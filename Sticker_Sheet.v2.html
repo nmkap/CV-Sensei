@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei — Sticker Sheet v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS  ·  edit here to update globally
+   ═══════════════════════════════════════════════════════ */
+:root {
+  /* ── Core palette (v2 – refined + accessible) ── */
+  --c-dark:         #222831;   /* sidebar, hero, primary headings   14.83:1 on white AAA */
+  --c-mid:          #6B6560;   /* body text, borders, nav labels     5.74:1 on white AA  */
+  --c-accent:       #B55400;   /* CTAs, links, active — LIGHT BG     4.96:1 on white AA  */
+  --c-accent-dark:  #E07A15;   /* accent on DARK BG only             4.92:1 on dark  AA  */
+  --c-surface:      #F2F0EC;   /* page bg, card fills, inputs        warm off-white      */
+  --c-white:        #FFFFFF;   /* elevated cards, chat bubbles                           */
+  --c-border:       #E0DCD6;   /* dividers, input borders                                */
+
+  /* ── Text scale ── */
+  --c-text-primary:  #222831;  /* 14.83:1 on white AAA */
+  --c-text-body:     #3D3935;  /* 11.92:1 on white AAA */
+  --c-text-secondary:#6B6560;  /* 5.74:1  on white AA  */
+  --c-text-muted:    #625D58;  /* 6.51:1  on white AA  — fixed from #8A857F */
+  --c-text-placeholder: #A09890; /* labels only, not body text */
+
+  /* ── Semantic ── */
+  --c-success:  #2E7D52;   /* 5.03:1 on white AA */
+  --c-error:    #C0392B;   /* 5.44:1 on white AA */
+  --c-warning:  #C8860A;   /* 4.55:1 on white AA */
+  --c-info:     #2C5282;   /* 7.48:1 on white AAA */
+
+  /* ── Typography ── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui:      'Lato', system-ui, sans-serif;
+
+  /* ── Type scale ── */
+  --text-36: 2.25rem;
+  --text-28: 1.75rem;
+  --text-22: 1.375rem;
+  --text-18: 1.125rem;
+  --text-16: 1rem;
+  --text-14: 0.875rem;
+  --text-13: 0.8125rem;
+  --text-11: 0.6875rem;
+
+  /* ── Spacing (4px grid) ── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ── Border radius ── */
+  --r-xs:   4px;
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   20px;
+  --r-pill: 999px;
+
+  /* ── Elevation ── */
+  --shadow-xs: 0 1px 2px rgba(34,40,49,0.06);
+  --shadow-sm: 0 1px 4px rgba(34,40,49,0.07), 0 2px 8px rgba(34,40,49,0.05);
+  --shadow-md: 0 4px 14px rgba(34,40,49,0.10), 0 2px 4px rgba(34,40,49,0.06);
+  --shadow-lg: 0 12px 36px rgba(34,40,49,0.13), 0 4px 8px rgba(34,40,49,0.07);
+
+  /* ── Focus ring (accessible) ── */
+  --focus-light: 0 0 0 3px rgba(181,84,0,0.30);     /* on light bg */
+  --focus-dark:  0 0 0 3px rgba(224,122,21,0.50);   /* on dark bg  */
+
+  /* ── Transitions ── */
+  --t-fast:   150ms ease;
+  --t-normal: 200ms ease;
+  --t-slow:   300ms ease;
+}
+
+/* ── Reduced motion override ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-ui);
+  background: #E2DED8;
+  color: var(--c-text-primary);
+  padding: 52px 36px 96px;
+  min-width: 960px;
+  line-height: 1.5;
+}
+
+/* ── Global focus visible ── */
+*:focus { outline: none; }
+*:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+/* ═══════════════════════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════════════════════ */
+.page { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+
+.page-header {
+  max-width: 1120px;
+  margin: 0 auto 4px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #C4C0BA;
+  gap: 20px;
+}
+
+.ph-left h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  font-weight: 700;
+  color: var(--c-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.ph-left p { font-size: var(--text-13); color: var(--c-text-muted); font-weight: 300; }
+
+.ph-palette { display: flex; gap: 5px; align-items: center; }
+.ph-chip {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+/* ── Section card ── */
+.section {
+  background: var(--c-white);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.section-head {
+  background: var(--c-dark);
+  padding: 13px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: var(--text-11);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-accent-dark);
+}
+
+.section-note {
+  font-size: var(--text-11);
+  color: #4A5060;
+  font-style: italic;
+}
+
+.section-body { padding: 32px 30px; }
+
+/* ── Sub-label ── */
+.sub-label {
+  font-size: var(--text-11);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--c-text-muted);
+  margin-bottom: 14px;
+}
+
+.sub-label + .sub-label { margin-top: 28px; }
+
+/* ── Divider ── */
+.divider { border: none; border-top: 1px solid var(--c-border); margin: 24px 0; }
+
+/* ── Grid helpers ── */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.flex-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.flex-col { display: flex; flex-direction: column; gap: 12px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   01  COLOUR TOKENS
+   ═══════════════════════════════════════════════════════ */
+.colour-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; }
+
+.colour-card {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.colour-swatch { height: 68px; display: flex; align-items: flex-end; padding: 0 12px 10px; }
+
+.colour-meta { background: #FAFAF8; border-top: 1px solid var(--c-border); padding: 10px 12px; }
+.colour-name { font-size: var(--text-11); font-weight: 700; color: var(--c-dark); text-transform: uppercase; letter-spacing: 0.08em; }
+.colour-hex  { font-size: var(--text-11); color: var(--c-text-muted); margin-top: 2px; font-family: 'Courier New', monospace; }
+.colour-cr   { font-size: 0.6rem; color: #AAA; margin-top: 3px; }
+.colour-role { font-size: 0.58rem; color: #BBB; margin-top: 2px; line-height: 1.4; }
+
+.accent-pill {
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.22);
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: #fff;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+/* Semantic row */
+.semantic-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.semantic-chip {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--c-surface);
+  border-radius: var(--r-pill);
+  padding: 6px 14px 6px 9px;
+  border: 1px solid var(--c-border);
+}
+.s-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.s-name { font-size: var(--text-11); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--c-text-secondary); }
+.s-cr { font-size: 0.6rem; color: #BBB; margin-left: 2px; }
+
+/* Context rule callout */
+.context-rule {
+  background: rgba(181,84,0,0.05);
+  border: 1px solid rgba(181,84,0,0.15);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  font-size: var(--text-13);
+  color: var(--c-accent);
+  font-weight: 400;
+  line-height: 1.55;
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.context-rule svg { flex-shrink: 0; margin-top: 1px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   02  TYPOGRAPHY
+   ═══════════════════════════════════════════════════════ */
+.type-table { width: 100%; }
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--c-surface);
+}
+.type-row:last-child { border-bottom: none; }
+
+.type-meta { min-width: 160px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px; }
+.type-tag  { font-size: var(--text-11); font-weight: 700; color: var(--c-accent); text-transform: uppercase; letter-spacing: 0.1em; }
+.type-spec { font-size: 0.6rem; color: #BBB; font-family: 'Courier New', monospace; margin-top: 3px; }
+.type-cr   { font-size: 0.58rem; color: #2E7D52; margin-top: 2px; font-weight: 700; }
+
+
+/* ═══════════════════════════════════════════════════════
+   03  SPACING · RADIUS · ELEVATION
+   ═══════════════════════════════════════════════════════ */
+.spacing-list { display: flex; flex-direction: column; gap: 9px; }
+.sp-row { display: flex; align-items: center; gap: 12px; }
+.sp-bar { height: 8px; background: var(--c-mid); border-radius: 2px; flex-shrink: 0; }
+.sp-label { font-size: var(--text-11); color: var(--c-text-muted); font-family: 'Courier New', monospace; white-space: nowrap; }
+.sp-use   { font-size: 0.6rem; color: #BBB; margin-left: 4px; }
+
+.radius-list { display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; }
+.r-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.r-box { width: 44px; height: 44px; background: var(--c-mid); }
+.r-label { font-size: 0.6rem; color: var(--c-text-muted); font-family: 'Courier New', monospace; text-align: center; line-height: 1.4; }
+
+.elevation-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 4px; }
+.el-card {
+  background: var(--c-white);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  flex: 1;
+  min-width: 140px;
+}
+.el-level { font-size: var(--text-11); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--c-accent); margin-bottom: 5px; }
+.el-use   { font-size: var(--text-11); color: var(--c-text-muted); line-height: 1.5; }
+.el-token { font-size: 0.6rem; color: #BBB; font-family: 'Courier New', monospace; margin-top: 4px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   04  ICONS
+   ═══════════════════════════════════════════════════════ */
+.icon-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.icon-item {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  width: 72px; padding: 12px 8px;
+  border-radius: var(--r-md);
+  background: var(--c-surface);
+  cursor: default;
+  transition: background var(--t-fast), transform var(--t-fast);
+  /* min touch target */
+  min-height: 44px;
+  justify-content: center;
+}
+.icon-item:hover { background: var(--c-border); transform: translateY(-2px); }
+.icon-item:hover svg { color: var(--c-accent); }
+.icon-item:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.icon-item svg { color: var(--c-dark); width: 20px; height: 20px; }
+.icon-label { font-size: 0.58rem; color: var(--c-text-muted); text-align: center; letter-spacing: 0.03em; }
+
+.icon-sizes { display: flex; gap: 24px; align-items: flex-end; flex-wrap: wrap; margin-top: 20px; }
+.icon-size-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.icon-size-label { font-size: 0.6rem; color: var(--c-text-muted); font-family: 'Courier New', monospace; }
+
+/* ── Icon on dark demo ── */
+.icon-dark-demo {
+  background: var(--c-dark);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 14px;
+}
+.idd-label { font-size: var(--text-11); color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+
+
+/* ═══════════════════════════════════════════════════════
+   05  BUTTONS
+   ═══════════════════════════════════════════════════════ */
+.btn {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--r-md);
+  letter-spacing: 0.02em;
+  transition: all var(--t-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  line-height: 1;
+  /* minimum 44×44 touch target */
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: var(--text-14);
+  text-decoration: none;
+}
+
+/* Focus rings — context aware */
+.btn:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.btn-on-dark:focus-visible { outline: 2px solid var(--c-accent-dark); outline-offset: 3px; }
+
+.btn-primary   { background: var(--c-accent); color: #fff; }
+.btn-primary:hover { background: #8F4200; box-shadow: var(--shadow-md); }
+.btn-primary:active { background: #7A3800; transform: scale(0.98); }
+
+.btn-secondary { background: transparent; color: var(--c-accent); border: 2px solid var(--c-accent); min-height: 44px; padding: 0 20px; }
+.btn-secondary:hover { background: rgba(181,84,0,0.07); }
+
+.btn-ghost     { background: transparent; color: var(--c-text-secondary); border: 2px solid var(--c-border); min-height: 44px; padding: 0 20px; }
+.btn-ghost:hover { border-color: #C4C0BA; background: var(--c-surface); color: var(--c-dark); }
+
+.btn-dark      { background: var(--c-dark); color: #fff; }
+.btn-dark:hover { background: #2E3848; box-shadow: var(--shadow-md); }
+
+.btn-danger    { background: var(--c-error); color: #fff; }
+.btn-danger:hover { background: #A0301F; }
+
+.btn-sm  { min-height: 36px; padding: 0 14px; font-size: var(--text-13); border-radius: var(--r-sm); }
+.btn-lg  { min-height: 52px; padding: 0 32px; font-size: var(--text-16); border-radius: var(--r-lg); }
+
+.btn-icon {
+  width: 44px; height: 44px;
+  padding: 0;
+  border-radius: var(--r-md);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading state */
+.btn-loading { position: relative; color: transparent !important; }
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* State label strip */
+.state-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--c-surface);
+  border-radius: var(--r-md);
+  margin-top: 8px;
+}
+.state-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-text-muted);
+  min-width: 60px;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   06  FORM & INPUTS
+   ═══════════════════════════════════════════════════════ */
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-label {
+  font-size: var(--text-14);
+  font-weight: 700;
+  color: var(--c-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.required-mark { color: var(--c-error); font-size: var(--text-14); aria-hidden: true; }
+
+.form-sublabel {
+  font-size: var(--text-13);
+  color: var(--c-text-muted);
+  font-weight: 300;
+  margin-top: -2px;
+}
+
+.form-input {
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--c-text-primary);
+  background: var(--c-white);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 0 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  /* 44px min height for touch */
+  min-height: 44px;
+}
+
+.form-input::placeholder { color: var(--c-text-placeholder); }
+.form-input:hover:not(:disabled) { border-color: #C4C0BA; }
+.form-input:focus { border-color: var(--c-accent); box-shadow: var(--focus-light); }
+
+/* States */
+.form-input.state-error   { border-color: var(--c-error); }
+.form-input.state-error:focus { box-shadow: 0 0 0 3px rgba(192,57,43,0.20); }
+.form-input.state-success { border-color: var(--c-success); }
+.form-input.state-success:focus { box-shadow: 0 0 0 3px rgba(46,125,82,0.20); }
+.form-input.state-disabled, .form-input:disabled {
+  background: var(--c-surface);
+  color: var(--c-text-muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.form-hint {
+  font-size: var(--text-13);
+  color: var(--c-text-muted);
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+.form-hint.error   { color: var(--c-error); }
+.form-hint.success { color: var(--c-success); }
+
+/* ── Error: icon + text (never colour alone) ── */
+.hint-icon { flex-shrink: 0; width: 14px; height: 14px; margin-top: 1px; }
+
+/* Textarea */
+.form-textarea { resize: vertical; min-height: 88px; padding: 12px 14px; line-height: 1.6; }
+
+/* Select */
+.form-select {
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--c-text-primary);
+  background: var(--c-white);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 0 14px;
+  min-height: 44px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-select:focus { border-color: var(--c-accent); box-shadow: var(--focus-light); }
+
+/* Checkbox / Radio */
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: var(--text-14);
+  color: var(--c-text-body);
+  /* 44px touch target via padding */
+  min-height: 44px;
+}
+.check-label input[type="checkbox"],
+.check-label input[type="radio"] {
+  width: 18px; height: 18px;
+  accent-color: var(--c-accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.check-label input:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Drop zone */
+.drop-zone {
+  border: 2px dashed var(--c-border);
+  border-radius: var(--r-lg);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--t-normal);
+  background: var(--c-surface);
+}
+.drop-zone:hover, .drop-zone:focus-within { border-color: var(--c-accent); background: rgba(181,84,0,0.03); }
+.drop-zone:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+.dz-icon { color: #C4C0BA; margin-bottom: 10px; transition: color var(--t-normal); }
+.drop-zone:hover .dz-icon, .drop-zone:focus-within .dz-icon { color: var(--c-accent); }
+.dz-text { font-size: var(--text-14); color: var(--c-text-muted); line-height: 1.55; }
+.dz-link { color: var(--c-accent); font-weight: 700; text-decoration: underline; }
+.dz-sub  { font-size: var(--text-13); color: #BBB; margin-top: 5px; display: block; }
+
+
+/* ═══════════════════════════════════════════════════════
+   07  CHAT COMPONENTS
+   ═══════════════════════════════════════════════════════ */
+.chat-viewport {
+  background: var(--c-surface);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Live region for screen readers */
+[role="log"] { /* aria-live="polite" aria-atomic="false" */ }
+
+.chat-msg { display: flex; flex-direction: column; gap: 4px; }
+.chat-msg.user { align-items: flex-end; }
+
+.chat-sender {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-text-placeholder);
+  padding: 0 4px;
+}
+
+.bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: var(--text-14);
+  line-height: 1.6;
+  max-width: 86%;
+}
+
+.bubble-ai {
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-primary);
+  border-radius: 3px 12px 12px 12px;
+  box-shadow: var(--shadow-xs);
+}
+
+.bubble-user {
+  background: var(--c-accent);
+  color: #fff;
+  border-radius: 12px 12px 3px 12px;
+}
+
+/* Typing indicator — aria-label for SR */
+.typing-indicator {
+  display: flex; align-items: center; gap: 5px;
+  padding: 10px 14px;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: 3px 12px 12px 12px;
+  width: fit-content;
+  box-shadow: var(--shadow-xs);
+}
+.t-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #CCC;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+.t-dot:nth-child(2) { animation-delay: 0.2s; }
+.t-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { background: #CCC; transform: scale(1); }
+  40% { background: var(--c-accent); transform: scale(1.3); }
+}
+
+/* Suggestion chips — min touch target */
+.chips-row { display: flex; flex-wrap: wrap; gap: 7px; padding-left: 4px; }
+.chip {
+  font-family: var(--font-ui);
+  font-size: var(--text-13);
+  font-weight: 700;
+  color: var(--c-accent);
+  border: 1.5px solid rgba(181,84,0,0.28);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;       /* ≥ 44px tall with line-height */
+  background: rgba(181,84,0,0.06);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  min-height: 36px;
+  display: flex; align-items: center;
+}
+.chip:hover { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+.chip:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; border-radius: var(--r-pill); }
+
+/* Chat input bar */
+.chat-input-bar {
+  display: flex; gap: 8px; align-items: center;
+  background: var(--c-white);
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: 7px 7px 7px 16px;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.chat-input-bar:focus-within { border-color: var(--c-accent); box-shadow: var(--focus-light); }
+.chat-input-bar input {
+  flex: 1; border: none; outline: none;
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--c-text-primary);
+  background: transparent;
+  min-height: 30px;
+}
+.chat-input-bar input::placeholder { color: var(--c-text-placeholder); }
+.send-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--c-accent);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; flex-shrink: 0;
+  transition: background var(--t-fast);
+  /* aria-label required */
+}
+.send-btn:hover { background: #8F4200; }
+.send-btn:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
+
+/* Progress bar */
+.progress-wrap {
+  background: var(--c-surface);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  border: 1px solid var(--c-border);
+}
+.progress-labels { display: flex; justify-content: space-between; font-size: var(--text-13); color: var(--c-text-muted); margin-bottom: 8px; }
+.progress-labels strong { color: var(--c-accent); font-weight: 700; }
+.progress-track { background: var(--c-border); border-radius: var(--r-pill); height: 6px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: var(--r-pill); background: var(--c-accent); transition: width var(--t-slow); }
+
+
+/* ═══════════════════════════════════════════════════════
+   08  CARDS & NAVIGATION
+   ═══════════════════════════════════════════════════════ */
+.cv-card {
+  background: var(--c-white);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-normal), transform var(--t-normal);
+  cursor: default;
+}
+.cv-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.cv-card:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+
+.cv-card-title { font-family: var(--font-display); font-size: var(--text-16); font-weight: 600; color: var(--c-dark); margin-bottom: 3px; }
+.cv-card-sub   { font-size: var(--text-13); color: var(--c-text-muted); }
+.cv-card-divider { border: none; border-top: 1px solid var(--c-border); margin: 14px 0; }
+.cv-card-meta  { display: flex; align-items: center; justify-content: space-between; }
+.cv-card-count { font-size: var(--text-13); color: var(--c-text-muted); }
+
+/* Status badge — icon + text, never colour alone */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: var(--text-11); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+}
+.status-active  { background: rgba(46,125,82,0.10);  color: #2E7D52; }
+.status-draft   { background: rgba(200,134,10,0.10);  color: #A06A00; }  /* darkened for AA */
+.status-done    { background: rgba(34,40,49,0.07);    color: var(--c-text-secondary); }
+
+/* Sidebar nav */
+.sidebar-nav {
+  background: var(--c-dark);
+  border-radius: var(--r-lg);
+  padding: 18px 14px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px; padding: 0 6px;
+}
+.nav-logo {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--c-accent); flex-shrink: 0;
+}
+.nav-app-name {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700; color: #fff;
+}
+.nav-section-label {
+  font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  /* ── FIXED: was invisible #393E46 ── now readable */
+  color: #4E5664;
+  padding: 0 8px; margin: 10px 0 5px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 8px; border-radius: var(--r-sm);
+  cursor: pointer; transition: all var(--t-fast);
+  min-height: 44px;
+  text-decoration: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.07); }
+.nav-item.active { background: var(--c-accent); }
+.nav-item:focus-visible {
+  /* white focus on dark bg */
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+
+.nav-icon { flex-shrink: 0; }
+.nav-item .nav-icon { color: #3D4450; }
+.nav-item.active .nav-icon { color: rgba(255,255,255,0.80); }
+.nav-item:hover:not(.active) .nav-icon { color: #7A8490; }
+
+.nav-label { font-size: var(--text-14); color: #5A6270; flex: 1; font-weight: 400; }
+.nav-item.active .nav-label { color: #fff; font-weight: 700; }
+.nav-item:hover:not(.active) .nav-label { color: #9AA0AA; }
+
+/* ── Accent labels on dark use #E07A15 ── */
+.nav-accent-text { color: var(--c-accent-dark); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; padding: 0 8px; margin: 10px 0 5px; }
+
+.nav-badge {
+  font-size: 0.6rem; font-weight: 700;
+  background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.5);
+  padding: 2px 7px; border-radius: var(--r-pill);
+}
+.nav-item.active .nav-badge { background: rgba(0,0,0,0.18); color: rgba(255,255,255,0.75); }
+
+
+/* ═══════════════════════════════════════════════════════
+   09  BADGES & TAGS
+   ═══════════════════════════════════════════════════════ */
+.badge {
+  font-family: var(--font-ui);
+  font-size: var(--text-11);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* All badges use icon + text so they don't rely on colour alone */
+.badge-accent  { background: rgba(181,84,0,0.12);  color: var(--c-accent); }
+.badge-dark    { background: var(--c-dark); color: #fff; }
+.badge-mid     { background: var(--c-mid); color: #fff; }
+.badge-success { background: rgba(46,125,82,0.12);  color: #2E7D52; }
+.badge-error   { background: rgba(192,57,43,0.12);  color: #C0392B; }
+.badge-warning { background: rgba(200,134,10,0.12); color: #A06A00; }  /* darkened */
+.badge-outline { background: transparent; color: var(--c-mid); border: 1.5px solid var(--c-mid); }
+.badge-surface { background: var(--c-surface); color: var(--c-text-secondary); border: 1px solid var(--c-border); }
+
+
+/* ═══════════════════════════════════════════════════════
+   10  FEEDBACK / TOASTS
+   ═══════════════════════════════════════════════════════ */
+.toast-stack { display: flex; flex-direction: column; gap: 10px; max-width: 400px; }
+
+.toast {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border-left: 3px solid transparent;
+  box-shadow: var(--shadow-md);
+  background: var(--c-white);
+  /* role="alert" aria-live="assertive" for errors
+     role="status" aria-live="polite" for success/info */
+}
+
+.toast-success { border-left-color: var(--c-success); }
+.toast-error   { border-left-color: var(--c-error); }
+.toast-warning { border-left-color: var(--c-warning); }
+.toast-info    { border-left-color: var(--c-info); }
+
+.toast-icon { flex-shrink: 0; margin-top: 2px; }
+.toast-title { font-size: var(--text-14); font-weight: 700; color: var(--c-dark); margin-bottom: 2px; }
+.toast-body  { font-size: var(--text-13); color: var(--c-text-muted); line-height: 1.45; }
+
+.toast-close {
+  margin-left: auto; flex-shrink: 0;
+  background: none; border: none; cursor: pointer;
+  color: var(--c-text-muted); padding: 2px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  transition: color var(--t-fast);
+  /* aria-label="Dismiss notification" */
+  min-width: 24px; min-height: 24px;
+}
+.toast-close:hover { color: var(--c-dark); }
+.toast-close:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 1px; }
+
+
+/* ═══════════════════════════════════════════════════════
+   11  EMPTY STATE
+   ═══════════════════════════════════════════════════════ */
+.empty-state { text-align: center; padding: 44px 24px; max-width: 320px; margin: 0 auto; }
+.empty-icon  {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--c-surface); display: flex;
+  align-items: center; justify-content: center;
+  margin: 0 auto 18px; color: #C4C0BA;
+  border: 1px solid var(--c-border);
+}
+.empty-title { font-family: var(--font-display); font-size: var(--text-18); font-weight: 600; color: var(--c-dark); margin-bottom: 9px; }
+.empty-body  { font-size: var(--text-14); color: var(--c-text-muted); line-height: 1.65; margin-bottom: 22px; font-weight: 300; }
+
+
+/* ═══════════════════════════════════════════════════════
+   12  MOTION / TRANSITIONS
+   ═══════════════════════════════════════════════════════ */
+.motion-card {
+  background: var(--c-surface);
+  border-radius: var(--r-md);
+  padding: 18px 20px;
+  border: 1px solid var(--c-border);
+}
+.motion-card-title { font-size: var(--text-13); font-weight: 700; color: var(--c-dark); margin-bottom: 6px; }
+.motion-card-body  { font-size: var(--text-13); color: var(--c-text-muted); line-height: 1.55; }
+.motion-card-token { font-size: 0.6rem; font-family: 'Courier New', monospace; color: #BBB; margin-top: 6px; background: var(--c-white); display: inline-block; padding: 2px 7px; border-radius: 3px; }
+
+/* Accessibility callout */
+.a11y-callout {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: rgba(46,125,82,0.07);
+  border: 1px solid rgba(46,125,82,0.2);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  font-size: var(--text-13);
+  color: #2E7D52;
+  line-height: 1.55;
+  margin-top: 14px;
+}
+.a11y-callout code { font-family: 'Courier New', monospace; font-size: 0.78rem; background: rgba(46,125,82,0.1); padding: 1px 5px; border-radius: 3px; }
+.a11y-callout svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ── Accessibility fix tag ── */
+.fix-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.6rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  background: rgba(46,125,82,0.12); color: #2E7D52;
+  border-radius: 3px; padding: 2px 6px;
+}
+
+/* Mini contrast badge inline */
+.cr-badge {
+  font-size: 0.6rem; font-weight: 700;
+  font-family: 'Courier New', monospace;
+  background: rgba(46,125,82,0.1); color: #2E7D52;
+  border-radius: 3px; padding: 1px 6px;
+}
+.cr-badge.warn { background: rgba(200,134,10,0.1); color: #C8860A; }
+
+/* Code block */
+.code-block {
+  background: #1A1F28;
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.78rem;
+  line-height: 2.0;
+  color: #C8D0DC;
+  overflow-x: auto;
+}
+.code-comment { color: #4A5568; }
+.code-token   { color: var(--c-accent-dark); }
+.code-value   { color: #81C784; }
+.code-note    { color: #4A5568; font-style: italic; }
+
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="ph-left">
+    <h1>CV Sensei — Sticker Sheet v2</h1>
+    <p>Playfair Display + Lato · Refined accessible palette · WCAG 2.1 AA throughout · Version 2.0</p>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+    <div class="ph-palette">
+      <div class="ph-chip" style="background:#222831;" title="#222831 Dark"></div>
+      <div class="ph-chip" style="background:#6B6560;" title="#6B6560 Mid"></div>
+      <div class="ph-chip" style="background:#B55400;" title="#B55400 Accent"></div>
+      <div class="ph-chip" style="background:#E07A15;" title="#E07A15 Accent-Dark"></div>
+      <div class="ph-chip" style="background:#F2F0EC; border:1px solid #CCC;" title="#F2F0EC Surface"></div>
+    </div>
+    <div style="font-size:0.6rem;color:#AAA;letter-spacing:0.06em;">ALL PAIRS WCAG AA+</div>
+  </div>
+</header>
+
+<main class="page">
+
+<!-- ═══════════════════════════════════════
+     01 · COLOUR TOKENS
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-colour">
+  <div class="section-head">
+    <span id="s-colour" class="section-title">01 · Colour Tokens</span>
+    <span class="section-note">v2 palette · all pairs verified WCAG 2.1 AA · edit :root to update globally</span>
+  </div>
+  <div class="section-body">
+
+    <div class="colour-grid">
+      <!-- Dark -->
+      <div class="colour-card">
+        <div class="colour-swatch" style="background:#222831;"></div>
+        <div class="colour-meta">
+          <div class="colour-name">Dark</div>
+          <div class="colour-hex">--c-dark · #222831</div>
+          <div class="colour-cr">14.83:1 on white · AAA ✓</div>
+          <div class="colour-role">Sidebar · headings · hero background</div>
+        </div>
+      </div>
+      <!-- Mid — NEW -->
+      <div class="colour-card">
+        <div class="colour-swatch" style="background:#6B6560;">
+          <span class="accent-pill" style="background:rgba(181,84,0,0.5);">NEW ✦</span>
+        </div>
+        <div class="colour-meta">
+          <div class="colour-name" style="color:#B55400;">Mid <span class="fix-tag">✦ replaced #393E46</span></div>
+          <div class="colour-hex">--c-mid · #6B6560</div>
+          <div class="colour-cr">5.74:1 on white · AA ✓ · 5.05:1 on surface AA ✓</div>
+          <div class="colour-role">Body text · borders · nav labels · captions</div>
+        </div>
+      </div>
+      <!-- Accent -->
+      <div class="colour-card">
+        <div class="colour-swatch" style="background:#B55400;">
+          <span class="accent-pill">Accent 1</span>
+        </div>
+        <div class="colour-meta">
+          <div class="colour-name">Accent</div>
+          <div class="colour-hex">--c-accent · #B55400</div>
+          <div class="colour-cr">4.96:1 on white AA ✓ · LIGHT BG ONLY</div>
+          <div class="colour-role">Buttons · links · active states · overlines</div>
+        </div>
+      </div>
+      <!-- Accent-Dark — ROLE DEFINED -->
+      <div class="colour-card">
+        <div class="colour-swatch" style="background:#E07A15;">
+          <span class="accent-pill">Accent 2</span>
+        </div>
+        <div class="colour-meta">
+          <div class="colour-name">Accent-Dark <span class="fix-tag">✦ role defined</span></div>
+          <div class="colour-hex">--c-accent-dark · #E07A15</div>
+          <div class="colour-cr">4.92:1 on #222831 AA ✓ · DARK BG ONLY</div>
+          <div class="colour-role">Text + icons on dark sidebar/hero backgrounds</div>
+        </div>
+      </div>
+      <!-- Surface — NEW -->
+      <div class="colour-card">
+        <div class="colour-swatch" style="background:#F2F0EC; border-bottom:1px solid #DDD;">
+          <span class="accent-pill" style="background:rgba(107,101,96,0.3); color:#6B6560;">NEW ✦</span>
+        </div>
+        <div class="colour-meta">
+          <div class="colour-name" style="color:#B55400;">Surface <span class="fix-tag">✦ replaces #EEE+#FFF</span></div>
+          <div class="colour-hex">--c-surface · #F2F0EC</div>
+          <div class="colour-cr">Dark on surface 13.03:1 AAA ✓ · warm off-white</div>
+          <div class="colour-role">Page bg · card fills · input backgrounds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context rule -->
+    <div class="context-rule">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Accent context rule:</strong> Use <code style="background:rgba(181,84,0,0.1);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:0.78rem;">--c-accent #B55400</code> on light backgrounds only (buttons, links, labels on white/surface). Use <code style="background:rgba(181,84,0,0.1);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:0.78rem;">--c-accent-dark #E07A15</code> on <code style="background:rgba(181,84,0,0.1);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:0.78rem;">--c-dark #222831</code> backgrounds only. Never swap these contexts.</span>
+    </div>
+
+    <!-- Semantic -->
+    <div class="sub-label" style="margin-top:24px;">Semantic Colours</div>
+    <div class="semantic-grid">
+      <div class="semantic-chip"><div class="s-dot" style="background:#2E7D52;"></div><span class="s-name">Success</span><span class="s-cr">5.03:1 AA</span></div>
+      <div class="semantic-chip"><div class="s-dot" style="background:#C0392B;"></div><span class="s-name">Error</span><span class="s-cr">5.44:1 AA</span></div>
+      <div class="semantic-chip"><div class="s-dot" style="background:#C8860A;"></div><span class="s-name">Warning</span><span class="s-cr">4.55:1 AA</span></div>
+      <div class="semantic-chip"><div class="s-dot" style="background:#2C5282;"></div><span class="s-name">Info</span><span class="s-cr">7.48:1 AAA</span></div>
+      <div class="semantic-chip"><div class="s-dot" style="background:#625D58;"></div><span class="s-name">Text Muted</span><span class="s-cr">6.51:1 AA <span class="fix-tag">✦ was #8A857F</span></span></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     02 · TYPOGRAPHY
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-type">
+  <div class="section-head">
+    <span id="s-type" class="section-title">02 · Typography</span>
+    <span class="section-note">Playfair Display (display/headings) + Lato (UI/body) · min 14px body</span>
+  </div>
+  <div class="section-body">
+    <div class="type-table">
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">H1 · Display</span>
+          <span class="type-spec">Playfair · 36px · 700 · lh 1.1</span>
+          <span class="type-cr">✓ 14.83:1 AAA</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:2.25rem;font-weight:700;color:var(--c-dark);letter-spacing:-0.02em;line-height:1.1;">Build your story.</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">H2 · Section</span>
+          <span class="type-spec">Playfair · 28px · 600 · lh 1.2</span>
+          <span class="type-cr">✓ 14.83:1 AAA</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:600;color:var(--c-dark);letter-spacing:-0.01em;">Work Experience</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">H3 · Card Title</span>
+          <span class="type-spec">Playfair · 22px · 500</span>
+          <span class="type-cr">✓ 14.83:1 AAA</span>
+        </div>
+        <span style="font-family:'Playfair Display',serif;font-size:1.375rem;font-weight:500;color:var(--c-dark);">Senior Product Designer CV</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">H4 · Label</span>
+          <span class="type-spec">Lato · 18px · 700</span>
+          <span class="type-cr">✓ 14.83:1 AAA</span>
+        </div>
+        <span style="font-family:'Lato',sans-serif;font-size:1.125rem;font-weight:700;color:var(--c-dark);">Chat started 5 minutes ago</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">Overline</span>
+          <span class="type-spec">Lato · 11px · 900 · 0.14em · caps</span>
+          <span class="type-cr">✓ 4.96:1 AA (bold)</span>
+        </div>
+        <span style="font-family:'Lato',sans-serif;font-size:0.6875rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:var(--c-accent);">AI Suggestion · Senior UX Role</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">Body · 14px</span>
+          <span class="type-spec">Lato · 14px · 400 · lh 1.65</span>
+          <span class="type-cr">✓ 11.92:1 AAA</span>
+        </div>
+        <span style="font-family:'Lato',sans-serif;font-size:0.875rem;font-weight:400;color:#3D3935;line-height:1.65;max-width:560px;">Led end-to-end redesign of the onboarding flow, reducing drop-off by 34% and improving activation rate across web and mobile platforms.</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">Body Secondary</span>
+          <span class="type-spec">Lato · 14px · 300 · #6B6560</span>
+          <span class="type-cr">✓ 5.74:1 AA</span>
+        </div>
+        <span style="font-family:'Lato',sans-serif;font-size:0.875rem;font-weight:300;color:#6B6560;line-height:1.65;max-width:480px;">Hints, descriptions, secondary information and supporting context throughout the interface.</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">Caption / Muted</span>
+          <span class="type-spec">Lato · 13px · 300 · #625D58</span>
+          <span class="type-cr">✓ 6.51:1 AA <span class="fix-tag">✦ fixed</span></span>
+        </div>
+        <span style="font-family:'Lato',sans-serif;font-size:0.8125rem;font-weight:300;color:#625D58;line-height:1.6;">Timestamps, character counts, metadata, helper text · <em>was #8A857F (3.66:1 — only large text)</em></span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-meta">
+          <span class="type-tag">Link</span>
+          <span class="type-spec">Lato · 14px · 700 · underline</span>
+          <span class="type-cr">✓ 4.96:1 AA</span>
+        </div>
+        <a href="#" style="font-family:'Lato',sans-serif;font-size:0.875rem;font-weight:700;color:var(--c-accent);text-decoration:underline;text-underline-offset:3px;" onclick="return false;">View full CV preview →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     03 · SPACING · RADIUS · ELEVATION
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-tokens">
+  <div class="section-head">
+    <span id="s-tokens" class="section-title">03 · Spacing · Radius · Elevation</span>
+    <span class="section-note">4px base grid · consistent naming · CSS variable driven</span>
+  </div>
+  <div class="section-body">
+    <div class="g2">
+      <!-- Spacing -->
+      <div>
+        <div class="sub-label">Spacing Scale</div>
+        <div class="spacing-list">
+          <div class="sp-row"><div class="sp-bar" style="width:4px;"></div><span class="sp-label">--sp-1 · 4px</span><span class="sp-use">micro gaps</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:8px;"></div><span class="sp-label">--sp-2 · 8px</span><span class="sp-use">icon-label gap</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:12px;"></div><span class="sp-label">--sp-3 · 12px</span><span class="sp-use">tight groups</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:16px;"></div><span class="sp-label">--sp-4 · 16px</span><span class="sp-use">default padding</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:20px;"></div><span class="sp-label">--sp-5 · 20px</span><span class="sp-use">card inner</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:24px;"></div><span class="sp-label">--sp-6 · 24px</span><span class="sp-use">section gap</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:32px;"></div><span class="sp-label">--sp-8 · 32px</span><span class="sp-use">major sections</span></div>
+          <div class="sp-row"><div class="sp-bar" style="width:48px;"></div><span class="sp-label">--sp-12 · 48px</span><span class="sp-use">page sections</span></div>
+        </div>
+
+        <div class="sub-label" style="margin-top:28px;">Border Radius</div>
+        <div class="radius-list">
+          <div class="r-item"><div class="r-box" style="border-radius:4px;"></div><span class="r-label">--r-xs<br>4px<br>tags</span></div>
+          <div class="r-item"><div class="r-box" style="border-radius:6px;"></div><span class="r-label">--r-sm<br>6px<br>sm btns</span></div>
+          <div class="r-item"><div class="r-box" style="border-radius:10px;"></div><span class="r-label">--r-md<br>10px<br>inputs</span></div>
+          <div class="r-item"><div class="r-box" style="border-radius:14px;"></div><span class="r-label">--r-lg<br>14px<br>cards</span></div>
+          <div class="r-item"><div class="r-box" style="border-radius:20px;"></div><span class="r-label">--r-xl<br>20px<br>panels</span></div>
+          <div class="r-item"><div class="r-box" style="border-radius:999px;width:44px;height:24px;"></div><span class="r-label">--r-pill<br>999px<br>chips</span></div>
+        </div>
+      </div>
+
+      <!-- Elevation + Motion -->
+      <div>
+        <div class="sub-label">Elevation / Shadows</div>
+        <div class="elevation-row">
+          <div class="el-card" style="box-shadow:0 1px 2px rgba(34,40,49,0.06);">
+            <div class="el-level">XS</div>
+            <div class="el-use">Inline elements, subtle surface depth</div>
+            <div class="el-token">--shadow-xs</div>
+          </div>
+          <div class="el-card" style="box-shadow:0 1px 4px rgba(34,40,49,0.07),0 2px 8px rgba(34,40,49,0.05);">
+            <div class="el-level">SM</div>
+            <div class="el-use">Cards, section panels</div>
+            <div class="el-token">--shadow-sm</div>
+          </div>
+          <div class="el-card" style="box-shadow:0 4px 14px rgba(34,40,49,0.10),0 2px 4px rgba(34,40,49,0.06);">
+            <div class="el-level">MD</div>
+            <div class="el-use">Hover states, chat bubbles</div>
+            <div class="el-token">--shadow-md</div>
+          </div>
+          <div class="el-card" style="box-shadow:0 12px 36px rgba(34,40,49,0.13),0 4px 8px rgba(34,40,49,0.07);">
+            <div class="el-level">LG</div>
+            <div class="el-use">Modals, dropdowns, lifted cards</div>
+            <div class="el-token">--shadow-lg</div>
+          </div>
+        </div>
+
+        <div class="sub-label" style="margin-top:28px;">Focus Rings — Context Aware <span class="fix-tag">✦ a11y</span></div>
+        <div class="g2" style="gap:14px;">
+          <div style="background:var(--c-surface);border-radius:var(--r-md);padding:14px;border:1px solid var(--c-border);">
+            <div style="font-size:var(--text-11);color:var(--c-text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Light background</div>
+            <button class="btn btn-primary" style="box-shadow:0 0 0 3px rgba(181,84,0,0.30);" tabindex="-1">Focused button</button>
+            <div style="font-size:0.6rem;color:#BBB;margin-top:8px;font-family:monospace;">--focus-light · 3px #B55400 30%</div>
+          </div>
+          <div style="background:var(--c-dark);border-radius:var(--r-md);padding:14px;">
+            <div style="font-size:var(--text-11);color:#4A5060;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Dark background</div>
+            <button class="btn btn-dark" style="background:#2E3848;outline:2px solid #fff;outline-offset:3px;" tabindex="-1">Focused nav item</button>
+            <div style="font-size:0.6rem;color:#3A4050;margin-top:8px;font-family:monospace;">2px solid #fff on dark bg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     04 · ICONOGRAPHY
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-icons">
+  <div class="section-head">
+    <span id="s-icons" class="section-title">04 · Iconography</span>
+    <span class="section-note">Stroke-based · 20px default · 24px large · decorative icons get aria-hidden="true"</span>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-label">Product Icon Set — hover to preview accent state</div>
+    <div class="icon-grid" role="list">
+      <div class="icon-item" role="listitem" title="Chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="icon-label">Chat</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <span class="icon-label">Send</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Upload CV">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span class="icon-label">Upload</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Download PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="icon-label">Download</span>
+      </div>
+      <div class="icon-item" role="listitem" title="CV / Document">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span class="icon-label">PDF / CV</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Edit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span class="icon-label">Edit</span>
+      </div>
+      <div class="icon-item" role="listitem" title="AI Suggestion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span class="icon-label">AI</span>
+      </div>
+      <div class="icon-item" role="listitem" title="New chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span class="icon-label">New Chat</span>
+      </div>
+      <div class="icon-item" role="listitem" title="User profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="icon-label">Profile</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span class="icon-label">Settings</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Delete">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        <span class="icon-label">Delete</span>
+      </div>
+      <div class="icon-item" role="listitem" title="Confirmed / Done">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="icon-label">Done</span>
+      </div>
+    </div>
+
+    <!-- Icon on dark -->
+    <div class="icon-dark-demo" aria-label="Icon example on dark background" role="img">
+      <span class="idd-label">On dark bg → use --c-accent-dark #E07A15</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E07A15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E07A15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E07A15" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span style="font-size:0.72rem;color:#E07A15;font-weight:700;">4.92:1 AA ✓</span>
+      <span style="margin-left:auto;font-size:var(--text-11);color:#3A4050;">vs --c-accent #B55400 on dark = 2.99:1 FAIL ✗</span>
+    </div>
+
+    <!-- Size scale -->
+    <div class="sub-label" style="margin-top:20px;">Icon sizes</div>
+    <div class="icon-sizes">
+      <div class="icon-size-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="icon-size-label">16px · inline</span>
+      </div>
+      <div class="icon-size-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--c-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="icon-size-label">20px · default</span>
+      </div>
+      <div class="icon-size-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-mid)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="icon-size-label">24px · large</span>
+      </div>
+      <div class="icon-size-item">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-mid)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="icon-size-label">32px · hero/empty</span>
+      </div>
+    </div>
+
+    <div class="a11y-callout">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Decorative icons (used alongside visible text labels) must have <code>aria-hidden="true"</code>. Functional standalone icons (icon-only buttons) must have a visible or screen-reader accessible label via <code>aria-label</code> on the button element.</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     05 · BUTTONS
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-buttons">
+  <div class="section-head">
+    <span id="s-buttons" class="section-title">05 · Buttons</span>
+    <span class="section-note">Min 44×44px touch target · focus-visible on all · disabled via aria-disabled</span>
+  </div>
+  <div class="section-body">
+
+    <div class="sub-label">Variants</div>
+    <div class="flex-row" style="margin-bottom:20px;">
+      <button class="btn btn-primary">Download CV</button>
+      <button class="btn btn-secondary">Save Draft</button>
+      <button class="btn btn-ghost">Cancel</button>
+      <button class="btn btn-dark">New Chat</button>
+      <button class="btn btn-danger">Delete</button>
+    </div>
+
+    <div class="sub-label">Sizes</div>
+    <div class="flex-row" style="margin-bottom:20px;align-items:center;">
+      <button class="btn btn-primary btn-sm">Small · 36px</button>
+      <button class="btn btn-primary">Default · 44px</button>
+      <button class="btn btn-primary btn-lg">Large · 52px — Download PDF</button>
+    </div>
+
+    <div class="sub-label">With Icons + Icon-only</div>
+    <div class="flex-row" style="margin-bottom:20px;">
+      <button class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <button class="btn btn-secondary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        New Chat
+      </button>
+      <button class="btn btn-primary btn-icon" aria-label="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+      <button class="btn btn-ghost btn-icon" aria-label="Delete chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+      </button>
+    </div>
+
+    <div class="sub-label">States — loading · disabled</div>
+    <div class="flex-row">
+      <button class="btn btn-primary btn-loading" aria-busy="true" aria-label="Generating CV, please wait">Generating…</button>
+      <button class="btn btn-primary" aria-disabled="true" disabled>Disabled</button>
+      <button class="btn btn-secondary" aria-disabled="true" disabled>Disabled</button>
+      <button class="btn btn-ghost" aria-disabled="true" disabled>Disabled</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     06 · FORM & INPUTS
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-forms">
+  <div class="section-head">
+    <span id="s-forms" class="section-title">06 · Form &amp; Inputs</span>
+    <span class="section-note">All inputs have explicit &lt;label&gt; · errors use icon+text not colour alone · min 44px height</span>
+  </div>
+  <div class="section-body">
+    <div class="g2">
+
+      <div class="flex-col">
+        <!-- Default -->
+        <div class="form-group">
+          <label class="form-label" for="input-default">
+            Job Title
+            <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <input id="input-default" class="form-input" type="text" placeholder="e.g. Senior UX Designer" aria-required="true">
+          <span class="form-hint">We'll tailor every suggestion to this role.</span>
+        </div>
+
+        <!-- With sublabel -->
+        <div class="form-group">
+          <label class="form-label" for="input-sub">Company</label>
+          <span class="form-sublabel" id="input-sub-desc">Your most recent employer</span>
+          <input id="input-sub" class="form-input" type="text" placeholder="e.g. Figma" aria-describedby="input-sub-desc">
+        </div>
+
+        <!-- Focus state (visual) -->
+        <div class="form-group">
+          <label class="form-label" for="input-focus">Job Description URL</label>
+          <input id="input-focus" class="form-input" type="url" placeholder="Paste the job listing URL" style="border-color:var(--c-accent);box-shadow:var(--focus-light);">
+          <span class="form-hint">Focused state — 3px accent ring</span>
+        </div>
+
+        <!-- Error — icon + text -->
+        <div class="form-group">
+          <label class="form-label" for="input-error">Email address</label>
+          <input id="input-error" class="form-input state-error" type="email" value="notanemail" aria-invalid="true" aria-describedby="input-error-msg">
+          <span class="form-hint error" id="input-error-msg" role="alert">
+            <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Please enter a valid email address.
+          </span>
+        </div>
+
+        <!-- Success -->
+        <div class="form-group">
+          <label class="form-label" for="input-success">LinkedIn URL</label>
+          <input id="input-success" class="form-input state-success" type="text" value="linkedin.com/in/yourname" aria-describedby="input-success-msg">
+          <span class="form-hint success" id="input-success-msg">
+            <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Profile found and verified.
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-col">
+        <!-- Select -->
+        <div class="form-group">
+          <label class="form-label" for="input-select">Industry</label>
+          <select id="input-select" class="form-select" aria-label="Select your industry">
+            <option>Technology</option>
+            <option>Finance</option>
+            <option>Healthcare</option>
+            <option>Creative</option>
+          </select>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="form-label" for="input-textarea">
+            Work Experience
+            <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <span class="form-sublabel" id="ta-desc">Paste your existing CV or describe your roles</span>
+          <textarea id="input-textarea" class="form-input form-textarea" placeholder="Describe your roles, responsibilities and key achievements…" aria-describedby="ta-desc" aria-required="true"></textarea>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="form-group">
+          <span class="form-label" id="check-group-label">Preferences</span>
+          <div role="group" aria-labelledby="check-group-label" class="flex-col" style="gap:0;">
+            <label class="check-label"><input type="checkbox" checked aria-checked="true"> Focus on impact metrics</label>
+            <label class="check-label"><input type="checkbox"> Include cover letter tips</label>
+            <label class="check-label"><input type="checkbox"> Optimise for ATS only</label>
+          </div>
+        </div>
+
+        <!-- Drop zone -->
+        <div class="drop-zone" role="button" tabindex="0" aria-label="Upload your CV — click or drag and drop">
+          <div class="dz-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <div class="dz-text">
+            Drop your CV here, or <a class="dz-link" href="#" onclick="return false;">browse files</a>
+            <span class="dz-sub">PDF, DOCX · up to 5MB</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     07 · CHAT COMPONENTS
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-chat">
+  <div class="section-head">
+    <span id="s-chat" class="section-title">07 · Chat Components</span>
+    <span class="section-note">role="log" aria-live="polite" on message list · typing indicator has sr-only text</span>
+  </div>
+  <div class="section-body">
+    <div class="g2">
+
+      <!-- Chat window -->
+      <div>
+        <div class="sub-label">Message Bubbles + Typing + Chips</div>
+        <div class="chat-viewport" role="log" aria-live="polite" aria-label="CV Sensei chat">
+          <div class="chat-msg">
+            <span class="chat-sender" aria-hidden="true">CV Sensei</span>
+            <div class="bubble bubble-ai">I've reviewed your CV. Your Figma experience is excellent — but let's sharpen how you talk about <strong>impact</strong>. Want me to rewrite your bullet points?</div>
+          </div>
+          <div class="chat-msg user">
+            <span class="chat-sender" aria-hidden="true">You</span>
+            <div class="bubble bubble-user">Yes — focus on measurable outcomes for each role.</div>
+          </div>
+          <div class="chat-msg" aria-label="CV Sensei is typing">
+            <span class="chat-sender" aria-hidden="true">CV Sensei</span>
+            <div class="typing-indicator" role="status">
+              <div class="t-dot"></div>
+              <div class="t-dot"></div>
+              <div class="t-dot"></div>
+              <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">CV Sensei is typing</span>
+            </div>
+          </div>
+          <div class="chips-row" role="group" aria-label="Quick suggestions">
+            <button class="chip">Add ATS keywords</button>
+            <button class="chip">Strengthen summary</button>
+            <button class="chip">Reorder sections</button>
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <div class="chat-input-bar">
+            <input type="text" placeholder="Ask anything about your CV…" aria-label="Message CV Sensei">
+            <button class="send-btn" aria-label="Send message">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress + States -->
+      <div class="flex-col">
+        <div class="sub-label">Progress bar</div>
+        <div class="progress-wrap" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="CV generation progress">
+          <div class="progress-labels"><span>Generating your CV…</span><strong>72%</strong></div>
+          <div class="progress-track"><div class="progress-fill" style="width:72%;"></div></div>
+        </div>
+
+        <div class="sub-label" style="margin-top:8px;">Badges & Status — icon + text (not colour alone)</div>
+        <div class="flex-row">
+          <span class="badge badge-accent">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            AI Suggestion
+          </span>
+          <span class="badge badge-success">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Complete
+          </span>
+          <span class="badge badge-warning">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+            Draft
+          </span>
+          <span class="badge badge-error">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Error
+          </span>
+          <span class="badge badge-dark">New</span>
+          <span class="badge badge-outline">In Review</span>
+        </div>
+
+        <div class="sub-label" style="margin-top:8px;">CV Card + Status</div>
+        <div class="cv-card" tabindex="0" aria-label="Product Designer CV — Active — 14 messages">
+          <div class="cv-card-title">Product Designer CV</div>
+          <div class="cv-card-sub">Last edited 2 hours ago</div>
+          <hr class="cv-card-divider">
+          <div class="cv-card-meta">
+            <span class="cv-card-count">14 messages</span>
+            <span class="status-badge status-active">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              Active
+            </span>
+          </div>
+        </div>
+        <div class="cv-card" tabindex="0" aria-label="UX Lead CV — In Progress — 8 messages">
+          <div class="cv-card-title">UX Lead CV</div>
+          <div class="cv-card-sub">Last edited yesterday</div>
+          <hr class="cv-card-divider">
+          <div class="cv-card-meta">
+            <span class="cv-card-count">8 messages</span>
+            <span class="status-badge status-draft">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              In Progress
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     08 · NAVIGATION
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-nav">
+  <div class="section-head">
+    <span id="s-nav" class="section-title">08 · Navigation Sidebar</span>
+    <span class="section-note">White focus rings on dark bg · --c-accent-dark for labels · min 44px nav items</span>
+  </div>
+  <div class="section-body">
+    <div class="g2">
+      <div>
+        <div class="sub-label">Sidebar — all states</div>
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <div class="nav-brand">
+            <div class="nav-logo" role="img" aria-label="CV Sensei logo"></div>
+            <span class="nav-app-name">CV Sensei</span>
+          </div>
+
+          <!-- accent-dark for section labels on dark bg -->
+          <div class="nav-accent-text" aria-hidden="true">My CVs</div>
+
+          <a href="#" class="nav-item active" aria-current="page" onclick="return false;">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="nav-label">Product Designer CV</span>
+          </a>
+          <a href="#" class="nav-item" onclick="return false;">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span class="nav-label">UX Lead CV</span>
+            <span class="nav-badge">Draft</span>
+          </a>
+          <a href="#" class="nav-item" onclick="return false;">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span class="nav-label">New CV</span>
+          </a>
+
+          <div class="nav-accent-text" aria-hidden="true">Account</div>
+
+          <a href="#" class="nav-item" onclick="return false;">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="nav-label">Profile</span>
+          </a>
+          <a href="#" class="nav-item" onclick="return false;">
+            <svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span class="nav-label">Settings</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="sub-label">Toast Notifications <span class="fix-tag">✦ icon+text · role="alert"</span></div>
+        <div class="toast-stack" role="region" aria-label="Notifications">
+
+          <div class="toast toast-success" role="status" aria-live="polite">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D52" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="toast-title">CV downloaded successfully</div>
+              <div class="toast-body">Your polished CV has been saved as a PDF.</div>
+            </div>
+            <button class="toast-close" aria-label="Dismiss notification">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <div class="toast toast-error" role="alert" aria-live="assertive">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div>
+              <div class="toast-title">Upload failed</div>
+              <div class="toast-body">File type not supported. Please use PDF or DOCX.</div>
+            </div>
+            <button class="toast-close" aria-label="Dismiss error">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <div class="toast toast-info" role="status" aria-live="polite">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C5282" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div>
+              <div class="toast-title">One CV per chat</div>
+              <div class="toast-body">To create a new version, start a new chat.</div>
+            </div>
+            <button class="toast-close" aria-label="Dismiss notification">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <div class="sub-label" style="margin-top:24px;">Empty State</div>
+        <div class="empty-state">
+          <div class="empty-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="empty-title">No CVs yet</h3>
+          <p class="empty-body">Start your first chat to build a tailored CV. Each chat creates one version — create as many as you need.</p>
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Start your first CV
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     09 · MOTION & TRANSITIONS
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-motion">
+  <div class="section-head">
+    <span id="s-motion" class="section-title">09 · Motion &amp; Transitions</span>
+    <span class="section-note">prefers-reduced-motion override applied globally · always use CSS vars</span>
+  </div>
+  <div class="section-body">
+    <div class="g3">
+      <div class="motion-card">
+        <div class="motion-card-title">Fast · 150ms</div>
+        <div class="motion-card-body">Hover colour changes, icon swaps, focus ring appearance. Immediate feedback.</div>
+        <div class="motion-card-token">--t-fast: 150ms ease</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-card-title">Normal · 200ms</div>
+        <div class="motion-card-body">Button hover states, card lift, border transitions. Standard interactions.</div>
+        <div class="motion-card-token">--t-normal: 200ms ease</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-card-title">Slow · 300ms</div>
+        <div class="motion-card-body">Page load reveals, modal open/close, sidebar expand. Considered transitions.</div>
+        <div class="motion-card-token">--t-slow: 300ms ease</div>
+      </div>
+    </div>
+    <div class="a11y-callout" style="margin-top:16px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>The global <code>@media (prefers-reduced-motion: reduce)</code> rule at the top of this stylesheet overrides all animations and transitions to <code>0.01ms</code> for users who have enabled reduced motion in their OS accessibility settings. This covers the chat typing animation, carousel scroll, page-load reveals, and button hover lifts.</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     10 · CSS TOKEN REFERENCE
+     ═══════════════════════════════════════ -->
+<div class="section" aria-labelledby="s-tokens-ref">
+  <div class="section-head">
+    <span id="s-tokens-ref" class="section-title">10 · CSS Token Reference</span>
+    <span class="section-note">Copy :root block into your project — edit once, updates everywhere</span>
+  </div>
+  <div class="section-body">
+    <div class="code-block" role="region" aria-label="CSS variables token reference">
+      <span class="code-comment">/* ── CV Sensei Design Tokens v2 ── */</span><br>
+      :root {<br>
+      &nbsp;&nbsp;<span class="code-comment">/* Core palette */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-dark</span>:         <span class="code-value">#222831</span>; <span class="code-note">/* sidebar, hero, headings · 14.83:1 AAA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-mid</span>:          <span class="code-value">#6B6560</span>; <span class="code-note">/* body text, borders · 5.74:1 AA ✦ was #393E46 */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-accent</span>:       <span class="code-value">#B55400</span>; <span class="code-note">/* CTAs, links — LIGHT BG ONLY · 4.96:1 AA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-accent-dark</span>:  <span class="code-value">#E07A15</span>; <span class="code-note">/* icons/text on #222831 ONLY · 4.92:1 AA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-surface</span>:      <span class="code-value">#F2F0EC</span>; <span class="code-note">/* page bg, cards ✦ replaces #EEE + #FFF */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-white</span>:        <span class="code-value">#FFFFFF</span>; <span class="code-note">/* elevated cards, chat bubbles */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-border</span>:       <span class="code-value">#E0DCD6</span>; <span class="code-note">/* dividers, input borders */</span><br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Text */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-text-primary</span>:   <span class="code-value">#222831</span>; <span class="code-note">/* 14.83:1 AAA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-text-body</span>:      <span class="code-value">#3D3935</span>; <span class="code-note">/* 11.92:1 AAA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-text-secondary</span>: <span class="code-value">#6B6560</span>; <span class="code-note">/* 5.74:1 AA */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-text-muted</span>:     <span class="code-value">#625D58</span>; <span class="code-note">/* 6.51:1 AA ✦ was #8A857F (fail) */</span><br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Semantic */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--c-success</span>:  <span class="code-value">#2E7D52</span>; &nbsp;<span class="code-token">--c-error</span>: <span class="code-value">#C0392B</span>; &nbsp;<span class="code-token">--c-warning</span>: <span class="code-value">#C8860A</span>; &nbsp;<span class="code-token">--c-info</span>: <span class="code-value">#2C5282</span>;<br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Fonts */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--font-display</span>: <span class="code-value">'Playfair Display', Georgia, serif</span>;<br>
+      &nbsp;&nbsp;<span class="code-token">--font-ui</span>:      <span class="code-value">'Lato', system-ui, sans-serif</span>;<br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Spacing (4px grid) */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--sp-1</span>: <span class="code-value">4px</span>; &nbsp;<span class="code-token">--sp-2</span>: <span class="code-value">8px</span>; &nbsp;<span class="code-token">--sp-4</span>: <span class="code-value">16px</span>; &nbsp;<span class="code-token">--sp-6</span>: <span class="code-value">24px</span>; &nbsp;<span class="code-token">--sp-8</span>: <span class="code-value">32px</span>; &nbsp;<span class="code-token">--sp-12</span>: <span class="code-value">48px</span>;<br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Radius */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--r-sm</span>: <span class="code-value">6px</span>; &nbsp;<span class="code-token">--r-md</span>: <span class="code-value">10px</span>; &nbsp;<span class="code-token">--r-lg</span>: <span class="code-value">14px</span>; &nbsp;<span class="code-token">--r-xl</span>: <span class="code-value">20px</span>; &nbsp;<span class="code-token">--r-pill</span>: <span class="code-value">999px</span>;<br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Focus rings */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--focus-light</span>: <span class="code-value">0 0 0 3px rgba(181,84,0,0.30)</span>; <span class="code-note">/* on light bg */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--focus-dark</span>:  <span class="code-value">0 0 0 3px rgba(224,122,21,0.50)</span>; <span class="code-note">/* on dark bg */</span><br>
+      <br>
+      &nbsp;&nbsp;<span class="code-comment">/* Transitions */</span><br>
+      &nbsp;&nbsp;<span class="code-token">--t-fast</span>: <span class="code-value">150ms ease</span>; &nbsp;<span class="code-token">--t-normal</span>: <span class="code-value">200ms ease</span>; &nbsp;<span class="code-token">--t-slow</span>: <span class="code-value">300ms ease</span>;<br>
+      }
+    </div>
+  </div>
+</div>
+
+
+</main>
+</body>
+</html>

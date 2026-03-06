@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Builder – Sticker Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   DESIGN TOKENS — edit these to customise
+   ════════════════════════════════════════ */
+:root {
+  /* Colours */
+  --c-dark:      #222831;
+  --c-mid:       #393E46;
+  --c-accent:    #B55400;
+  --c-light:     #EEEEEE;
+  --c-white:     #FFFFFF;
+  --c-surface:   #F7F6F3;
+  --c-error:     #C0392B;
+  --c-success:   #2E7D52;
+  --c-warning:   #C8860A;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui:      'Lato', system-ui, sans-serif;
+
+  /* Font sizes */
+  --text-h1:   2.25rem;   /* 36px */
+  --text-h2:   1.75rem;   /* 28px */
+  --text-h3:   1.375rem;  /* 22px */
+  --text-h4:   1.125rem;  /* 18px */
+  --text-h5:   0.9375rem; /* 15px */
+  --text-body: 0.875rem;  /* 14px */
+  --text-sm:   0.8125rem; /* 13px */
+  --text-xs:   0.6875rem; /* 11px */
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(34,40,49,0.08), 0 1px 2px rgba(34,40,49,0.04);
+  --shadow-md:  0 4px 12px rgba(34,40,49,0.10), 0 2px 4px rgba(34,40,49,0.06);
+  --shadow-lg:  0 12px 32px rgba(34,40,49,0.14), 0 4px 8px rgba(34,40,49,0.08);
+  --shadow-focus: 0 0 0 3px rgba(181,84,0,0.25);
+
+  /* Transitions */
+  --transition: 180ms ease;
+}
+
+/* ════════════════════════════════════════
+   BASE RESET & LAYOUT
+   ════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-ui);
+  background: #E8E7E3;
+  color: var(--c-dark);
+  padding: 48px 32px 80px;
+  min-width: 900px;
+}
+
+/* ════════════════════════════════════════
+   PAGE HEADER
+   ════════════════════════════════════════ */
+.page-header {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CCC;
+}
+
+.page-header-left h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--c-dark);
+  letter-spacing: -0.01em;
+}
+
+.page-header-left p {
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+.page-header-right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.palette-chip {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+
+/* ════════════════════════════════════════
+   SECTION WRAPPER
+   ════════════════════════════════════════ */
+.sheet {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section {
+  background: var(--c-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  background: var(--c-dark);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.section-note {
+  font-size: var(--text-xs);
+  color: #555;
+  font-style: italic;
+}
+
+.section-body {
+  padding: 32px 28px;
+}
+
+/* ════════════════════════════════════════
+   1. COLOUR TOKENS
+   ════════════════════════════════════════ */
+.colour-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.colour-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.colour-swatch {
+  height: 72px;
+}
+
+.colour-meta {
+  background: #FAFAFA;
+  border-top: 1px solid #EEE;
+  padding: 10px 12px;
+}
+
+.colour-name {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--c-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.colour-hex {
+  font-size: var(--text-xs);
+  color: #888;
+  margin-top: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+.colour-role {
+  font-size: var(--text-xs);
+  color: #AAA;
+  margin-top: 2px;
+}
+
+/* Semantic colours row */
+.semantic-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.semantic-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #F5F5F5;
+  border-radius: var(--radius-pill);
+  padding: 6px 12px 6px 8px;
+}
+
+.semantic-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.semantic-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* ════════════════════════════════════════
+   2. TYPOGRAPHY
+   ════════════════════════════════════════ */
+.type-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.type-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--c-light);
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.type-tag {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--c-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.type-spec {
+  font-size: var(--text-xs);
+  color: #AAA;
+  margin-top: 3px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ════════════════════════════════════════
+   3. SPACING & RADIUS TOKENS
+   ════════════════════════════════════════ */
+.token-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.token-section-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: 14px;
+}
+
+.spacing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spacing-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.spacing-bar {
+  height: 8px;
+  background: var(--c-mid);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.spacing-label {
+  font-size: var(--text-xs);
+  color: #888;
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+}
+
+.radius-list {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.radius-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.radius-box {
+  width: 48px;
+  height: 48px;
+  background: var(--c-mid);
+}
+
+.radius-label {
+  font-size: var(--text-xs);
+  color: #888;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+/* ════════════════════════════════════════
+   4. ELEVATION / SHADOWS
+   ════════════════════════════════════════ */
+.shadow-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.shadow-card {
+  background: var(--c-white);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shadow-level {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--c-accent);
+}
+
+.shadow-use {
+  font-size: var(--text-xs);
+  color: #888;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════════════
+   5. ICONS
+   ════════════════════════════════════════ */
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 10px;
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  width: 72px;
+  cursor: default;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.icon-item:hover {
+  background: var(--c-light);
+  transform: translateY(-2px);
+}
+
+.icon-item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--c-dark);
+}
+
+.icon-item:hover svg { color: var(--c-accent); }
+
+.icon-label {
+  font-size: 0.6rem;
+  color: #999;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* ════════════════════════════════════════
+   6. BUTTONS
+   ════════════════════════════════════════ */
+.component-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Primary */
+.btn {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  letter-spacing: 0.02em;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--c-accent);
+  color: #fff;
+  padding: 11px 22px;
+  font-size: var(--text-sm);
+}
+.btn-primary:hover { background: #993D00; box-shadow: var(--shadow-md); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--c-accent);
+  border: 2px solid var(--c-accent);
+  padding: 9px 20px;
+  font-size: var(--text-sm);
+}
+.btn-secondary:hover { background: rgba(181,84,0,0.06); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-mid);
+  border: 2px solid var(--c-light);
+  padding: 9px 20px;
+  font-size: var(--text-sm);
+}
+.btn-ghost:hover { border-color: #CCC; background: var(--c-surface); }
+
+.btn-dark {
+  background: var(--c-dark);
+  color: #fff;
+  padding: 11px 22px;
+  font-size: var(--text-sm);
+}
+.btn-dark:hover { background: var(--c-mid); }
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: var(--text-xs);
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: var(--text-body);
+  border-radius: var(--radius-lg);
+}
+
+.btn:disabled, .btn[data-state="disabled"] {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Icon button */
+.btn-icon {
+  width: 36px; height: 36px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════
+   7. FORM INPUTS
+   ════════════════════════════════════════ */
+.input-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--c-dark);
+  letter-spacing: 0.01em;
+}
+
+.input-sublabel {
+  font-size: var(--text-xs);
+  color: #AAA;
+  margin-top: -4px;
+}
+
+.input-field {
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  color: var(--c-dark);
+  background: var(--c-white);
+  border: 1.5px solid #D5D2CE;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-field::placeholder { color: #BBB; }
+.input-field:focus { border-color: var(--c-accent); box-shadow: var(--shadow-focus); }
+
+.input-field.error { border-color: var(--c-error); }
+.input-field.error:focus { box-shadow: 0 0 0 3px rgba(192,57,43,0.2); }
+
+.input-field.success { border-color: var(--c-success); }
+
+.input-hint {
+  font-size: var(--text-xs);
+  color: #AAA;
+  margin-top: -4px;
+}
+
+.input-hint.error { color: var(--c-error); }
+.input-hint.success { color: var(--c-success); }
+
+.input-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.input-row .input-field { flex: 1; }
+
+/* Textarea */
+.input-textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--font-ui);
+}
+
+/* File drop zone */
+.drop-zone {
+  border: 2px dashed #CCC;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--c-surface);
+}
+
+.drop-zone:hover { border-color: var(--c-accent); background: rgba(181,84,0,0.03); }
+
+.drop-zone-icon { color: #CCC; margin-bottom: 8px; }
+.drop-zone:hover .drop-zone-icon { color: var(--c-accent); }
+
+.drop-zone-text {
+  font-size: var(--text-sm);
+  color: #888;
+  line-height: 1.5;
+}
+
+.drop-zone-link { color: var(--c-accent); font-weight: 700; text-decoration: none; }
+
+/* ════════════════════════════════════════
+   8. CHAT COMPONENTS
+   ════════════════════════════════════════ */
+.chat-demo {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 560px;
+}
+
+.chat-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chat-msg.user { align-items: flex-end; }
+
+.chat-sender {
+  font-size: var(--text-xs);
+  color: #AAA;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 4px;
+}
+
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  max-width: 85%;
+}
+
+.chat-bubble.ai {
+  background: var(--c-white);
+  border: 1px solid #E5E5E5;
+  color: var(--c-dark);
+  border-radius: 3px 12px 12px 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-bubble.user {
+  background: var(--c-accent);
+  color: #fff;
+  border-radius: 12px 12px 3px 12px;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+  background: var(--c-white);
+  border: 1px solid #E5E5E5;
+  border-radius: 3px 12px 12px 12px;
+  width: fit-content;
+  box-shadow: var(--shadow-sm);
+}
+
+.typing-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #CCC;
+  animation: typing 1.2s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(1); background: #CCC; }
+  40% { transform: scale(1.3); background: var(--c-accent); }
+}
+
+/* Suggestion chips */
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.chip {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--c-accent);
+  border: 1.5px solid rgba(181,84,0,0.3);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  background: rgba(181,84,0,0.05);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.chip:hover { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+
+/* Chat input bar */
+.chat-input-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--c-white);
+  border: 1.5px solid #D5D2CE;
+  border-radius: var(--radius-lg);
+  padding: 8px 8px 8px 16px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.chat-input-bar:focus-within {
+  border-color: var(--c-accent);
+  box-shadow: var(--shadow-focus);
+}
+
+.chat-input-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--c-dark);
+  background: transparent;
+}
+
+.chat-input-bar input::placeholder { color: #BBB; }
+
+.send-btn {
+  width: 34px; height: 34px;
+  border-radius: var(--radius-md);
+  background: var(--c-accent);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.send-btn:hover { background: #993D00; }
+
+/* ════════════════════════════════════════
+   9. CARDS & SURFACES
+   ════════════════════════════════════════ */
+.card-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--c-white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  border: 1px solid #ECEAE5;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+  cursor: default;
+}
+
+.card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.card-chat {
+  width: 220px;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h5);
+  font-weight: 600;
+  color: var(--c-dark);
+  margin-bottom: 4px;
+}
+
+.card-subtitle {
+  font-size: var(--text-xs);
+  color: #AAA;
+}
+
+.card-divider { border: none; border-top: 1px solid #EEE; margin: 14px 0; }
+
+.chat-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-status {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.status-active { background: rgba(46,125,82,0.1); color: var(--c-success); }
+.status-draft  { background: rgba(200,134,10,0.1); color: var(--c-warning); }
+.status-done   { background: rgba(34,40,49,0.08); color: var(--c-mid); }
+
+/* ════════════════════════════════════════
+   10. BADGES & TAGS
+   ════════════════════════════════════════ */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.badge {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-accent  { background: rgba(181,84,0,0.12); color: var(--c-accent); }
+.badge-dark    { background: var(--c-dark); color: #fff; }
+.badge-mid     { background: var(--c-mid); color: #fff; }
+.badge-success { background: rgba(46,125,82,0.12); color: var(--c-success); }
+.badge-error   { background: rgba(192,57,43,0.12); color: var(--c-error); }
+.badge-outline { background: transparent; color: var(--c-mid); border: 1.5px solid var(--c-mid); }
+
+/* ════════════════════════════════════════
+   11. FEEDBACK / TOASTS
+   ════════════════════════════════════════ */
+.toast-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 380px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border-left: 3px solid transparent;
+  box-shadow: var(--shadow-md);
+  background: var(--c-white);
+}
+
+.toast-success { border-left-color: var(--c-success); }
+.toast-error   { border-left-color: var(--c-error); }
+.toast-warning { border-left-color: var(--c-warning); }
+.toast-info    { border-left-color: var(--c-mid); }
+
+.toast-icon { flex-shrink: 0; margin-top: 1px; }
+
+.toast-content {}
+.toast-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--c-dark);
+  margin-bottom: 2px;
+}
+.toast-body { font-size: var(--text-xs); color: #888; line-height: 1.4; }
+
+/* ════════════════════════════════════════
+   12. PROGRESS / UPLOAD STATE
+   ════════════════════════════════════════ */
+.progress-card {
+  background: var(--c-surface);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  max-width: 340px;
+  border: 1px solid #E5E5E5;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.progress-bar-track {
+  background: var(--c-light);
+  border-radius: var(--radius-pill);
+  height: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--c-accent);
+  transition: width 0.5s ease;
+}
+
+/* ════════════════════════════════════════
+   13. NAVIGATION SIDEBAR ITEM
+   ════════════════════════════════════════ */
+.nav-preview {
+  background: var(--c-dark);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  width: 200px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.nav-logo {
+  width: 26px; height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--c-accent);
+  flex-shrink: 0;
+}
+
+.nav-app-name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.nav-section-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #555;
+  padding: 0 8px;
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-bottom: 2px;
+}
+
+.nav-item:hover { background: rgba(255,255,255,0.07); }
+
+.nav-item.active {
+  background: var(--c-accent);
+}
+
+.nav-item-label {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: #888;
+  flex: 1;
+}
+
+.nav-item.active .nav-item-label { color: #fff; font-weight: 700; }
+.nav-item:hover .nav-item-label { color: #CCC; }
+
+.nav-item-icon { color: #555; flex-shrink: 0; }
+.nav-item.active .nav-item-icon { color: rgba(255,255,255,0.85); }
+
+.nav-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+}
+
+.nav-item.active .nav-badge { background: rgba(0,0,0,0.2); }
+
+/* ════════════════════════════════════════
+   14. EMPTY STATE
+   ════════════════════════════════════════ */
+.empty-state {
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.empty-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--c-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  color: #CCC;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h4);
+  font-weight: 600;
+  color: var(--c-dark);
+  margin-bottom: 8px;
+}
+
+.empty-body {
+  font-size: var(--text-sm);
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ════════════════════════════════════════
+   GRID HELPERS
+   ════════════════════════════════════════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-left">
+    <h1>CV Builder — Sticker Sheet</h1>
+    <p>Playfair Display + Lato · Design system foundation · v1.0</p>
+  </div>
+  <div class="page-header-right">
+    <div class="palette-chip" style="background:#222831"></div>
+    <div class="palette-chip" style="background:#393E46"></div>
+    <div class="palette-chip" style="background:#B55400"></div>
+    <div class="palette-chip" style="background:#EEEEEE; border-color:#CCC"></div>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <!-- ══════════════════════
+       01. COLOUR TOKENS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">01 · Colour Tokens</span>
+      <span class="section-note">Edit :root variables to update globally</span>
+    </div>
+    <div class="section-body">
+      <div class="colour-grid">
+        <div class="colour-card">
+          <div class="colour-swatch" style="background:#222831"></div>
+          <div class="colour-meta">
+            <div class="colour-name">Dark</div>
+            <div class="colour-hex">--c-dark · #222831</div>
+            <div class="colour-role">Sidebar, headings, body text</div>
+          </div>
+        </div>
+        <div class="colour-card">
+          <div class="colour-swatch" style="background:#393E46"></div>
+          <div class="colour-meta">
+            <div class="colour-name">Mid</div>
+            <div class="colour-hex">--c-mid · #393E46</div>
+            <div class="colour-role">Secondary text, borders</div>
+          </div>
+        </div>
+        <div class="colour-card">
+          <div class="colour-swatch" style="background:#B55400"></div>
+          <div class="colour-meta">
+            <div class="colour-name">Accent</div>
+            <div class="colour-hex">--c-accent · #B55400</div>
+            <div class="colour-role">CTA, active states, links</div>
+          </div>
+        </div>
+        <div class="colour-card">
+          <div class="colour-swatch" style="background:#EEEEEE; border-top: 1px solid #DDD"></div>
+          <div class="colour-meta">
+            <div class="colour-name">Light</div>
+            <div class="colour-hex">--c-light · #EEEEEE</div>
+            <div class="colour-role">Backgrounds, dividers</div>
+          </div>
+        </div>
+      </div>
+      <!-- Semantic colours -->
+      <div class="semantic-row">
+        <div class="semantic-chip"><div class="semantic-dot" style="background:#2E7D52"></div><span class="semantic-label">Success</span></div>
+        <div class="semantic-chip"><div class="semantic-dot" style="background:#C0392B"></div><span class="semantic-label">Error</span></div>
+        <div class="semantic-chip"><div class="semantic-dot" style="background:#C8860A"></div><span class="semantic-label">Warning</span></div>
+        <div class="semantic-chip"><div class="semantic-dot" style="background:#393E46"></div><span class="semantic-label">Info</span></div>
+        <div class="semantic-chip"><div class="semantic-dot" style="background:#F7F6F3; border:1px solid #DDD"></div><span class="semantic-label">Surface</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       02. TYPOGRAPHY
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">02 · Typography</span>
+      <span class="section-note">Playfair Display (display) + Lato (UI)</span>
+    </div>
+    <div class="section-body">
+      <div class="type-grid">
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">H1 · Display</span>
+            <span class="type-spec">Playfair · 36px · 700</span>
+          </div>
+          <span style="font-family:'Playfair Display',serif; font-size:2.25rem; font-weight:700; color:var(--c-dark); letter-spacing:-0.01em;">Build your story.</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">H2 · Section</span>
+            <span class="type-spec">Playfair · 28px · 600</span>
+          </div>
+          <span style="font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:600; color:var(--c-dark);">Work Experience</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">H3 · Card Title</span>
+            <span class="type-spec">Playfair · 22px · 500</span>
+          </div>
+          <span style="font-family:'Playfair Display',serif; font-size:1.375rem; font-weight:500; color:var(--c-dark);">Senior Product Designer CV</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">H4 · Label</span>
+            <span class="type-spec">Lato · 18px · 700</span>
+          </div>
+          <span style="font-family:'Lato',sans-serif; font-size:1.125rem; font-weight:700; color:var(--c-dark);">Chat started 5 mins ago</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">Overline</span>
+            <span class="type-spec">Lato · 11px · 700 · caps</span>
+          </div>
+          <span style="font-family:'Lato',sans-serif; font-size:0.69rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--c-accent);">AI Suggestions</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">Body</span>
+            <span class="type-spec">Lato · 14px · 400</span>
+          </div>
+          <span style="font-family:'Lato',sans-serif; font-size:0.875rem; font-weight:400; color:#555; line-height:1.65; max-width:520px;">Led end-to-end redesign of the onboarding flow, reducing drop-off by 34% and improving activation rate across web and mobile platforms.</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">Body Small</span>
+            <span class="type-spec">Lato · 13px · 300</span>
+          </div>
+          <span style="font-family:'Lato',sans-serif; font-size:0.8125rem; font-weight:300; color:#888; line-height:1.6;">Hint text, captions, timestamps and secondary metadata.</span>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <span class="type-tag">Link</span>
+            <span class="type-spec">Lato · 14px · 700</span>
+          </div>
+          <a href="#" style="font-family:'Lato',sans-serif; font-size:0.875rem; font-weight:700; color:var(--c-accent); text-decoration:none; border-bottom:1.5px solid rgba(181,84,0,0.35);" onmouseover="this.style.borderBottomColor='var(--c-accent)'" onmouseout="this.style.borderBottomColor='rgba(181,84,0,0.35)'">View full CV preview →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       03. SPACING & TOKENS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">03 · Spacing, Radius & Elevation</span>
+      <span class="section-note">4px base grid</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <!-- Spacing -->
+        <div>
+          <div class="token-section-title">Spacing Scale</div>
+          <div class="spacing-list">
+            <div class="spacing-item"><div class="spacing-bar" style="width:4px"></div><span class="spacing-label">--space-1 · 4px · xs</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:8px"></div><span class="spacing-label">--space-2 · 8px · sm</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:12px"></div><span class="spacing-label">--space-3 · 12px</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:16px"></div><span class="spacing-label">--space-4 · 16px · md</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:24px"></div><span class="spacing-label">--space-6 · 24px · lg</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:32px"></div><span class="spacing-label">--space-8 · 32px · xl</span></div>
+            <div class="spacing-item"><div class="spacing-bar" style="width:48px"></div><span class="spacing-label">--space-12 · 48px · 2xl</span></div>
+          </div>
+        </div>
+        <!-- Radius + Elevation -->
+        <div>
+          <div class="token-section-title">Border Radius</div>
+          <div class="radius-list" style="margin-bottom:28px;">
+            <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><span class="radius-label">sm · 4px<br>buttons</span></div>
+            <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><span class="radius-label">md · 8px<br>inputs</span></div>
+            <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><span class="radius-label">lg · 12px<br>cards</span></div>
+            <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><span class="radius-label">xl · 16px<br>panels</span></div>
+            <div class="radius-item"><div class="radius-box" style="border-radius:999px; width:48px; height:24px;"></div><span class="radius-label">pill<br>tags</span></div>
+          </div>
+          <div class="token-section-title">Elevation</div>
+          <div class="shadow-row">
+            <div class="shadow-card" style="box-shadow:0 1px 3px rgba(34,40,49,0.08)">
+              <div class="shadow-level">sm</div>
+              <div class="shadow-use">Inline cards, inputs</div>
+            </div>
+            <div class="shadow-card" style="box-shadow:0 4px 12px rgba(34,40,49,0.10)">
+              <div class="shadow-level">md</div>
+              <div class="shadow-use">Hover states, chat bubbles</div>
+            </div>
+            <div class="shadow-card" style="box-shadow:0 12px 32px rgba(34,40,49,0.14)">
+              <div class="shadow-level">lg</div>
+              <div class="shadow-use">Modals, dropdowns</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       04. ICONS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">04 · Iconography</span>
+      <span class="section-note">20px default · 24px large · stroke-based · hover activates accent colour</span>
+    </div>
+    <div class="section-body">
+      <div class="icon-grid">
+        <!-- Chat / AI -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="icon-label">Chat</span>
+        </div>
+        <!-- Send -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span class="icon-label">Send</span>
+        </div>
+        <!-- Upload -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span class="icon-label">Upload</span>
+        </div>
+        <!-- Download -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span class="icon-label">Download</span>
+        </div>
+        <!-- PDF -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="icon-label">PDF</span>
+        </div>
+        <!-- Edit -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span class="icon-label">Edit</span>
+        </div>
+        <!-- Sparkle / AI -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/></svg>
+          <span class="icon-label">AI</span>
+        </div>
+        <!-- Plus -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span class="icon-label">New Chat</span>
+        </div>
+        <!-- User -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="icon-label">Profile</span>
+        </div>
+        <!-- Settings -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="icon-label">Settings</span>
+        </div>
+        <!-- Trash -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          <span class="icon-label">Delete</span>
+        </div>
+        <!-- Check -->
+        <div class="icon-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="icon-label">Done</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       05. BUTTONS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">05 · Buttons</span>
+      <span class="section-note">Hover to see states</span>
+    </div>
+    <div class="section-body" style="display:flex; flex-direction:column; gap:20px;">
+      <div>
+        <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:12px;">Variants</div>
+        <div class="component-row">
+          <button class="btn btn-primary">Download CV</button>
+          <button class="btn btn-secondary">Save Draft</button>
+          <button class="btn btn-ghost">Cancel</button>
+          <button class="btn btn-dark">Start New Chat</button>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:12px;">Sizes</div>
+        <div class="component-row">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large — Download PDF</button>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:12px;">With Icons + Disabled</div>
+        <div class="component-row">
+          <button class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </button>
+          <button class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Chat
+          </button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+          <button class="btn btn-icon btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       06. FORM INPUTS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">06 · Form & Inputs</span>
+      <span class="section-note">Click fields to see focus ring</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div class="input-stack">
+          <div class="input-group">
+            <label class="input-label">Job Title</label>
+            <input class="input-field" type="text" placeholder="e.g. Senior UX Designer">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Company</label>
+            <label class="input-sublabel">Most recent employer</label>
+            <input class="input-field" type="text" placeholder="e.g. Figma">
+            <span class="input-hint">This will appear at the top of your CV.</span>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Email address</label>
+            <input class="input-field error" type="email" value="notanemail">
+            <span class="input-hint error">Please enter a valid email address.</span>
+          </div>
+          <div class="input-group">
+            <label class="input-label">LinkedIn URL</label>
+            <input class="input-field success" type="text" value="linkedin.com/in/yourname">
+            <span class="input-hint success">Looks good!</span>
+          </div>
+        </div>
+        <div class="input-stack">
+          <div class="input-group">
+            <label class="input-label">Work Experience</label>
+            <label class="input-sublabel">Or paste your existing CV content</label>
+            <textarea class="input-field input-textarea" placeholder="Describe your roles, responsibilities and achievements…"></textarea>
+          </div>
+          <div class="drop-zone">
+            <div class="drop-zone-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="drop-zone-text">
+              Drop your CV here, or <a class="drop-zone-link" href="#">browse</a><br>
+              <span style="font-size:var(--text-xs); color:#CCC; margin-top:4px; display:block;">PDF, DOCX · up to 5MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       07. CHAT COMPONENTS
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">07 · Chat Components</span>
+      <span class="section-note">Core of the product experience</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:14px;">Message Bubbles + Typing</div>
+          <div class="chat-demo">
+            <div class="chat-msg">
+              <span class="chat-sender">CV Assistant</span>
+              <div class="chat-bubble ai">I've analysed your CV. Your 5 years at Google is a real strength — shall I lead with that in the summary?</div>
+            </div>
+            <div class="chat-msg user">
+              <span class="chat-sender">You</span>
+              <div class="chat-bubble user">Yes, and focus on leadership impact.</div>
+            </div>
+            <div class="chat-msg">
+              <span class="chat-sender">CV Assistant</span>
+              <div class="typing-indicator">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+              </div>
+            </div>
+            <div class="chips-row">
+              <div class="chip">Use fewer bullet points</div>
+              <div class="chip">Emphasise metrics</div>
+              <div class="chip">Add a skills section</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:14px;">Chat Input Bar</div>
+          <div class="chat-input-bar" style="margin-bottom:20px;">
+            <input type="text" placeholder="Ask anything about your CV…">
+            <button class="send-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:14px;">Progress State</div>
+          <div class="progress-card">
+            <div class="progress-label">
+              <span>Generating your CV…</span>
+              <span style="color:var(--c-accent); font-weight:700;">72%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width:72%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       08. CARDS & NAVIGATION
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">08 · Cards & Navigation</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:14px;">Chat History Cards · Hover for elevation</div>
+          <div class="card-row" style="flex-direction:column; max-width:260px;">
+            <div class="card card-chat">
+              <div class="card-title">Product Designer CV</div>
+              <div class="card-subtitle">Last edited 2 hours ago</div>
+              <hr class="card-divider">
+              <div class="chat-meta">
+                <span style="font-size:var(--text-xs); color:#AAA;">14 messages</span>
+                <span class="chat-status status-active">Active</span>
+              </div>
+            </div>
+            <div class="card card-chat">
+              <div class="card-title">Senior UX Lead CV</div>
+              <div class="card-subtitle">Last edited yesterday</div>
+              <hr class="card-divider">
+              <div class="chat-meta">
+                <span style="font-size:var(--text-xs); color:#AAA;">8 messages</span>
+                <span class="chat-status status-draft">In Progress</span>
+              </div>
+            </div>
+            <div class="card card-chat">
+              <div class="card-title">Freelance Portfolio CV</div>
+              <div class="card-subtitle">Last edited 3 days ago</div>
+              <hr class="card-divider">
+              <div class="chat-meta">
+                <span style="font-size:var(--text-xs); color:#AAA;">21 messages</span>
+                <span class="chat-status status-done">Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:14px;">Sidebar Navigation</div>
+          <div class="nav-preview">
+            <div class="nav-brand">
+              <div class="nav-logo"></div>
+              <span class="nav-app-name">CVcraft</span>
+            </div>
+            <div class="nav-section-label">My CVs</div>
+            <div class="nav-item active">
+              <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="nav-item-label">Product Designer CV</span>
+            </div>
+            <div class="nav-item">
+              <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="nav-item-label">UX Lead CV</span>
+              <span class="nav-badge">Draft</span>
+            </div>
+            <div class="nav-item">
+              <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span class="nav-item-label">New CV</span>
+            </div>
+            <div class="nav-section-label">Account</div>
+            <div class="nav-item">
+              <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+              <span class="nav-item-label">Profile</span>
+            </div>
+            <div class="nav-item">
+              <svg class="nav-item-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span class="nav-item-label">Settings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       09. BADGES & FEEDBACK
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">09 · Badges, Tags & Feedback</span>
+    </div>
+    <div class="section-body" style="display:flex; flex-direction:column; gap:24px;">
+      <div>
+        <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:12px;">Badges & Status Tags</div>
+        <div class="badge-row">
+          <span class="badge badge-accent">AI Suggestion</span>
+          <span class="badge badge-dark">New</span>
+          <span class="badge badge-success">Complete</span>
+          <span class="badge badge-error">Error</span>
+          <span class="badge badge-mid">Draft</span>
+          <span class="badge badge-outline">In review</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#AAA;margin-bottom:12px;">Toast Notifications</div>
+        <div class="toast-stack">
+          <div class="toast toast-success">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D52" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="toast-content">
+              <div class="toast-title">CV downloaded!</div>
+              <div class="toast-body">Your polished CV has been saved as a PDF.</div>
+            </div>
+          </div>
+          <div class="toast toast-error">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div class="toast-content">
+              <div class="toast-title">Upload failed</div>
+              <div class="toast-body">File type not supported. Please use PDF or DOCX.</div>
+            </div>
+          </div>
+          <div class="toast toast-info">
+            <div class="toast-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#393E46" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+            <div class="toast-content">
+              <div class="toast-title">One CV per chat</div>
+              <div class="toast-body">To create a new version, start a new chat.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       10. EMPTY STATE
+       ══════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">10 · Empty State</span>
+    </div>
+    <div class="section-body">
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="empty-title">No CVs yet</div>
+        <div class="empty-body">Start your first chat to build a tailored CV. Each chat produces one version — create as many as you need.</div>
+        <button class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Start your first CV
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="max-width:1100px; margin:48px auto 0; font-family:'Lato',sans-serif; font-size:0.75rem; color:#AAA; text-align:center;">
+  CV Builder Sticker Sheet · Playfair Display + Lato · #222831 / #393E46 / #B55400 / #EEEEEE
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei — Logo Concepts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F2F0EC;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  /* ── Page title ── */
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #6B6560;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  /* ── Section divider ── */
+  .section-label {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6B6560;
+    white-space: nowrap;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #d4d0ca;
+  }
+
+  /* ── Concepts grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto 72px;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 48px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 2px 20px rgba(34,40,49,0.06);
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6B6560;
+    text-align: center;
+  }
+
+  .concept-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222831;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .description {
+    font-size: 13px;
+    color: #6B6560;
+    line-height: 1.7;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  .on-dark {
+    background: #222831;
+    border-radius: 2px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* ── Final section ── */
+  .final-wrap {
+    max-width: 1100px;
+    margin: 0 auto 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Full logo on dark bg */
+  .final-hero {
+    background: #222831;
+    border-radius: 4px;
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    box-shadow: 0 4px 40px rgba(34,40,49,0.1);
+  }
+
+  .final-logo-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .final-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .final-right h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #F2F0EC;
+  }
+
+  .rationale {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rationale li {
+    font-size: 12.5px;
+    color: #6B6560;
+    font-weight: 300;
+    line-height: 1.65;
+    padding-left: 18px;
+    position: relative;
+  }
+  .rationale li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #E07A15;
+  }
+
+  /* Size previews row */
+  .sizes-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .size-card {
+    background: #222831;
+    border-radius: 4px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 2px 16px rgba(34,40,49,0.08);
+  }
+
+  .size-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6B6560;
+  }
+
+  .size-note {
+    font-size: 11px;
+    color: #6B6560;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* Simulated nav bar */
+  .nav-sim {
+    background: #222831;
+    border-radius: 3px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 32px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-size: 11px;
+    color: #6B6560;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-btn {
+    font-size: 11px;
+    color: #222831;
+    background: #E07A15;
+    padding: 5px 12px;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* Favicon sim */
+  .favicon-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .favicon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .favicon-bg {
+    background: #222831;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .favicon-dim {
+    font-size: 10px;
+    color: #6B6560;
+    letter-spacing: 0.1em;
+  }
+
+  /* SVG code block */
+  .code-wrap {
+    max-width: 1100px;
+    margin: 0 auto 56px;
+  }
+
+  .code-block {
+    background: #1a1f26;
+    border-radius: 4px;
+    padding: 32px 36px;
+    overflow-x: auto;
+    box-shadow: 0 2px 16px rgba(34,40,49,0.1);
+  }
+
+  .code-block pre {
+    font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #c9d1d9;
+    white-space: pre;
+  }
+
+  .code-block .c  { color: #6B6560; }   /* comments */
+  .code-block .t  { color: #79c0ff; }   /* tags */
+  .code-block .a  { color: #d2a679; }   /* attributes */
+  .code-block .v  { color: #a5d6a7; }   /* values */
+  .code-block .s  { color: #f0883e; }   /* strings / hex */
+
+  /* Footer */
+  .footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    font-size: 11px;
+    color: #6B6560;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  .variant-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6B6560;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">CV Sensei — Logo Concepts</h1>
+
+<!-- ── SECTION: INITIAL CONCEPTS ── -->
+<div class="section-label"><span>Initial Concepts</span></div>
+
+<div class="grid">
+
+  <!-- CONCEPT 1 -->
+  <div class="card">
+    <div class="label">Concept 01</div>
+    <div class="logo-area">
+      <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="62" width="16" height="26" rx="2" fill="#6B6560" opacity="0.35"/>
+        <rect x="42" y="48" width="16" height="40" rx="2" fill="#E07A15" opacity="0.6"/>
+        <rect x="64" y="32" width="16" height="56" rx="2" fill="#E07A15" opacity="0.85"/>
+        <rect x="86" y="14" width="16" height="74" rx="2" fill="#B55400"/>
+        <line x1="89" y1="22" x2="99" y2="22" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="89" y1="28" x2="99" y2="28" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="89" y1="34" x2="99" y2="34" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="118" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#222831" letter-spacing="0.5">CV</text>
+        <text x="118" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#B55400" letter-spacing="2">SENSEI</text>
+      </svg>
+      <div class="on-dark">
+        <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="62" width="16" height="26" rx="2" fill="#6B6560" opacity="0.5"/>
+          <rect x="42" y="48" width="16" height="40" rx="2" fill="#E07A15" opacity="0.6"/>
+          <rect x="64" y="32" width="16" height="56" rx="2" fill="#E07A15" opacity="0.85"/>
+          <rect x="86" y="14" width="16" height="74" rx="2" fill="#E07A15"/>
+          <line x1="89" y1="22" x2="99" y2="22" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="89" y1="28" x2="99" y2="28" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="89" y1="34" x2="99" y2="34" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="118" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+          <text x="118" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Ascent</div>
+    <div class="description">Career progression as a visual metaphor. Rising bars represent growth and momentum — the core promise of a stronger CV. Clean, data-inspired, memorable without any character or mascot.</div>
+  </div>
+
+  <!-- CONCEPT 2 -->
+  <div class="card">
+    <div class="label">Concept 02 — Selected</div>
+    <div class="logo-area">
+      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#222831" stroke-width="2"/>
+        <path d="M54 10 L70 26 L54 26 Z" fill="#222831" opacity="0.12"/>
+        <line x1="54" y1="10" x2="54" y2="26" stroke="#222831" stroke-width="2"/>
+        <line x1="54" y1="26" x2="70" y2="26" stroke="#222831" stroke-width="2"/>
+        <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+        <line x1="70" y1="65" x2="70" y2="79" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="63" y1="72" x2="77" y2="72" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#222831" letter-spacing="0.5">CV</text>
+        <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#B55400" letter-spacing="2">SENSEI</text>
+      </svg>
+      <div class="on-dark">
+        <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#F2F0EC" stroke-width="2"/>
+          <path d="M54 10 L70 26 L54 26 Z" fill="#F2F0EC" opacity="0.15"/>
+          <line x1="54" y1="10" x2="54" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="54" y1="26" x2="70" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+          <line x1="70" y1="65" x2="70" y2="79" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="63" y1="72" x2="77" y2="72" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+          <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Document Spark</div>
+    <div class="description">A refined document icon with a folded corner — a universal CV symbol — punctuated by a bold orange spark, suggesting the AI's input that ignites the document. Minimal and instantly recognisable.</div>
+  </div>
+
+  <!-- CONCEPT 3 -->
+  <div class="card">
+    <div class="label">Concept 03</div>
+    <div class="logo-area">
+      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="12" width="72" height="72" rx="6" fill="#222831"/>
+        <path d="M52 32 C42 32 34 39 34 50 C34 61 42 68 52 68 C56 68 60 67 63 64" stroke="#E07A15" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <polyline points="63,33 70,62 77,33" stroke="#F2F0EC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <text x="98" y="46" font-family="'DM Sans', sans-serif" font-weight="300" font-size="13" fill="#222831" letter-spacing="3">CV</text>
+        <text x="98" y="64" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#222831" letter-spacing="1">Sensei</text>
+        <line x1="98" y1="70" x2="155" y2="70" stroke="#E07A15" stroke-width="2"/>
+      </svg>
+      <div class="on-dark">
+        <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="12" y="12" width="72" height="72" rx="6" fill="#E07A15"/>
+          <path d="M52 32 C42 32 34 39 34 50 C34 61 42 68 52 68 C56 68 60 67 63 64" stroke="#222831" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <polyline points="63,33 70,62 77,33" stroke="#222831" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="98" y="46" font-family="'DM Sans', sans-serif" font-weight="300" font-size="13" fill="#F2F0EC" letter-spacing="3">CV</text>
+          <text x="98" y="64" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#F2F0EC" letter-spacing="1">Sensei</text>
+          <line x1="98" y1="70" x2="155" y2="70" stroke="#E07A15" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Monogram</div>
+    <div class="description">A bold, contained mark using the CV initials — the C in brand orange, the V in off-white — set inside a dark tile. App-icon ready and versatile. The wordmark uses a serif/sans pairing for authority with warmth.</div>
+  </div>
+
+</div>
+
+<!-- ── SECTION: FINAL REFINED ── -->
+<div class="section-label"><span>Final Refined Logo — Concept 02 Dark Mode</span></div>
+
+<div class="final-wrap">
+
+  <!-- Hero: full logo -->
+  <div class="final-hero">
+    <div class="final-logo-block">
+      <div class="variant-label" style="margin-bottom:20px;">Full lockup</div>
+      <svg width="220" height="110" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#F2F0EC" stroke-width="2"/>
+        <path d="M54 10 L70 26 L54 26 Z" fill="#F2F0EC" opacity="0.15"/>
+        <line x1="54" y1="10" x2="54" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+        <line x1="54" y1="26" x2="70" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+        <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+        <line x1="70" y1="65" x2="70" y2="79" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="63" y1="72" x2="77" y2="72" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+        <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+        <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+      </svg>
+    </div>
+    <div class="final-right">
+      <h2>Final Direction</h2>
+      <ul class="rationale">
+        <li>Dark background (#222831) adopted as the logo's native context</li>
+        <li>Document outline and corner in off-white (#F2F0EC) for contrast</li>
+        <li>Content lines remain in #6B6560 — subtle, not competing</li>
+        <li>Spark circle stays #E07A15 — the single warm accent point</li>
+        <li>SENSEI wordmark lifts to #E07A15 on dark for legibility and brand consistency</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Size previews -->
+  <div class="sizes-row">
+
+    <!-- Nav bar -->
+    <div class="size-card">
+      <div class="size-card-label">Navigation bar</div>
+      <div class="nav-sim">
+        <svg width="100" height="32" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#F2F0EC" stroke-width="2"/>
+          <path d="M54 10 L70 26 L54 26 Z" fill="#F2F0EC" opacity="0.15"/>
+          <line x1="54" y1="10" x2="54" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="54" y1="26" x2="70" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+          <line x1="70" y1="65" x2="70" y2="79" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="63" y1="72" x2="77" y2="72" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+          <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+        </svg>
+        <div class="nav-links">
+          <span class="nav-link">Dashboard</span>
+          <span class="nav-link">My CVs</span>
+          <span class="nav-btn">New CV</span>
+        </div>
+      </div>
+      <div class="size-note">Rendered at ~32px height inside a 52px nav bar. The full lockup (icon + wordmark) works well at this scale.</div>
+    </div>
+
+    <!-- Icon only / small -->
+    <div class="size-card">
+      <div class="size-card-label">Icon mark only</div>
+      <div style="display:flex; align-items:flex-end; gap:20px; padding: 8px 0 16px;">
+        <!-- 48px -->
+        <div class="favicon-item">
+          <div class="favicon-bg" style="width:48px; height:48px; border-radius:4px;">
+            <svg width="38" height="38" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="52" height="66" rx="3" fill="none" stroke="#F2F0EC" stroke-width="5"/>
+              <path d="M42 4 L58 20 L42 20 Z" fill="#F2F0EC" opacity="0.15"/>
+              <line x1="42" y1="4" x2="42" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="42" y1="20" x2="58" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="14" y1="34" x2="50" y2="34" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="46" x2="50" y2="46" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="58" x2="36" y2="58" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="58" cy="70" r="16" fill="#E07A15"/>
+              <line x1="58" y1="61" x2="58" y2="79" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+              <line x1="49" y1="70" x2="67" y2="70" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="favicon-dim">48px</span>
+        </div>
+        <!-- 32px -->
+        <div class="favicon-item">
+          <div class="favicon-bg" style="width:32px; height:32px; border-radius:3px;">
+            <svg width="24" height="24" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="52" height="66" rx="3" fill="none" stroke="#F2F0EC" stroke-width="5"/>
+              <path d="M42 4 L58 20 L42 20 Z" fill="#F2F0EC" opacity="0.15"/>
+              <line x1="42" y1="4" x2="42" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="42" y1="20" x2="58" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="14" y1="34" x2="50" y2="34" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="46" x2="50" y2="46" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="58" x2="36" y2="58" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="58" cy="70" r="16" fill="#E07A15"/>
+              <line x1="58" y1="61" x2="58" y2="79" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+              <line x1="49" y1="70" x2="67" y2="70" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="favicon-dim">32px</span>
+        </div>
+        <!-- 16px -->
+        <div class="favicon-item">
+          <div class="favicon-bg" style="width:16px; height:16px; border-radius:2px;">
+            <svg width="12" height="12" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="52" height="66" rx="3" fill="none" stroke="#F2F0EC" stroke-width="5"/>
+              <path d="M42 4 L58 20 L42 20 Z" fill="#F2F0EC" opacity="0.15"/>
+              <line x1="42" y1="4" x2="42" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="42" y1="20" x2="58" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="14" y1="34" x2="50" y2="34" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="46" x2="50" y2="46" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="58" x2="36" y2="58" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="58" cy="70" r="16" fill="#E07A15"/>
+              <line x1="58" y1="61" x2="58" y2="79" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+              <line x1="49" y1="70" x2="67" y2="70" stroke="#222831" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span class="favicon-dim">16px</span>
+        </div>
+      </div>
+      <div class="size-note">Icon-only mark for compact contexts. At 16px the spark circle and document shape remain distinct — the orange dot anchors recognition.</div>
+    </div>
+
+    <!-- Favicon in browser tab sim -->
+    <div class="size-card">
+      <div class="size-card-label">Favicon in context</div>
+      <div style="padding: 8px 0 16px;">
+        <!-- Simulated browser tab -->
+        <div style="display:flex; align-items:center; background:#2e3642; border-radius:6px 6px 0 0; padding: 8px 14px; gap:7px; width: fit-content;">
+          <div class="favicon-bg" style="width:16px; height:16px; border-radius:2px; flex-shrink:0;">
+            <svg width="12" height="12" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="4" width="52" height="66" rx="3" fill="none" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="42" y1="4" x2="42" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="42" y1="20" x2="58" y2="20" stroke="#F2F0EC" stroke-width="5"/>
+              <line x1="14" y1="34" x2="50" y2="34" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <line x1="14" y1="46" x2="50" y2="46" stroke="#6B6560" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="58" cy="70" r="16" fill="#E07A15"/>
+            </svg>
+          </div>
+          <span style="font-size:11px; color:#9ca3af; white-space:nowrap;">CV Sensei</span>
+          <span style="font-size:10px; color:#4b5563; margin-left:4px;">✕</span>
+        </div>
+        <div style="background:#1e2530; border-radius:0 6px 6px 6px; padding:12px 14px;">
+          <div style="background:#2e3642; border-radius:3px; height:20px; width:100%; opacity:0.5;"></div>
+        </div>
+      </div>
+      <div class="size-note">At 16px favicon size, simplify to just the document outline + spark circle. The orange dot is immediately recognisable in a browser tab.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ── SECTION: SVG CODE ── -->
+<div class="section-label"><span>SVG Code — Dark Mode (copy-paste ready)</span></div>
+
+<div class="code-wrap">
+  <div class="code-block"><pre
+><span class="c">&lt;!-- =============================== --&gt;
+&lt;!-- CV Sensei — Logo Dark Mode SVG  --&gt;
+&lt;!-- Concept 02 · The Document Spark --&gt;
+&lt;!-- =============================== --&gt;</span>
+
+<span class="t">&lt;svg</span>
+  <span class="a">width</span>=<span class="s">"200"</span>
+  <span class="a">height</span>=<span class="s">"100"</span>
+  <span class="a">viewBox</span>=<span class="s">"0 0 200 100"</span>
+  <span class="a">fill</span>=<span class="s">"none"</span>
+  <span class="a">xmlns</span>=<span class="s">"http://www.w3.org/2000/svg"</span>
+<span class="t">&gt;</span>
+
+  <span class="c">&lt;!-- Document outline --&gt;</span>
+  <span class="t">&lt;rect</span>
+    <span class="a">x</span>=<span class="s">"18"</span> <span class="a">y</span>=<span class="s">"10"</span>
+    <span class="a">width</span>=<span class="s">"52"</span> <span class="a">height</span>=<span class="s">"68"</span>
+    <span class="a">rx</span>=<span class="s">"3"</span>
+    <span class="a">fill</span>=<span class="s">"none"</span>
+    <span class="a">stroke</span>=<span class="s">"#F2F0EC"</span>
+    <span class="a">stroke-width</span>=<span class="s">"2"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Folded corner — triangle fill --&gt;</span>
+  <span class="t">&lt;path</span>
+    <span class="a">d</span>=<span class="s">"M54 10 L70 26 L54 26 Z"</span>
+    <span class="a">fill</span>=<span class="s">"#F2F0EC"</span>
+    <span class="a">opacity</span>=<span class="s">"0.15"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Folded corner — vertical line --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"54"</span> <span class="a">y1</span>=<span class="s">"10"</span>
+    <span class="a">x2</span>=<span class="s">"54"</span> <span class="a">y2</span>=<span class="s">"26"</span>
+    <span class="a">stroke</span>=<span class="s">"#F2F0EC"</span>
+    <span class="a">stroke-width</span>=<span class="s">"2"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Folded corner — horizontal line --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"54"</span> <span class="a">y1</span>=<span class="s">"26"</span>
+    <span class="a">x2</span>=<span class="s">"70"</span> <span class="a">y2</span>=<span class="s">"26"</span>
+    <span class="a">stroke</span>=<span class="s">"#F2F0EC"</span>
+    <span class="a">stroke-width</span>=<span class="s">"2"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Content line 1 --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"27"</span> <span class="a">y1</span>=<span class="s">"38"</span>
+    <span class="a">x2</span>=<span class="s">"62"</span> <span class="a">y2</span>=<span class="s">"38"</span>
+    <span class="a">stroke</span>=<span class="s">"#6B6560"</span>
+    <span class="a">stroke-width</span>=<span class="s">"1.5"</span>
+    <span class="a">stroke-linecap</span>=<span class="s">"round"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Content line 2 --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"27"</span> <span class="a">y1</span>=<span class="s">"48"</span>
+    <span class="a">x2</span>=<span class="s">"62"</span> <span class="a">y2</span>=<span class="s">"48"</span>
+    <span class="a">stroke</span>=<span class="s">"#6B6560"</span>
+    <span class="a">stroke-width</span>=<span class="s">"1.5"</span>
+    <span class="a">stroke-linecap</span>=<span class="s">"round"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Content line 3 — shorter --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"27"</span> <span class="a">y1</span>=<span class="s">"58"</span>
+    <span class="a">x2</span>=<span class="s">"48"</span> <span class="a">y2</span>=<span class="s">"58"</span>
+    <span class="a">stroke</span>=<span class="s">"#6B6560"</span>
+    <span class="a">stroke-width</span>=<span class="s">"1.5"</span>
+    <span class="a">stroke-linecap</span>=<span class="s">"round"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Spark circle --&gt;</span>
+  <span class="t">&lt;circle</span>
+    <span class="a">cx</span>=<span class="s">"70"</span> <span class="a">cy</span>=<span class="s">"72"</span>
+    <span class="a">r</span>=<span class="s">"10"</span>
+    <span class="a">fill</span>=<span class="s">"#E07A15"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Spark cross — vertical --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"70"</span> <span class="a">y1</span>=<span class="s">"65"</span>
+    <span class="a">x2</span>=<span class="s">"70"</span> <span class="a">y2</span>=<span class="s">"79"</span>
+    <span class="a">stroke</span>=<span class="s">"#222831"</span>
+    <span class="a">stroke-width</span>=<span class="s">"1.8"</span>
+    <span class="a">stroke-linecap</span>=<span class="s">"round"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Spark cross — horizontal --&gt;</span>
+  <span class="t">&lt;line</span>
+    <span class="a">x1</span>=<span class="s">"63"</span> <span class="a">y1</span>=<span class="s">"72"</span>
+    <span class="a">x2</span>=<span class="s">"77"</span> <span class="a">y2</span>=<span class="s">"72"</span>
+    <span class="a">stroke</span>=<span class="s">"#222831"</span>
+    <span class="a">stroke-width</span>=<span class="s">"1.8"</span>
+    <span class="a">stroke-linecap</span>=<span class="s">"round"</span>
+  <span class="t">/&gt;</span>
+
+  <span class="c">&lt;!-- Wordmark — CV --&gt;</span>
+  <span class="t">&lt;text</span>
+    <span class="a">x</span>=<span class="s">"90"</span> <span class="a">y</span>=<span class="s">"46"</span>
+    <span class="a">font-family</span>=<span class="s">"'DM Sans', sans-serif"</span>
+    <span class="a">font-weight</span>=<span class="s">"500"</span>
+    <span class="a">font-size</span>=<span class="s">"18"</span>
+    <span class="a">fill</span>=<span class="s">"#F2F0EC"</span>
+    <span class="a">letter-spacing</span>=<span class="s">"0.5"</span>
+  <span class="t">&gt;</span>CV<span class="t">&lt;/text&gt;</span>
+
+  <span class="c">&lt;!-- Wordmark — SENSEI --&gt;</span>
+  <span class="t">&lt;text</span>
+    <span class="a">x</span>=<span class="s">"90"</span> <span class="a">y</span>=<span class="s">"66"</span>
+    <span class="a">font-family</span>=<span class="s">"'Cormorant Garamond', serif"</span>
+    <span class="a">font-size</span>=<span class="s">"16"</span>
+    <span class="a">fill</span>=<span class="s">"#E07A15"</span>
+    <span class="a">letter-spacing</span>=<span class="s">"2"</span>
+  <span class="t">&gt;</span>SENSEI<span class="t">&lt;/text&gt;</span>
+
+<span class="t">&lt;/svg&gt;</span></pre>
+  </div>
+</div>
+
+<div class="footer">CV Sensei · Brand Identity · 2026</div>
+
+</body>
+</html>

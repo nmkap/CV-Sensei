@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei — Logo Concepts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #F2F0EC;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #6B6560;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 48px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 2px 20px rgba(34,40,49,0.06);
+  }
+
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #6B6560;
+    text-align: center;
+  }
+
+  .concept-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222831;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .description {
+    font-size: 13px;
+    color: #6B6560;
+    line-height: 1.7;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  /* Dark background variant */
+  .card.dark {
+    background: #222831;
+  }
+  .card.dark .concept-title { color: #F2F0EC; }
+  .card.dark .description { color: #6B6560; }
+  .card.dark .label { color: #6B6560; }
+
+  /* On dark bg */
+  .on-dark {
+    background: #222831;
+    border-radius: 2px;
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>CV Sensei — Logo Concepts</h1>
+
+<div class="grid">
+
+  <!-- CONCEPT 1: The Ascending Path -->
+  <div class="card">
+    <div class="label">Concept 01</div>
+    <div class="logo-area">
+      <!-- Light background version -->
+      <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ascending bars — career growth -->
+        <rect x="20" y="62" width="16" height="26" rx="2" fill="#6B6560" opacity="0.35"/>
+        <rect x="42" y="48" width="16" height="40" rx="2" fill="#E07A15" opacity="0.6"/>
+        <rect x="64" y="32" width="16" height="56" rx="2" fill="#E07A15" opacity="0.85"/>
+        <rect x="86" y="14" width="16" height="74" rx="2" fill="#B55400"/>
+        <!-- Subtle document line on last bar -->
+        <line x1="89" y1="22" x2="99" y2="22" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="89" y1="28" x2="99" y2="28" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="89" y1="34" x2="99" y2="34" stroke="#F2F0EC" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Wordmark -->
+        <text x="118" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#222831" letter-spacing="0.5">CV</text>
+        <text x="118" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#B55400" letter-spacing="2">SENSEI</text>
+      </svg>
+
+      <!-- Dark version preview -->
+      <div class="on-dark">
+        <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="62" width="16" height="26" rx="2" fill="#6B6560" opacity="0.5"/>
+          <rect x="42" y="48" width="16" height="40" rx="2" fill="#E07A15" opacity="0.6"/>
+          <rect x="64" y="32" width="16" height="56" rx="2" fill="#E07A15" opacity="0.85"/>
+          <rect x="86" y="14" width="16" height="74" rx="2" fill="#E07A15"/>
+          <line x1="89" y1="22" x2="99" y2="22" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="89" y1="28" x2="99" y2="28" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="89" y1="34" x2="99" y2="34" stroke="#222831" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="118" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+          <text x="118" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Ascent</div>
+    <div class="description">Career progression as a visual metaphor. Rising bars represent growth and momentum — the core promise of a stronger CV. Clean, data-inspired, memorable without any character or mascot.</div>
+  </div>
+
+  <!-- CONCEPT 2: The Document Spark -->
+  <div class="card">
+    <div class="label">Concept 02</div>
+    <div class="logo-area">
+      <!-- Light version -->
+      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Document shape -->
+        <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#222831" stroke-width="2"/>
+        <!-- Folded corner -->
+        <path d="M54 10 L70 26 L54 26 Z" fill="#222831" opacity="0.12"/>
+        <line x1="54" y1="10" x2="54" y2="26" stroke="#222831" stroke-width="2"/>
+        <line x1="54" y1="26" x2="70" y2="26" stroke="#222831" stroke-width="2"/>
+        <!-- Document lines -->
+        <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Orange accent spark / star dot -->
+        <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+        <line x1="70" y1="65" x2="70" y2="79" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="63" y1="72" x2="77" y2="72" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <!-- Wordmark -->
+        <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#222831" letter-spacing="0.5">CV</text>
+        <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#B55400" letter-spacing="2">SENSEI</text>
+      </svg>
+
+      <!-- Dark version preview -->
+      <div class="on-dark">
+        <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="18" y="10" width="52" height="68" rx="3" fill="none" stroke="#F2F0EC" stroke-width="2"/>
+          <path d="M54 10 L70 26 L54 26 Z" fill="#F2F0EC" opacity="0.15"/>
+          <line x1="54" y1="10" x2="54" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="54" y1="26" x2="70" y2="26" stroke="#F2F0EC" stroke-width="2"/>
+          <line x1="27" y1="38" x2="62" y2="38" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="48" x2="62" y2="48" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="27" y1="58" x2="48" y2="58" stroke="#6B6560" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="70" cy="72" r="10" fill="#E07A15"/>
+          <line x1="70" y1="65" x2="70" y2="79" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="63" y1="72" x2="77" y2="72" stroke="#222831" stroke-width="1.8" stroke-linecap="round"/>
+          <text x="90" y="46" font-family="'DM Sans', sans-serif" font-weight="500" font-size="18" fill="#F2F0EC" letter-spacing="0.5">CV</text>
+          <text x="90" y="66" font-family="'Cormorant Garamond', serif" font-size="16" fill="#E07A15" letter-spacing="2">SENSEI</text>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Document Spark</div>
+    <div class="description">A refined document icon with a folded corner — a universal CV symbol — punctuated by a bold orange spark, suggesting the AI's input that ignites the document. Minimal and instantly recognisable.</div>
+  </div>
+
+  <!-- CONCEPT 3: The Monogram -->
+  <div class="card">
+    <div class="label">Concept 03</div>
+    <div class="logo-area">
+      <!-- Light version -->
+      <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bold CV monogram in a circle/square mark -->
+        <rect x="12" y="12" width="72" height="72" rx="6" fill="#222831"/>
+        <!-- C shape -->
+        <path d="M52 32 C42 32 34 39 34 50 C34 61 42 68 52 68 C56 68 60 67 63 64" 
+              stroke="#E07A15" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <!-- V shape -->
+        <path d="M62 34 L56 66 L68 50 L74 66 L68 34" 
+              stroke="none" fill="none"/>
+        <polyline points="63,33 70,62 77,33" stroke="#F2F0EC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <!-- Wordmark next to mark -->
+        <text x="98" y="46" font-family="'DM Sans', sans-serif" font-weight="300" font-size="13" fill="#222831" letter-spacing="3">CV</text>
+        <text x="98" y="64" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#222831" letter-spacing="1">Sensei</text>
+        <!-- Small orange underline accent -->
+        <line x1="98" y1="70" x2="155" y2="70" stroke="#E07A15" stroke-width="2"/>
+      </svg>
+
+      <!-- Dark version preview -->
+      <div class="on-dark">
+        <svg width="200" height="100" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="12" y="12" width="72" height="72" rx="6" fill="#E07A15"/>
+          <path d="M52 32 C42 32 34 39 34 50 C34 61 42 68 52 68 C56 68 60 67 63 64" 
+                stroke="#222831" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <polyline points="63,33 70,62 77,33" stroke="#222831" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="98" y="46" font-family="'DM Sans', sans-serif" font-weight="300" font-size="13" fill="#F2F0EC" letter-spacing="3">CV</text>
+          <text x="98" y="64" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#F2F0EC" letter-spacing="1">Sensei</text>
+          <line x1="98" y1="70" x2="155" y2="70" stroke="#E07A15" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+    <div class="concept-title">The Monogram</div>
+    <div class="description">A bold, contained mark using the CV initials — the C in brand orange, the V in off-white — set inside a dark tile. App-icon ready and versatile. The wordmark uses a serif/sans pairing for authority with warmth.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

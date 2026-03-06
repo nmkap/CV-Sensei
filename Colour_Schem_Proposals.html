@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Builder – Colour Scheme Proposals</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F5F4F0;
+    color: #1a1a1a;
+    padding: 48px 32px;
+  }
+
+  header {
+    max-width: 860px;
+    margin: 0 auto 56px;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: #111;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 1rem;
+    color: #666;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  .schemes {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .scheme { }
+
+  .scheme-label {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .scheme-number {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999;
+  }
+
+  .scheme-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: #111;
+  }
+
+  .scheme-tagline {
+    font-size: 0.85rem;
+    color: #888;
+    margin-left: auto;
+    font-style: italic;
+  }
+
+  /* Swatches row */
+  .swatches {
+    display: flex;
+    gap: 0;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+  }
+
+  .swatch {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    transition: flex 0.3s ease;
+    position: relative;
+  }
+
+  .swatch:hover { flex: 1.6; }
+
+  .swatch-hex {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+  }
+
+  .swatch-role {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+
+  /* Accent badge */
+  .accent-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    color: inherit;
+  }
+
+  /* Mini UI preview */
+  .preview {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    height: 220px;
+    display: flex;
+    position: relative;
+  }
+
+  /* Annotations */
+  .annotation {
+    display: flex;
+    gap: 20px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .annotation-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: #555;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── SCHEME 1: Slate & Coral ─── */
+  .s1-sidebar {
+    width: 200px;
+    background: #1E2B3C;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 16px;
+    flex-shrink: 0;
+  }
+  .s1-logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #E8614A;
+    margin-bottom: 20px;
+  }
+  .s1-nav-item {
+    height: 8px; border-radius: 4px;
+    background: #2e3f55;
+    margin-bottom: 8px;
+  }
+  .s1-nav-item.active { background: #E8614A; width: 70%; }
+  .s1-main {
+    flex: 1;
+    background: #F7F5F2;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 20px;
+  }
+  .s1-topbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .s1-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #1E2B3C;
+    margin-left: auto;
+  }
+  .s1-chat-bubble {
+    background: #fff;
+    border-radius: 10px 10px 10px 0;
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    color: #333;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    max-width: 68%;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .s1-chat-bubble.user {
+    background: #E8614A;
+    color: #fff;
+    border-radius: 10px 10px 0 10px;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  .chat-area { display: flex; flex-direction: column; flex: 1; }
+  .s1-input-bar {
+    height: 28px; border-radius: 6px;
+    background: #fff;
+    border: 1.5px solid #ddd;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+  .s1-input-bar::after {
+    content: '↑';
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #E8614A;
+    font-weight: 700;
+  }
+  .s1-input-bar span { font-size: 0.6rem; color: #bbb; }
+
+  /* ─── SCHEME 2: Warm Cream & Forest ─── */
+  .s2-sidebar {
+    width: 200px;
+    background: #2D4A3E;
+    display: flex; flex-direction: column;
+    padding: 18px 16px; flex-shrink: 0;
+  }
+  .s2-logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #C8A96E; margin-bottom: 20px;
+  }
+  .s2-nav-item {
+    height: 8px; border-radius: 4px;
+    background: #3a5e50; margin-bottom: 8px;
+  }
+  .s2-nav-item.active { background: #C8A96E; width: 70%; }
+  .s2-main {
+    flex: 1; background: #FFFBF4;
+    display: flex; flex-direction: column;
+    padding: 18px 20px;
+  }
+  .s2-chat-bubble {
+    background: #fff;
+    border-radius: 10px 10px 10px 0;
+    padding: 8px 12px; font-size: 0.65rem;
+    color: #2D4A3E; box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    max-width: 68%; margin-bottom: 8px; line-height: 1.4;
+  }
+  .s2-chat-bubble.user {
+    background: #2D4A3E; color: #FFFBF4;
+    border-radius: 10px 10px 0 10px;
+    align-self: flex-end; margin-left: auto;
+  }
+  .s2-input-bar {
+    height: 28px; border-radius: 6px;
+    background: #fff; border: 1.5px solid #e0d9cc;
+    margin-top: auto; display: flex;
+    align-items: center; padding: 0 10px;
+  }
+  .s2-input-bar::after {
+    content: '↑'; margin-left: auto;
+    font-size: 0.75rem; color: #C8A96E; font-weight: 700;
+  }
+  .s2-input-bar span { font-size: 0.6rem; color: #bbb; }
+
+  /* ─── SCHEME 3: Midnight & Electric ─── */
+  .s3-sidebar {
+    width: 200px;
+    background: #0D0D14;
+    display: flex; flex-direction: column;
+    padding: 18px 16px; flex-shrink: 0;
+  }
+  .s3-logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #5B5BF8; margin-bottom: 20px;
+  }
+  .s3-nav-item {
+    height: 8px; border-radius: 4px;
+    background: #1a1a2e; margin-bottom: 8px;
+  }
+  .s3-nav-item.active { background: #5B5BF8; width: 70%; }
+  .s3-main {
+    flex: 1; background: #12121C;
+    display: flex; flex-direction: column;
+    padding: 18px 20px;
+  }
+  .s3-chat-bubble {
+    background: #1e1e2e;
+    border: 1px solid #2a2a3e;
+    border-radius: 10px 10px 10px 0;
+    padding: 8px 12px; font-size: 0.65rem;
+    color: #c8c8e8; max-width: 68%;
+    margin-bottom: 8px; line-height: 1.4;
+  }
+  .s3-chat-bubble.user {
+    background: #5B5BF8; color: #fff;
+    border: none;
+    border-radius: 10px 10px 0 10px;
+    align-self: flex-end; margin-left: auto;
+  }
+  .s3-input-bar {
+    height: 28px; border-radius: 6px;
+    background: #1e1e2e; border: 1.5px solid #2a2a3e;
+    margin-top: auto; display: flex;
+    align-items: center; padding: 0 10px;
+  }
+  .s3-input-bar::after {
+    content: '↑'; margin-left: auto;
+    font-size: 0.75rem; color: #00F0C8; font-weight: 700;
+  }
+  .s3-input-bar span { font-size: 0.6rem; color: #555; }
+
+  /* ─── SCHEME 4: Soft Stone & Saffron ─── */
+  .s4-sidebar {
+    width: 200px;
+    background: #EDEAE4;
+    display: flex; flex-direction: column;
+    padding: 18px 16px; flex-shrink: 0;
+    border-right: 1px solid #D9D5CE;
+  }
+  .s4-logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: #E67635; margin-bottom: 20px;
+  }
+  .s4-nav-item {
+    height: 8px; border-radius: 4px;
+    background: #D9D5CE; margin-bottom: 8px;
+  }
+  .s4-nav-item.active { background: #E67635; width: 70%; }
+  .s4-main {
+    flex: 1; background: #FAF8F5;
+    display: flex; flex-direction: column;
+    padding: 18px 20px;
+  }
+  .s4-chat-bubble {
+    background: #fff;
+    border: 1px solid #E5E1DA;
+    border-radius: 10px 10px 10px 0;
+    padding: 8px 12px; font-size: 0.65rem;
+    color: #3A3530; max-width: 68%;
+    margin-bottom: 8px; line-height: 1.4;
+  }
+  .s4-chat-bubble.user {
+    background: #3A3530; color: #fff;
+    border: none;
+    border-radius: 10px 10px 0 10px;
+    align-self: flex-end; margin-left: auto;
+  }
+  .s4-input-bar {
+    height: 28px; border-radius: 6px;
+    background: #fff; border: 1.5px solid #E5E1DA;
+    margin-top: auto; display: flex;
+    align-items: center; padding: 0 10px;
+  }
+  .s4-input-bar::after {
+    content: '↑'; margin-left: auto;
+    font-size: 0.75rem; color: #E67635; font-weight: 700;
+  }
+  .s4-input-bar span { font-size: 0.6rem; color: #bbb; }
+
+  /* Dark text swatches */
+  .dark-text { color: rgba(0,0,0,0.75) !important; }
+  .dark-text .swatch-hex, .dark-text .swatch-role { opacity: 0.6 !important; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #E0DDD8;
+    margin: 8px 0 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Colour Scheme Proposals</h1>
+  <p>Four directions for your AI CV Builder interface — each balancing professionalism with personality. Hover swatches to expand.</p>
+</header>
+
+<div class="schemes">
+
+  <!-- ═══ SCHEME 1 ═══ -->
+  <div class="scheme">
+    <div class="scheme-label">
+      <span class="scheme-number">01</span>
+      <span class="scheme-name">Slate & Coral</span>
+      <span class="scheme-tagline">Confident, modern, energetic</span>
+    </div>
+    <hr class="divider">
+    <div class="swatches">
+      <div class="swatch" style="background:#1E2B3C; color:#fff;">
+        <span class="swatch-hex">#1E2B3C</span>
+        <span class="swatch-role">Primary / Sidebar</span>
+      </div>
+      <div class="swatch" style="background:#F7F5F2; color:#1E2B3C;" class="dark-text">
+        <span class="swatch-hex" style="color:#444">#F7F5F2</span>
+        <span class="swatch-role" style="color:#777">Background</span>
+      </div>
+      <div class="swatch" style="background:#E8614A; color:#fff;">
+        <div class="accent-badge">Accent 1</div>
+        <span class="swatch-hex">#E8614A</span>
+        <span class="swatch-role">CTA / Send / Active</span>
+      </div>
+      <div class="swatch" style="background:#FBBF8C; color:#1E2B3C;">
+        <div class="accent-badge" style="color:#1E2B3C">Accent 2</div>
+        <span class="swatch-hex">#FBBF8C</span>
+        <span class="swatch-role">Highlights / Tags</span>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="s1-sidebar">
+        <div class="s1-logo"></div>
+        <div class="s1-nav-item active"></div>
+        <div class="s1-nav-item" style="width:85%"></div>
+        <div class="s1-nav-item" style="width:60%"></div>
+        <div class="s1-nav-item" style="width:75%"></div>
+        <div class="s1-nav-item" style="width:50%"></div>
+      </div>
+      <div class="s1-main">
+        <div class="s1-topbar">
+          <span style="font-size:0.65rem; color:#999; font-weight:500;">Chat · Product Designer CV</span>
+          <div class="s1-avatar"></div>
+        </div>
+        <div class="chat-area">
+          <div class="s1-chat-bubble">Hi! I've analysed your CV. Your experience at Figma is strong — let's lead with that. Want to tailor this for a Senior UX role?</div>
+          <div class="s1-chat-bubble user">Yes, focus on leadership and systems thinking.</div>
+          <div class="s1-chat-bubble">Great. I'll restructure your summary and reframe your bullet points to emphasise impact.</div>
+        </div>
+        <div class="s1-input-bar"><span>Type a message...</span></div>
+      </div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-item"><div class="dot" style="background:#1E2B3C"></div> Deep slate sidebar — authority & trust</div>
+      <div class="annotation-item"><div class="dot" style="background:#E8614A"></div> Coral accent — energy, action buttons</div>
+      <div class="annotation-item"><div class="dot" style="background:#FBBF8C"></div> Warm amber — soft highlights, badges</div>
+      <div class="annotation-item"><div class="dot" style="background:#F7F5F2"></div> Off-white — clean reading surface</div>
+    </div>
+  </div>
+
+  <!-- ═══ SCHEME 2 ═══ -->
+  <div class="scheme">
+    <div class="scheme-label">
+      <span class="scheme-number">02</span>
+      <span class="scheme-name">Forest & Wheat</span>
+      <span class="scheme-tagline">Grounded, warm, trustworthy</span>
+    </div>
+    <hr class="divider">
+    <div class="swatches">
+      <div class="swatch" style="background:#2D4A3E; color:#fff;">
+        <span class="swatch-hex">#2D4A3E</span>
+        <span class="swatch-role">Primary / Sidebar</span>
+      </div>
+      <div class="swatch" style="background:#FFFBF4; color:#2D4A3E;">
+        <span class="swatch-hex" style="color:#555">#FFFBF4</span>
+        <span class="swatch-role" style="color:#888">Background</span>
+      </div>
+      <div class="swatch" style="background:#C8A96E; color:#fff;">
+        <div class="accent-badge">Accent 1</div>
+        <span class="swatch-hex">#C8A96E</span>
+        <span class="swatch-role">CTA / Gold wheat</span>
+      </div>
+      <div class="swatch" style="background:#E07B54; color:#fff;">
+        <div class="accent-badge">Accent 2</div>
+        <span class="swatch-hex">#E07B54</span>
+        <span class="swatch-role">Alerts / Emphasis</span>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="s2-sidebar">
+        <div class="s2-logo"></div>
+        <div class="s2-nav-item active"></div>
+        <div class="s2-nav-item" style="width:85%"></div>
+        <div class="s2-nav-item" style="width:60%"></div>
+        <div class="s2-nav-item" style="width:75%"></div>
+        <div class="s2-nav-item" style="width:50%"></div>
+      </div>
+      <div class="s2-main">
+        <div class="s1-topbar">
+          <span style="font-size:0.65rem; color:#888; font-weight:500;">Chat · Marketing Manager CV</span>
+          <div style="width:26px;height:26px;border-radius:50%;background:#2D4A3E;margin-left:auto;"></div>
+        </div>
+        <div class="chat-area">
+          <div class="s2-chat-bubble">Welcome! Upload your CV or paste your experience below to get started.</div>
+          <div class="s2-chat-bubble user">I'm targeting Head of Marketing roles in the tech sector.</div>
+          <div class="s2-chat-bubble">Perfect. I'll highlight your data-driven campaigns and team leadership. Ready when you are.</div>
+        </div>
+        <div class="s2-input-bar"><span style="font-size:0.6rem;color:#bbb;">Type a message...</span></div>
+      </div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-item"><div class="dot" style="background:#2D4A3E"></div> Deep forest — calm, professional</div>
+      <div class="annotation-item"><div class="dot" style="background:#C8A96E"></div> Wheat gold — premium, warm accent</div>
+      <div class="annotation-item"><div class="dot" style="background:#E07B54"></div> Terracotta — secondary emphasis</div>
+      <div class="annotation-item"><div class="dot" style="background:#FFFBF4"></div> Cream — soft, non-clinical background</div>
+    </div>
+  </div>
+
+  <!-- ═══ SCHEME 3 ═══ -->
+  <div class="scheme">
+    <div class="scheme-label">
+      <span class="scheme-number">03</span>
+      <span class="scheme-name">Midnight & Electric</span>
+      <span class="scheme-tagline">Bold, tech-forward, distinctive</span>
+    </div>
+    <hr class="divider">
+    <div class="swatches">
+      <div class="swatch" style="background:#0D0D14; color:#aaa;">
+        <span class="swatch-hex">#0D0D14</span>
+        <span class="swatch-role">Deep background</span>
+      </div>
+      <div class="swatch" style="background:#1E1E2E; color:#aaa;">
+        <span class="swatch-hex">#1E1E2E</span>
+        <span class="swatch-role">Surface / Cards</span>
+      </div>
+      <div class="swatch" style="background:#5B5BF8; color:#fff;">
+        <div class="accent-badge">Accent 1</div>
+        <span class="swatch-hex">#5B5BF8</span>
+        <span class="swatch-role">Primary action / AI</span>
+      </div>
+      <div class="swatch" style="background:#00F0C8; color:#0D0D14;">
+        <div class="accent-badge" style="color:#0D0D14">Accent 2</div>
+        <span class="swatch-hex" style="color:#0D0D14">#00F0C8</span>
+        <span class="swatch-role" style="color:#0D0D14">Success / Send</span>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="s3-sidebar">
+        <div class="s3-logo"></div>
+        <div class="s3-nav-item active"></div>
+        <div class="s3-nav-item" style="width:85%"></div>
+        <div class="s3-nav-item" style="width:60%"></div>
+        <div class="s3-nav-item" style="width:75%"></div>
+        <div class="s3-nav-item" style="width:50%"></div>
+      </div>
+      <div class="s3-main">
+        <div class="s1-topbar">
+          <span style="font-size:0.65rem; color:#555; font-weight:500;">Chat · Software Engineer CV</span>
+          <div style="width:26px;height:26px;border-radius:50%;background:#5B5BF8;margin-left:auto;"></div>
+        </div>
+        <div class="chat-area">
+          <div class="s3-chat-bubble">I've parsed your CV. Strong backend experience — shall I position you for Staff Engineer roles?</div>
+          <div class="s3-chat-bubble user">Yes, emphasise architecture and cross-team collaboration.</div>
+          <div class="s3-chat-bubble">Noted. Rewriting your summary now to reflect systems-level impact…</div>
+        </div>
+        <div class="s3-input-bar"><span style="font-size:0.6rem;color:#444;">Type a message...</span></div>
+      </div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-item"><div class="dot" style="background:#0D0D14; border:1px solid #444"></div> Near-black — immersive, focused</div>
+      <div class="annotation-item"><div class="dot" style="background:#5B5BF8"></div> Electric indigo — AI intelligence feel</div>
+      <div class="annotation-item"><div class="dot" style="background:#00F0C8"></div> Mint/teal — confirmation, send, success</div>
+      <div class="annotation-item"><div class="dot" style="background:#1E1E2E; border:1px solid #444"></div> Dark surface — cards & chat bubbles</div>
+    </div>
+  </div>
+
+  <!-- ═══ SCHEME 4 ═══ -->
+  <div class="scheme">
+    <div class="scheme-label">
+      <span class="scheme-number">04</span>
+      <span class="scheme-name">Stone & Saffron</span>
+      <span class="scheme-tagline">Refined, minimal, approachable</span>
+    </div>
+    <hr class="divider">
+    <div class="swatches">
+      <div class="swatch" style="background:#3A3530; color:#fff;">
+        <span class="swatch-hex">#3A3530</span>
+        <span class="swatch-role">Primary text / Dark UI</span>
+      </div>
+      <div class="swatch" style="background:#FAF8F5;">
+        <span class="swatch-hex" style="color:#555">#FAF8F5</span>
+        <span class="swatch-role" style="color:#888">Background</span>
+      </div>
+      <div class="swatch" style="background:#E67635; color:#fff;">
+        <div class="accent-badge">Accent 1</div>
+        <span class="swatch-hex">#E67635</span>
+        <span class="swatch-role">CTA / Saffron</span>
+      </div>
+      <div class="swatch" style="background:#EDEAE4;">
+        <span class="swatch-hex" style="color:#555">#EDEAE4</span>
+        <span class="swatch-role" style="color:#888">Sidebar / Panels</span>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="s4-sidebar">
+        <div class="s4-logo"></div>
+        <div class="s4-nav-item active"></div>
+        <div class="s4-nav-item" style="width:85%"></div>
+        <div class="s4-nav-item" style="width:60%"></div>
+        <div class="s4-nav-item" style="width:75%"></div>
+        <div class="s4-nav-item" style="width:50%"></div>
+      </div>
+      <div class="s4-main">
+        <div class="s1-topbar">
+          <span style="font-size:0.65rem; color:#aaa; font-weight:500;">Chat · Nurse CV</span>
+          <div style="width:26px;height:26px;border-radius:50%;background:#3A3530;margin-left:auto;"></div>
+        </div>
+        <div class="chat-area">
+          <div class="s4-chat-bubble">Hello! I'm ready to help you build a standout CV. What role are you applying for?</div>
+          <div class="s4-chat-bubble user">Senior ICU Nurse positions at NHS hospitals.</div>
+          <div class="s4-chat-bubble">I'll structure your clinical experience to lead with critical care hours and certifications.</div>
+        </div>
+        <div class="s4-input-bar"><span style="font-size:0.6rem;color:#ccc;">Type a message...</span></div>
+      </div>
+    </div>
+    <div class="annotation">
+      <div class="annotation-item"><div class="dot" style="background:#3A3530"></div> Warm charcoal — readable, grounded</div>
+      <div class="annotation-item"><div class="dot" style="background:#E67635"></div> Saffron orange — singular bold accent</div>
+      <div class="annotation-item"><div class="dot" style="background:#EDEAE4; border:1px solid #ccc"></div> Stone panel — structured but soft</div>
+      <div class="annotation-item"><div class="dot" style="background:#FAF8F5; border:1px solid #ddd"></div> Warm white — clear canvas</div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="max-width:860px;margin:64px auto 0;padding-bottom:48px;font-size:0.78rem;color:#aaa;text-align:center;">
+  Colour proposals for AI CV Builder · UX Portfolio Case Study
+</footer>
+
+</body>
+</html>

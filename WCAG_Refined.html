@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei – Refined Colour Palette</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-d: 'Playfair Display', serif;
+  --font-u: 'Lato', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-u);
+  background: #E4E1DC;
+  color: #222831;
+  padding: 52px 36px 80px;
+}
+.page { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 44px; }
+
+/* PAGE HEADER */
+.page-header { padding-bottom: 24px; border-bottom: 1px solid #C8C4BF; }
+.page-header h1 { font-family: var(--font-d); font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+.page-header p { font-size: 0.82rem; color: #888; font-weight: 300; }
+
+/* CARD */
+.card { background: #fff; border-radius: 16px; box-shadow: 0 2px 20px rgba(34,40,49,0.08); overflow: hidden; }
+.card-header { background: #222831; padding: 13px 28px; display: flex; align-items: center; justify-content: space-between; }
+.card-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #B55400; }
+.card-note { font-size: 0.68rem; color: #555; font-style: italic; }
+.card-body { padding: 32px 28px; }
+
+/* ══ BEFORE / AFTER PALETTE ══ */
+.ba-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: start; }
+.ba-arrow { display: flex; align-items: center; justify-content: center; padding-top: 32px; font-size: 1.8rem; color: #B55400; }
+
+.palette-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+.label-fail { color: #C0392B; }
+.label-pass { color: #2E7D52; }
+
+.swatch-col { display: flex; flex-direction: column; gap: 8px; }
+
+.swatch-row {
+  display: flex;
+  align-items: stretch;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  height: 64px;
+}
+
+.sw-block { flex: 1; position: relative; }
+
+.sw-label {
+  position: absolute;
+  bottom: 7px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sw-hex { font-size: 0.58rem; font-family: 'Courier New', monospace; font-weight: 700; }
+.sw-name { font-size: 0.52rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.55; }
+
+.problem-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #C0392B;
+  background: rgba(192,57,43,0.08);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-top: 4px;
+}
+
+.fix-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #2E7D52;
+  background: rgba(46,125,82,0.08);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-top: 4px;
+}
+
+.new-tag {
+  font-size: 0.55rem;
+  font-weight: 900;
+  background: #B55400;
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+
+/* ══ DESIGN PRINCIPLES ══ */
+.principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.principle-card {
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(34,40,49,0.08);
+  background: #FAFAF8;
+}
+.pr-icon { font-size: 1.3rem; margin-bottom: 10px; }
+.pr-title { font-size: 0.85rem; font-weight: 700; color: #222831; margin-bottom: 6px; }
+.pr-body { font-size: 0.78rem; color: #6B6560; line-height: 1.6; font-weight: 300; }
+.pr-verdict {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.verd-pass { background: rgba(46,125,82,0.1); color: #2E7D52; }
+.verd-fail { background: rgba(192,57,43,0.1); color: #C0392B; }
+.verd-new  { background: rgba(181,84,0,0.1); color: #B55400; }
+
+/* ══ FINAL PALETTE SHOWCASE ══ */
+.final-strip {
+  display: flex;
+  height: 100px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(34,40,49,0.12);
+  margin-bottom: 24px;
+}
+
+.fs-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  transition: flex 0.35s cubic-bezier(0.4,0,0.2,1);
+  cursor: default;
+  position: relative;
+}
+
+.fs-block:hover { flex: 2; }
+
+.fs-hex { font-size: 0.68rem; font-family: 'Courier New', monospace; font-weight: 700; }
+.fs-name { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; margin-top: 2px; }
+.fs-role { font-size: 0.58rem; opacity: 0.45; margin-top: 1px; }
+
+.accent-star {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  font-size: 0.55rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Contrast grid */
+.contrast-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 20px; }
+.cr-cell {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+.cr-swatch { height: 36px; display: flex; align-items: center; justify-content: center; }
+.cr-sample-text { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; }
+.cr-meta { padding: 6px 8px; background: #FAFAF8; }
+.cr-ratio { font-size: 0.65rem; font-weight: 700; font-family: 'Courier New', monospace; }
+.cr-grade { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 1px; }
+.cr-pair { font-size: 0.55rem; color: #AAA; margin-top: 1px; }
+.grade-aaa { color: #2E7D52; }
+.grade-aa  { color: #2E7D52; }
+.grade-warn { color: #C8860A; }
+.grade-fail { color: #C0392B; }
+
+/* ══ UI PREVIEW ══ */
+.ui-previews { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.ui-preview-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #AAA; margin-bottom: 12px; }
+
+/* Sidebar */
+.preview-sidebar {
+  background: #222831;
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.psb-brand {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+}
+.psb-logo { width: 26px; height: 26px; border-radius: 6px; background: #B55400; flex-shrink: 0; }
+.psb-name { font-family: var(--font-d); font-size: 0.9rem; font-weight: 700; color: #fff; }
+.psb-section { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #3A3F48; padding: 0 8px; margin: 10px 0 4px; }
+.psb-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 8px; border-radius: 6px; cursor: default;
+}
+.psb-item.active { background: #B55400; }
+.psb-icon { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+.psb-item.active .psb-icon { background: rgba(255,255,255,0.4); }
+.psb-item:not(.active) .psb-icon { background: #2E3540; }
+.psb-text { font-size: 0.7rem; color: #6B6560; }
+.psb-item.active .psb-text { color: #fff; font-weight: 700; }
+.psb-item:not(.active):hover .psb-text { color: #AAA; }
+
+/* Accent usage: #E07A15 on dark sidebar labels — only for nav labels/icons */
+.psb-accent-label { color: #E07A15 !important; font-weight: 700; }
+
+/* Chat */
+.preview-chat { display: flex; flex-direction: column; gap: 10px; }
+.chat-msg { display: flex; flex-direction: column; gap: 3px; }
+.chat-msg.user { align-items: flex-end; }
+.chat-sender { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B8B0A8; padding: 0 4px; }
+.chat-bubble { padding: 10px 14px; border-radius: 12px; font-size: 0.78rem; line-height: 1.55; max-width: 87%; }
+.bubble-ai { background: #fff; border: 1px solid #E5E0D8; color: #222831; border-radius: 3px 12px 12px 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.bubble-user { background: #B55400; color: #fff; border-radius: 12px 12px 3px 12px; }
+.chat-chips { display: flex; flex-wrap: wrap; gap: 6px; padding-left: 4px; }
+.chip { font-size: 0.65rem; font-weight: 700; color: #B55400; border: 1.5px solid rgba(181,84,0,0.25); border-radius: 99px; padding: 4px 10px; background: rgba(181,84,0,0.06); }
+.chat-input { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #DDD8D0; border-radius: 10px; padding: 8px 8px 8px 14px; }
+.chat-input span { flex: 1; font-size: 0.72rem; color: #C0BAB2; }
+.send { width: 30px; height: 30px; border-radius: 7px; background: #B55400; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+
+/* Buttons preview */
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+.btn { font-family: var(--font-u); font-size: 0.82rem; font-weight: 700; border: none; border-radius: 8px; padding: 10px 20px; cursor: default; display: inline-flex; align-items: center; gap: 7px; }
+.btn-primary { background: #B55400; color: #fff; }
+.btn-secondary { background: transparent; color: #B55400; border: 2px solid #B55400; padding: 8px 18px; }
+.btn-ghost { background: transparent; color: #6B6560; border: 2px solid #E0DCD6; padding: 8px 18px; }
+.btn-dark { background: #222831; color: #fff; }
+.btn-sm { padding: 6px 14px; font-size: 0.72rem; border-radius: 6px; }
+
+/* Typography preview */
+.type-preview { display: flex; flex-direction: column; gap: 10px; }
+.tp-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid #F0ECE6; }
+.tp-row:last-child { border-bottom: none; }
+.tp-label { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #B55400; min-width: 72px; flex-shrink: 0; }
+
+/* Input states */
+.input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.inp-label { font-size: 0.78rem; font-weight: 700; color: #222831; }
+.inp { font-family: var(--font-u); font-size: 0.82rem; background: #fff; border: 1.5px solid #DDD8D0; border-radius: 8px; padding: 9px 13px; width: 100%; color: #222831; outline: none; }
+.inp::placeholder { color: #C0BAB2; }
+.inp.inp-focus { border-color: #B55400; box-shadow: 0 0 0 3px rgba(181,84,0,0.18); }
+.inp.inp-error { border-color: #C0392B; }
+.inp-hint { font-size: 0.7rem; color: #6B6560; }
+.inp-hint.err { color: #C0392B; }
+
+/* Badge row */
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { font-family: var(--font-u); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; }
+.b-accent  { background: rgba(181,84,0,0.12); color: #B55400; }
+.b-dark    { background: #222831; color: #fff; }
+.b-mid     { background: #6B6560; color: #fff; }
+.b-success { background: rgba(46,125,82,0.12); color: #2E7D52; }
+.b-outline { background: transparent; color: #6B6560; border: 1.5px solid #6B6560; }
+.b-light   { background: #F2F0EC; color: #6B6560; border: 1px solid #DDD; }
+
+/* Token reference */
+.token-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.token-table th { text-align:left; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#AAA; padding:8px 12px; border-bottom: 2px solid #F0ECE6; }
+.token-table td { padding: 11px 12px; border-bottom: 1px solid #F5F2EE; vertical-align: middle; }
+.token-table tr:last-child td { border-bottom: none; }
+.token-table tr:hover td { background: #FDFCFB; }
+.t-dot { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+.t-token { font-family: 'Courier New', monospace; font-size: 0.75rem; background: #F5F2EE; padding: 2px 8px; border-radius: 4px; color: #555; }
+.t-ratios { font-size: 0.7rem; color: #888; }
+.t-grade-pill { display: inline-block; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 3px; }
+
+/* Two col */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Refined Colour Palette</h1>
+    <p>Design principles + WCAG 2.1 AA · From 5 colours to 4, with 1 accent and 1 accent-dark variant</p>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Before vs After</span>
+      <span class="card-note">3 problems identified → 3 changes made</span>
+    </div>
+    <div class="card-body">
+      <div class="ba-grid">
+
+        <!-- BEFORE -->
+        <div>
+          <div class="palette-label label-fail">⬤ Before — 5 colours, 3 problems</div>
+          <div class="swatch-col">
+
+            <div>
+              <div class="swatch-row">
+                <div class="sw-block" style="background:#222831;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#222831</span><span class="sw-name" style="color:#fff;">Dark</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="swatch-row" style="box-shadow: 0 0 0 2px #C0392B, 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="sw-block" style="background:#B55400; flex:1.2;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#B55400</span><span class="sw-name" style="color:#fff;">Accent 1</span></div>
+                </div>
+                <div class="sw-block" style="background:#E07A15; flex:1.2;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#E07A15</span><span class="sw-name" style="color:#fff;">Accent 2</span></div>
+                </div>
+              </div>
+              <div class="problem-tag">✗ Same hue — 1.65:1 distinction. No contrast energy. One is redundant.</div>
+            </div>
+
+            <div>
+              <div class="swatch-row" style="box-shadow: 0 0 0 2px #C8860A, 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="sw-block" style="background:#EEEEEE;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#888;">#EEEEEE</span><span class="sw-name" style="color:#888;">Light</span></div>
+                </div>
+                <div class="sw-block" style="background:#FFFFFF; border-left: 1px solid #DDD;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#888;">#FFFFFF</span><span class="sw-name" style="color:#888;">White</span></div>
+                </div>
+              </div>
+              <div class="problem-tag">⚠ 1.16:1 between them — near-identical. Both doing the same job.</div>
+            </div>
+
+            <div>
+              <div class="swatch-row" style="box-shadow: 0 0 0 2px #C0392B, 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="sw-block" style="background:#222831; flex:0.6">
+                  <div class="sw-label"></div>
+                </div>
+                <div class="sw-block" style="background: linear-gradient(to right, #222831, #393E46); flex:0.6; display:flex; align-items:center; justify-content:center;">
+                  <span style="font-size:0.6rem;color:#666;font-weight:700;">?</span>
+                </div>
+              </div>
+              <div class="problem-tag">✗ No true mid-tone — dark jumps straight to light. No tonal hierarchy.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ARROW -->
+        <div class="ba-arrow">→</div>
+
+        <!-- AFTER -->
+        <div>
+          <div class="palette-label label-pass">⬤ After — 4 colours + 1 accent variant</div>
+          <div class="swatch-col">
+
+            <div>
+              <div class="swatch-row">
+                <div class="sw-block" style="background:#222831;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#222831</span><span class="sw-name" style="color:#fff;">Dark — unchanged</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="swatch-row">
+                <div class="sw-block" style="background:#6B6560;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#6B6560</span><span class="sw-name" style="color:#fff;">Mid — warm stone <span class="new-tag">NEW</span></span></div>
+                </div>
+              </div>
+              <div class="fix-tag">✓ Genuine mid-tone. 5.74:1 on white, 2.58:1 vs dark — real hierarchy step.</div>
+            </div>
+
+            <div>
+              <div class="swatch-row">
+                <div class="sw-block" style="background:#B55400;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#B55400</span><span class="sw-name" style="color:#fff;">Accent — on light bg</span></div>
+                </div>
+              </div>
+              <div class="swatch-row" style="margin-top:6px;">
+                <div class="sw-block" style="background:#E07A15;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#fff;">#E07A15</span><span class="sw-name" style="color:#fff;">Accent-dark — on #222831 only <span class="new-tag">ROLE DEFINED</span></span></div>
+                </div>
+              </div>
+              <div class="fix-tag">✓ Each shade has a defined role. No redundancy. Both pass AA in their context.</div>
+            </div>
+
+            <div>
+              <div class="swatch-row">
+                <div class="sw-block" style="background:#F2F0EC; border: 1px solid #DDD;">
+                  <div class="sw-label"><span class="sw-hex" style="color:#888;">#F2F0EC</span><span class="sw-name" style="color:#888;">Surface — warm off-white <span style="color:#B55400;font-weight:900;font-size:0.52rem;background:rgba(181,84,0,0.1);padding:1px 4px;border-radius:2px;">NEW</span></span></div>
+                </div>
+              </div>
+              <div class="fix-tag">✓ Replaces both #EEE + #FFF. One intentional surface that reads warm, not clinical.</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN PRINCIPLES -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Design Principles Applied</span>
+    </div>
+    <div class="card-body">
+      <div class="principles-grid">
+
+        <div class="principle-card">
+          <div class="pr-icon">◐</div>
+          <div class="pr-title">60–30–10 Rule</div>
+          <div class="pr-body">60% neutral (dark + surface backgrounds), 30% supporting (mid tone for text, borders, secondary UI), 10% accent (burnt orange for CTAs, active states, highlights). Your old palette had ~50% in the orange family — breaking this rule.</div>
+          <div class="pr-verdict verd-new">Now: Dark 60% · Mid 30% · Accent 10%</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="pr-icon">▤</div>
+          <div class="pr-title">Tonal Hierarchy</div>
+          <div class="pr-body">A palette should create clear visual steps — Dark → Mid → Light — so depth, layering and information hierarchy can be expressed through tone alone. Your original dark (#222831) jumped straight to light (#EEE) with nothing in between. #6B6560 fills this gap.</div>
+          <div class="pr-verdict verd-new">Dark 0.02 → Mid 0.16 → Surface 0.87 luminance</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="pr-icon">◎</div>
+          <div class="pr-title">Purposeful Accent</div>
+          <div class="pr-body">An accent colour works because of its rarity and contrast with neutrals. Having two near-identical oranges (1.65:1 between them) dilutes impact. The refined approach keeps one accent identity (#B55400) but contextualises it — lighter on dark backgrounds as a technical necessity, not a new colour.</div>
+          <div class="pr-verdict verd-pass">One accent identity. Two context-aware values.</div>
+        </div>
+
+        <div class="principle-card">
+          <div class="pr-icon">♨</div>
+          <div class="pr-title">Colour Temperature Harmony</div>
+          <div class="pr-body">The dark (#222831) has a cool blue-grey undertone. The original #EEEEEE and #FFFFFF are both cool and sterile, creating tension with the warm burnt orange accent. #F2F0EC (warm off-white) bridges this — it has orange undertones that make the accent feel at home.</div>
+          <div class="pr-verdict verd-pass">Cool dark · Neutral mid · Warm accent · Warm surface</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL PALETTE -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Final Palette — Hover to expand</span>
+      <span class="card-note">4 colours + 1 accent variant for dark contexts</span>
+    </div>
+    <div class="card-body">
+
+      <div class="final-strip">
+        <div class="fs-block" style="background:#222831; color:#fff;">
+          <span class="fs-hex">#222831</span>
+          <span class="fs-name">Dark</span>
+          <span class="fs-role">Sidebar · Headings · Hero bg</span>
+        </div>
+        <div class="fs-block" style="background:#6B6560; color:#fff;">
+          <span class="fs-hex">#6B6560</span>
+          <span class="fs-name">Mid · Warm Stone</span>
+          <span class="fs-role">Body text · Borders · Nav labels</span>
+        </div>
+        <div class="fs-block" style="background:#B55400; color:#fff;">
+          <span class="accent-star">Accent</span>
+          <span class="fs-hex">#B55400</span>
+          <span class="fs-name">Accent · Burnt Sienna</span>
+          <span class="fs-role">Buttons · Links · Active (light bg)</span>
+        </div>
+        <div class="fs-block" style="background:#E07A15; color:#fff;">
+          <span class="accent-star">Accent ◌</span>
+          <span class="fs-hex">#E07A15</span>
+          <span class="fs-name">Accent-Dark</span>
+          <span class="fs-role">Icons · Labels on dark bg only</span>
+        </div>
+        <div class="fs-block" style="background:#F2F0EC; color:#6B6560; border-left: 1px solid #DDD8D0;">
+          <span class="fs-hex">#F2F0EC</span>
+          <span class="fs-name">Surface</span>
+          <span class="fs-role">Page bg · Cards · Inputs</span>
+        </div>
+      </div>
+
+      <!-- Contrast grid -->
+      <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#AAA; margin-bottom:12px;">All key contrast pairs — WCAG 2.1</div>
+      <div class="contrast-grid">
+
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#222831;"><span class="cr-sample-text" style="color:#fff;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">14.83:1</div><div class="cr-grade grade-aaa">AAA</div><div class="cr-pair">#222831 on white</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#F2F0EC;"><span class="cr-sample-text" style="color:#222831;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">13.03:1</div><div class="cr-grade grade-aaa">AAA</div><div class="cr-pair">#222831 on surface</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#fff;"><span class="cr-sample-text" style="color:#6B6560;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">5.74:1</div><div class="cr-grade grade-aa">AA ✓</div><div class="cr-pair">#6B6560 on white</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#F2F0EC;"><span class="cr-sample-text" style="color:#6B6560;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">5.05:1</div><div class="cr-grade grade-aa">AA ✓</div><div class="cr-pair">#6B6560 on surface</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#B55400;"><span class="cr-sample-text" style="color:#fff;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">4.96:1</div><div class="cr-grade grade-aa">AA ✓</div><div class="cr-pair">White on #B55400</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#fff;"><span class="cr-sample-text" style="color:#B55400;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">4.96:1</div><div class="cr-grade grade-aa">AA ✓</div><div class="cr-pair">#B55400 on white</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#222831;"><span class="cr-sample-text" style="color:#E07A15;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">4.92:1</div><div class="cr-grade grade-aa">AA ✓</div><div class="cr-pair">#E07A15 on dark</div></div>
+        </div>
+        <div class="cr-cell">
+          <div class="cr-swatch" style="background:#222831;"><span class="cr-sample-text" style="color:#fff;">Aa</span></div>
+          <div class="cr-meta"><div class="cr-ratio">14.83:1</div><div class="cr-grade grade-aaa">AAA</div><div class="cr-pair">White on dark</div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- UI IN ACTION -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Palette in Context — UI Components</span>
+      <span class="card-note">How each colour functions in the actual product</span>
+    </div>
+    <div class="card-body">
+      <div class="ui-previews">
+
+        <!-- Sidebar + Buttons -->
+        <div>
+          <div class="ui-preview-label">Sidebar — Dark bg, #E07A15 labels</div>
+          <div class="preview-sidebar">
+            <div class="psb-brand">
+              <div class="psb-logo"></div>
+              <span class="psb-name">CV Sensei</span>
+            </div>
+            <div class="psb-section psb-accent-label">My CVs</div>
+            <div class="psb-item active">
+              <div class="psb-icon"></div>
+              <span class="psb-text">Product Designer CV</span>
+            </div>
+            <div class="psb-item">
+              <div class="psb-icon"></div>
+              <span class="psb-text">UX Lead CV</span>
+            </div>
+            <div class="psb-item">
+              <div class="psb-icon"></div>
+              <span class="psb-text">+ New CV</span>
+            </div>
+            <div class="psb-section psb-accent-label" style="margin-top:6px;">Account</div>
+            <div class="psb-item">
+              <div class="psb-icon"></div>
+              <span class="psb-text">Settings</span>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="ui-preview-label">Buttons</div>
+            <div class="btn-row">
+              <button class="btn btn-primary">Download PDF</button>
+              <button class="btn btn-secondary">Save Draft</button>
+            </div>
+            <div class="btn-row">
+              <button class="btn btn-ghost">Cancel</button>
+              <button class="btn btn-dark">New Chat</button>
+              <button class="btn btn-primary btn-sm">Send</button>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="ui-preview-label">Badges</div>
+            <div class="badge-row">
+              <span class="badge b-accent">AI Suggestion</span>
+              <span class="badge b-dark">New</span>
+              <span class="badge b-success">Complete</span>
+              <span class="badge b-mid">Draft</span>
+              <span class="badge b-outline">In review</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat + Inputs -->
+        <div>
+          <div class="ui-preview-label">Chat — surface bg, #B55400 accent</div>
+          <div style="background:#F2F0EC; border-radius:12px; padding:16px; margin-bottom:16px;">
+            <div class="preview-chat">
+              <div class="chat-msg">
+                <span class="chat-sender">CV Sensei</span>
+                <div class="chat-bubble bubble-ai">Your Figma experience is strong. Want me to reframe it around <strong>leadership impact</strong> for senior roles?</div>
+              </div>
+              <div class="chat-msg user">
+                <span class="chat-sender">You</span>
+                <div class="chat-bubble bubble-user">Yes — and add ATS keywords for UX Director roles.</div>
+              </div>
+              <div class="chat-chips">
+                <span class="chip">Improve summary</span>
+                <span class="chip">Reorder sections</span>
+              </div>
+              <div class="chat-input">
+                <span>Type a message…</span>
+                <div class="send">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-preview-label">Inputs — #6B6560 labels, #B55400 focus</div>
+          <div class="input-group">
+            <div class="inp-label">Target job title</div>
+            <input class="inp inp-focus" placeholder="e.g. Senior UX Director" readonly>
+            <div class="inp-hint">We'll optimise your CV for this specific role.</div>
+          </div>
+          <div class="input-group">
+            <div class="inp-label" style="color:#6B6560;">Previous employer</div>
+            <input class="inp inp-error" value="Invalid entry" readonly>
+            <div class="inp-hint err">Please enter a valid company name.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Typography row -->
+      <div style="margin-top:28px; border-top: 1px solid #F0ECE6; padding-top:24px;">
+        <div class="ui-preview-label">Typography with palette</div>
+        <div class="type-preview">
+          <div class="tp-row">
+            <span class="tp-label">H1 Display</span>
+            <span style="font-family:var(--font-d); font-size:2rem; font-weight:700; color:#222831; letter-spacing:-0.02em;">Build your story.</span>
+          </div>
+          <div class="tp-row">
+            <span class="tp-label">H2 Section</span>
+            <span style="font-family:var(--font-d); font-size:1.4rem; font-weight:600; color:#222831;">Work Experience</span>
+          </div>
+          <div class="tp-row">
+            <span class="tp-label">Overline</span>
+            <span style="font-size:0.68rem; font-weight:900; text-transform:uppercase; letter-spacing:0.14em; color:#B55400;">Senior Product Designer</span>
+          </div>
+          <div class="tp-row">
+            <span class="tp-label">Body</span>
+            <span style="font-size:0.875rem; font-weight:300; color:#6B6560; line-height:1.65;">Led end-to-end redesign of the onboarding flow, reducing drop-off by 34% and improving activation rate across web and mobile.</span>
+          </div>
+          <div class="tp-row">
+            <span class="tp-label">Link</span>
+            <span style="font-size:0.875rem; font-weight:700; color:#B55400; border-bottom:1.5px solid rgba(181,84,0,0.3);">View full CV preview →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOKEN REFERENCE -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Token Reference — Copy into Figma / CSS</span>
+    </div>
+    <div class="card-body" style="padding:0;">
+      <table class="token-table">
+        <thead>
+          <tr>
+            <th style="padding-left:28px;">Swatch</th>
+            <th>Token</th>
+            <th>Hex</th>
+            <th>Use in product</th>
+            <th>Key contrast ratios</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#222831;"></div></td>
+            <td><span class="t-token">--c-dark</span></td>
+            <td><strong>#222831</strong></td>
+            <td>Sidebar bg, hero section, headings</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">14.83 on white AAA</span></td>
+          </tr>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#6B6560;"></div></td>
+            <td><span class="t-token">--c-mid</span></td>
+            <td><strong>#6B6560</strong></td>
+            <td>Body text, borders, nav labels, captions</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">5.74 on white AA</span> · <span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">5.05 on surface AA</span></td>
+          </tr>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#B55400;"></div></td>
+            <td><span class="t-token">--c-accent</span></td>
+            <td><strong>#B55400</strong></td>
+            <td>Buttons, links, active states, overlines — light backgrounds only</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">4.96 on white AA</span></td>
+          </tr>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#E07A15;"></div></td>
+            <td><span class="t-token">--c-accent-dark</span></td>
+            <td><strong>#E07A15</strong></td>
+            <td>Accent text/icons on #222831 dark backgrounds only</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">4.92 on #222831 AA</span></td>
+          </tr>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#F2F0EC; border:1px solid #DDD;"></div></td>
+            <td><span class="t-token">--c-surface</span></td>
+            <td><strong>#F2F0EC</strong></td>
+            <td>Page background, card fills, input backgrounds, section backgrounds</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">13.03 dark on surface AAA</span></td>
+          </tr>
+          <tr>
+            <td style="padding-left:28px;"><div class="t-dot" style="background:#FFFFFF; border:1px solid #EEE;"></div></td>
+            <td><span class="t-token">--c-white</span></td>
+            <td><strong>#FFFFFF</strong></td>
+            <td>Card whites, chat bubbles, modal backgrounds — elevated surfaces only</td>
+            <td class="t-ratios"><span class="t-grade-pill" style="background:rgba(46,125,82,0.1);color:#2E7D52;">14.83 dark on white AAA</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

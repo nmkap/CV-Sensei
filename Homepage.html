@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei – Your AI CV Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════
+   TOKENS
+══════════════════════════════════ */
+:root {
+  --dark:    #222831;
+  --mid:     #393E46;
+  --accent:  #B55400;
+  --accent-hover: #8F4200;
+  --light:   #EEEEEE;
+  --surface: #F7F5F1;
+  --white:   #FFFFFF;
+  --text-body: #4A4540;
+  --text-muted: #8A857F;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui: 'Lato', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow-card: 0 4px 24px rgba(34,40,49,0.09), 0 1px 4px rgba(34,40,49,0.05);
+  --shadow-lift: 0 16px 48px rgba(34,40,49,0.14), 0 4px 12px rgba(34,40,49,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 56px;
+  height: 68px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(34,40,49,0.07);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo svg { color: #fff; }
+
+.nav-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.nav-link:hover { color: var(--accent); }
+
+.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 10px 22px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.nav-cta:hover { background: var(--accent-hover); box-shadow: 0 4px 16px rgba(181,84,0,0.3); }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 56px 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* Subtle texture overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(181,84,0,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(34,40,49,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Grid lines decoration */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34,40,49,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,40,49,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-left {}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(181,84,0,0.1);
+  border: 1px solid rgba(181,84,0,0.2);
+  border-radius: 99px;
+  padding: 5px 14px 5px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  animation: fadeSlideUp 0.6s ease both;
+}
+
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin-bottom: 20px;
+  animation: fadeSlideUp 0.6s 0.1s ease both;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--text-body);
+  line-height: 1.7;
+  max-width: 460px;
+  margin-bottom: 36px;
+  animation: fadeSlideUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeSlideUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(181,84,0,0.35);
+}
+
+.btn-ghost {
+  color: var(--mid);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+
+.btn-ghost:hover { color: var(--accent); }
+
+.hero-social-proof {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: fadeSlideUp 0.6s 0.4s ease both;
+}
+
+.avatar-stack {
+  display: flex;
+}
+
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  margin-left: -8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.avatar:first-child { margin-left: 0; }
+
+.proof-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.proof-text strong { color: var(--dark); font-weight: 700; }
+
+/* Stars */
+.stars { color: #E8A835; font-size: 0.85rem; letter-spacing: 1px; }
+
+/* ── Hero right: live chat mock ── */
+.hero-right {
+  position: relative;
+  animation: fadeSlideUp 0.7s 0.2s ease both;
+}
+
+.hero-mock {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+  border: 1px solid rgba(34,40,49,0.08);
+}
+
+.mock-titlebar {
+  background: var(--dark);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mock-dots { display: flex; gap: 6px; }
+.mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+.mock-dot:nth-child(1) { background: #C0392B; }
+.mock-dot:nth-child(2) { background: #E8A835; }
+.mock-dot:nth-child(3) { background: #2E7D52; }
+
+.mock-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: 4px;
+}
+
+.mock-tab {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #555;
+  background: rgba(255,255,255,0.08);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.mock-body {
+  padding: 20px;
+  background: #F9F8F5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 340px;
+}
+
+.mock-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mock-msg.user { align-items: flex-end; }
+
+.mock-sender {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #BBB;
+  padding: 0 4px;
+}
+
+.mock-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  max-width: 85%;
+}
+
+.mock-bubble.ai {
+  background: var(--white);
+  border: 1px solid #E8E5E0;
+  color: var(--dark);
+  border-radius: 3px 12px 12px 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.mock-bubble.user {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 12px 12px 3px 12px;
+}
+
+.mock-bubble strong { font-weight: 700; }
+
+.mock-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-left: 4px;
+}
+
+.mock-chip {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent);
+  border: 1.5px solid rgba(181,84,0,0.25);
+  border-radius: 99px;
+  padding: 4px 10px;
+  background: rgba(181,84,0,0.06);
+}
+
+.mock-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  background: var(--white);
+  border: 1px solid #E8E5E0;
+  border-radius: 3px 12px 12px 12px;
+  width: fit-content;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.mock-typing-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #CCC;
+  animation: typing 1.2s infinite;
+}
+
+.mock-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.mock-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing {
+  0%, 80%, 100% { background: #CCC; transform: scale(1); }
+  40% { background: var(--accent); transform: scale(1.3); }
+}
+
+.mock-input {
+  background: var(--white);
+  border-top: 1px solid #E8E5E0;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mock-input-field {
+  flex: 1;
+  font-size: 0.78rem;
+  color: #BBB;
+  font-family: var(--font-ui);
+}
+
+.mock-send {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* Floating badge */
+.hero-badge {
+  position: absolute;
+  bottom: -16px;
+  left: -24px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(34,40,49,0.07);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.badge-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(46,125,82,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2E7D52;
+  flex-shrink: 0;
+}
+
+.badge-text { display: flex; flex-direction: column; }
+.badge-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #AAA; }
+.badge-value { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
+
+/* ══════════════════════════════════
+   SECTION SHARED
+══════════════════════════════════ */
+section {
+  padding: 96px 56px;
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-h2 {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.section-h2 em { font-style: italic; color: var(--accent); }
+
+.section-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-body);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════════
+   FEATURES
+══════════════════════════════════ */
+#features {
+  background: var(--white);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  border: 1px solid rgba(34,40,49,0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181,84,0,0.06), transparent 70%);
+  pointer-events: none;
+}
+
+.feature-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+}
+
+.feature-card.large {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: rgba(181,84,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.feature-body {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.feature-pain {
+  margin-top: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(181,84,0,0.07);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* CV demo inside feature */
+.feature-cv-demo {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 20px 22px;
+  border: 1px solid rgba(34,40,49,0.07);
+}
+
+.cv-demo-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.cv-demo-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.cv-demo-line { height: 7px; border-radius: 3px; background: #EEE; margin-bottom: 5px; }
+.cv-demo-line.short { width: 55%; }
+.cv-demo-line.med { width: 80%; }
+.cv-demo-line.full { width: 100%; }
+
+.cv-badge-before {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #AAA;
+  background: #F0EDED;
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-bottom: 6px;
+  text-decoration: line-through;
+}
+
+.cv-badge-after {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(181,84,0,0.1);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-bottom: 6px;
+}
+
+/* ══════════════════════════════════
+   CV CAROUSEL
+══════════════════════════════════ */
+#examples {
+  background: var(--surface);
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  animation: scrollCarousel 28s linear infinite;
+  width: max-content;
+}
+
+.carousel-track:hover { animation-play-state: paused; }
+
+@keyframes scrollCarousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.carousel-fade-left,
+.carousel-fade-right {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-fade-left { left: 0; background: linear-gradient(to right, var(--surface), transparent); }
+.carousel-fade-right { right: 0; background: linear-gradient(to left, var(--surface), transparent); }
+
+.cv-card {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid rgba(34,40,49,0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.cv-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+}
+
+.cv-card-header {
+  padding: 20px 18px 14px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.cv-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+
+.cv-role {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.cv-card-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cv-section-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mid);
+  margin-top: 4px;
+}
+
+.cv-line { height: 6px; border-radius: 3px; background: var(--light); }
+.cv-line.s { width: 50%; }
+.cv-line.m { width: 75%; }
+.cv-line.l { width: 90%; }
+.cv-line.f { width: 100%; }
+
+.cv-tag {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  background: rgba(181,84,0,0.1);
+  color: var(--accent);
+  border-radius: 3px;
+  padding: 2px 7px;
+  margin-right: 4px;
+}
+
+.cv-card-footer {
+  padding: 10px 18px;
+  background: var(--surface);
+  border-top: 1px solid var(--light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cv-footer-label {
+  font-size: 0.6rem;
+  color: #BBB;
+  font-weight: 400;
+}
+
+.cv-check { color: #2E7D52; font-size: 0.7rem; }
+
+/* ══════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════ */
+#how {
+  background: var(--dark);
+}
+
+#how .section-tag { color: rgba(181,84,0,0.9); }
+#how .section-h2 { color: #fff; }
+#how .section-h2 em { color: var(--accent); }
+#how .section-sub { color: rgba(255,255,255,0.55); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.step {
+  background: var(--dark);
+  padding: 36px 28px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.step:hover { background: #2A3240; }
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(181,84,0,0.2);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.step-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: rgba(181,84,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.step-body {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+}
+
+.step-connector {
+  position: absolute;
+  top: 36px; right: -1px;
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), transparent);
+  display: none;
+}
+
+/* ══════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════ */
+#testimonials {
+  background: var(--white);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 1px solid rgba(34,40,49,0.07);
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px);
+}
+
+.testimonial-card.featured {
+  background: var(--dark);
+  grid-row: span 2;
+  border-color: transparent;
+}
+
+.t-stars { color: #E8A835; font-size: 0.85rem; letter-spacing: 2px; }
+.t-featured-stars { color: var(--accent); font-size: 0.85rem; letter-spacing: 2px; }
+
+.t-quote {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--dark);
+  font-style: italic;
+  flex: 1;
+}
+
+.t-quote.featured { color: rgba(255,255,255,0.9); font-size: 1.15rem; }
+
+.t-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.t-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.t-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.t-name.featured { color: #fff; }
+
+.t-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.t-role.featured { color: rgba(255,255,255,0.45); }
+
+.t-outcome {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  padding: 6px 12px;
+  background: rgba(181,84,0,0.12);
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+/* ══════════════════════════════════
+   FINAL CTA
+══════════════════════════════════ */
+#cta {
+  background: var(--surface);
+  padding: 96px 56px;
+}
+
+.cta-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta-inner .section-h2 { font-size: 3rem; margin-bottom: 20px; }
+
+.cta-inner .section-sub { margin: 0 auto 40px; text-align: center; }
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background: var(--dark);
+  padding: 48px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo {
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: var(--accent);
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: #555;
+  font-weight: 300;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-link {
+  font-size: 0.78rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-link:hover { color: var(--accent); }
+
+/* ══════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility: focus visible */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <a href="#" class="nav-brand">
+    <div class="nav-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <span class="nav-name">CV Sensei</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#examples" class="nav-link">Examples</a>
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#testimonials" class="nav-link">Reviews</a>
+    <a href="#cta" class="nav-cta">Get started free</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-dot"></div>
+        AI-Powered CV Coaching
+      </div>
+      <h1 class="hero-h1">
+        Your CV,<br>
+        <em>finally</em><br>
+        worth reading.
+      </h1>
+      <p class="hero-sub">
+        Stop wrestling with formatting and weak language. CV Sensei coaches you through every line — improving impact, optimising for ATS screening, and delivering a polished PDF ready to send.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">
+          Build my CV free
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#examples" class="btn-ghost">
+          See example CVs
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+      </div>
+      <div class="hero-social-proof">
+        <div class="avatar-stack">
+          <div class="avatar" style="background:#2D4A3E;">JM</div>
+          <div class="avatar" style="background:#B55400;">SR</div>
+          <div class="avatar" style="background:#393E46;">AL</div>
+          <div class="avatar" style="background:#7B4F2E;">PK</div>
+        </div>
+        <div class="proof-text">
+          <div class="stars">★★★★★</div>
+          Trusted by <strong>2,400+</strong> job seekers
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-mock">
+        <div class="mock-titlebar">
+          <div class="mock-dots">
+            <div class="mock-dot"></div>
+            <div class="mock-dot"></div>
+            <div class="mock-dot"></div>
+          </div>
+          <span class="mock-title">CV Sensei · Senior UX Designer</span>
+          <span class="mock-tab">Chat #3</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-msg">
+            <span class="mock-sender">CV Sensei</span>
+            <div class="mock-bubble ai">I've reviewed your CV. Your Figma experience is excellent — but let's sharpen how you talk about <strong>impact</strong>. Instead of <em>"responsible for onboarding"</em>, try:</div>
+          </div>
+          <div class="mock-msg">
+            <div class="mock-bubble ai" style="background: rgba(181,84,0,0.07); border-color: rgba(181,84,0,0.15);">
+              <strong style="color:var(--accent)">→</strong> "Redesigned onboarding flow, reducing drop-off by 34% and cutting time-to-activation from 8 days to 3."
+            </div>
+          </div>
+          <div class="mock-msg user">
+            <span class="mock-sender">You</span>
+            <div class="mock-bubble user">Yes! Can you do that for my other roles too?</div>
+          </div>
+          <div class="mock-msg">
+            <div class="mock-typing">
+              <div class="mock-typing-dot"></div>
+              <div class="mock-typing-dot"></div>
+              <div class="mock-typing-dot"></div>
+            </div>
+          </div>
+          <div class="mock-chips">
+            <span class="mock-chip">Add ATS keywords</span>
+            <span class="mock-chip">Strengthen summary</span>
+            <span class="mock-chip">Reorder sections</span>
+          </div>
+        </div>
+        <div class="mock-input">
+          <span class="mock-input-field">Ask anything about your CV…</span>
+          <div class="mock-send">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating badge -->
+      <div class="hero-badge">
+        <div class="badge-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="badge-text">
+          <span class="badge-label">ATS Score</span>
+          <span class="badge-value">87 / 100 ↑</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FEATURES ══════════ -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-header-row">
+      <div>
+        <span class="section-tag">What we solve</span>
+        <h2 class="section-h2">Every pain point,<br><em>handled.</em></h2>
+      </div>
+      <p class="section-sub">Addressing the four core reasons job seekers get passed over — even when they have the right experience.</p>
+    </div>
+
+    <div class="features-grid">
+
+      <!-- Large card: language -->
+      <div class="feature-card large">
+        <div>
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3 class="feature-title">Achievement-focused language</h3>
+          <p class="feature-body">Passive language undersells your real value. CV Sensei rewrites your bullet points to lead with results, metrics and action verbs that make recruiters take notice.</p>
+          <div class="feature-pain">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Pain point #2: "Responsible for social media" → "Grew LinkedIn engagement 3× in 6 months"
+          </div>
+        </div>
+        <div class="feature-cv-demo">
+          <div class="cv-demo-name">Sarah Reeves</div>
+          <div class="cv-demo-role">↑ Before &amp; After</div>
+          <div style="margin-bottom:10px;">
+            <div class="cv-badge-before">Responsible for managing the team</div>
+            <br>
+            <div class="cv-badge-after">Led a 6-person team, delivering 3 major features on time</div>
+          </div>
+          <div class="cv-demo-line full"></div>
+          <div class="cv-demo-line med"></div>
+          <div class="cv-demo-line short"></div>
+        </div>
+      </div>
+
+      <!-- ATS -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3 class="feature-title">ATS keyword optimisation</h3>
+        <p class="feature-body">Most CVs are rejected before a human reads them. We identify the right keywords for your target role and weave them in naturally.</p>
+        <div class="feature-pain">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Pain point #3: Missing industry keywords = instant rejection
+        </div>
+      </div>
+
+      <!-- Structure -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <h3 class="feature-title">Smart content prioritisation</h3>
+        <p class="feature-body">Know exactly what to include, what to cut, and in what order — based on your target role. No more unfocused CVs that try to say everything.</p>
+        <div class="feature-pain">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Pain point #4: Unfocused CVs dilute your strongest experience
+        </div>
+      </div>
+
+      <!-- Download -->
+      <div class="feature-card" style="grid-column: span 2; display:flex; gap:36px; align-items:center;">
+        <div style="flex:1;">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <h3 class="feature-title">Polished PDF — yours to keep</h3>
+          <p class="feature-body">When you're happy with the output, download a professionally formatted PDF. No subscriptions, no watermarks. One chat, one CV — clean and ready to send. Create multiple chats for multiple versions.</p>
+        </div>
+        <div style="flex:0 0 280px;">
+          <div class="feature-cv-demo">
+            <div class="cv-demo-name">Alex Laurent</div>
+            <div style="font-size:0.65rem; color:#AAA; margin-bottom:10px;">Senior Product Manager · London</div>
+            <div class="cv-demo-role">Profile</div>
+            <div class="cv-demo-line full"></div>
+            <div class="cv-demo-line med"></div>
+            <div class="cv-demo-role" style="margin-top:8px;">Experience</div>
+            <div class="cv-demo-line full"></div>
+            <div class="cv-demo-line med"></div>
+            <div class="cv-demo-line short"></div>
+            <div style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="cv-tag">Agile</span>
+              <span class="cv-tag">SQL</span>
+              <span class="cv-tag">A/B Testing</span>
+              <span class="cv-tag">Figma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CV CAROUSEL ══════════ -->
+<section id="examples">
+  <div class="section-inner">
+    <div class="section-header-row">
+      <div>
+        <span class="section-tag">Real results</span>
+        <h2 class="section-h2">CVs built with<br><em>CV Sensei.</em></h2>
+      </div>
+      <p class="section-sub">A sample of the CVs our users have created. Each one tailored to a specific role, strengthened by AI coaching.</p>
+    </div>
+  </div>
+
+  <div class="carousel-wrapper" style="padding: 16px 0 24px;">
+    <div class="carousel-fade-left"></div>
+    <div class="carousel-fade-right"></div>
+    <div class="carousel-track">
+
+      <!-- CV 1 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Sarah Reeves</div><div class="cv-role">UX Designer</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line l"></div><div class="cv-line m"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Experience</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Figma</span><span class="cv-tag">Research</span><span class="cv-tag">Systems</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 91 · Landed interview at Monzo</span></div>
+      </div>
+
+      <!-- CV 2 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">James Okafor</div><div class="cv-role">Product Manager</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Summary</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Key Achievements</div>
+          <div class="cv-line m"></div><div class="cv-line f"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Roadmap</span><span class="cv-tag">SQL</span><span class="cv-tag">OKRs</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 88 · Offer at Deliveroo</span></div>
+      </div>
+
+      <!-- CV 3 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Priya Kapoor</div><div class="cv-role">Data Analyst</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line f"></div><div class="cv-line l"></div>
+          <div class="cv-section-label">Technical Skills</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Python</span><span class="cv-tag">Tableau</span><span class="cv-tag">SQL</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 94 · Hired at HSBC</span></div>
+      </div>
+
+      <!-- CV 4 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Tom Whitfield</div><div class="cv-role">Frontend Engineer</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">About</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div><div class="cv-line m"></div>
+          <div class="cv-section-label">Projects</div>
+          <div class="cv-line f"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">React</span><span class="cv-tag">TypeScript</span><span class="cv-tag">AWS</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 89 · Shortlisted at Spotify</span></div>
+      </div>
+
+      <!-- CV 5 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Chloe Martin</div><div class="cv-role">Marketing Manager</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Summary</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div>
+          <div class="cv-section-label">Campaigns</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div><div class="cv-line m"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">SEO</span><span class="cv-tag">HubSpot</span><span class="cv-tag">ABM</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 86 · Hired at Notion</span></div>
+      </div>
+
+      <!-- CV 6 -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Daniel Yusuf</div><div class="cv-role">Finance Analyst</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Experience</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Excel</span><span class="cv-tag">Power BI</span><span class="cv-tag">FP&amp;A</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 90 · Offer at Barclays</span></div>
+      </div>
+
+      <!-- Duplicates for infinite scroll -->
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Sarah Reeves</div><div class="cv-role">UX Designer</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line l"></div><div class="cv-line m"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Experience</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Figma</span><span class="cv-tag">Research</span><span class="cv-tag">Systems</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 91 · Landed interview at Monzo</span></div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">James Okafor</div><div class="cv-role">Product Manager</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Summary</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Key Achievements</div>
+          <div class="cv-line m"></div><div class="cv-line f"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Roadmap</span><span class="cv-tag">SQL</span><span class="cv-tag">OKRs</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 88 · Offer at Deliveroo</span></div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Priya Kapoor</div><div class="cv-role">Data Analyst</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line f"></div><div class="cv-line l"></div>
+          <div class="cv-section-label">Technical Skills</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Python</span><span class="cv-tag">Tableau</span><span class="cv-tag">SQL</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 94 · Hired at HSBC</span></div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Tom Whitfield</div><div class="cv-role">Frontend Engineer</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">About</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div><div class="cv-line m"></div>
+          <div class="cv-section-label">Projects</div>
+          <div class="cv-line f"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">React</span><span class="cv-tag">TypeScript</span><span class="cv-tag">AWS</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 89 · Shortlisted at Spotify</span></div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Chloe Martin</div><div class="cv-role">Marketing Manager</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Summary</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div>
+          <div class="cv-section-label">Campaigns</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div><div class="cv-line m"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">SEO</span><span class="cv-tag">HubSpot</span><span class="cv-tag">ABM</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 86 · Hired at Notion</span></div>
+      </div>
+      <div class="cv-card">
+        <div class="cv-card-header"><div class="cv-name">Daniel Yusuf</div><div class="cv-role">Finance Analyst</div></div>
+        <div class="cv-card-body">
+          <div class="cv-section-label">Profile</div>
+          <div class="cv-line l"></div><div class="cv-line f"></div>
+          <div class="cv-section-label">Experience</div>
+          <div class="cv-line f"></div><div class="cv-line m"></div><div class="cv-line s"></div>
+          <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:4px;"><span class="cv-tag">Excel</span><span class="cv-tag">Power BI</span><span class="cv-tag">FP&amp;A</span></div>
+        </div>
+        <div class="cv-card-footer"><span class="cv-check">✓</span><span class="cv-footer-label">ATS score 90 · Offer at Barclays</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ HOW IT WORKS ══════════ -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-header-row">
+      <div>
+        <span class="section-tag">The process</span>
+        <h2 class="section-h2">From raw experience<br>to <em>job offer.</em></h2>
+      </div>
+      <p class="section-sub" style="color:rgba(255,255,255,0.45);">Four simple steps. One polished CV. No formatting headaches.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <h3 class="step-title">Upload your CV</h3>
+        <p class="step-body">Drop your existing CV or paste in your experience. CV Sensei parses everything instantly.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <h3 class="step-title">Set your target role</h3>
+        <p class="step-body">Tell us the job title and paste the job description. We tailor every suggestion to that specific role.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 class="step-title">Refine through chat</h3>
+        <p class="step-body">Your AI coach suggests improvements, you approve, tweak or redirect. Share template examples you like.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <h3 class="step-title">Download your PDF</h3>
+        <p class="step-body">When you're satisfied, receive a polished, recruiter-ready PDF. Free. No watermarks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-header-row">
+      <div>
+        <span class="section-tag">What users say</span>
+        <h2 class="section-h2">Real people,<br><em>real results.</em></h2>
+      </div>
+      <p class="section-sub">Over 2,400 job seekers have used CV Sensei to land interviews at companies they actually want to work at.</p>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <!-- Featured -->
+      <div class="testimonial-card featured" style="grid-column: 1; grid-row: 1 / 3;">
+        <div class="t-featured-stars">★★★★★</div>
+        <p class="t-quote featured">"I'd been applying for 3 months with zero callbacks. After one session with CV Sensei, I rewrote my profile and reordered my experience around the role. I got two interview requests within a week. The language suggestions alone were worth it — I didn't realise how passively I'd been describing my own work."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#B55400;">JO</div>
+          <div>
+            <div class="t-name featured">James Okafor</div>
+            <div class="t-role featured">Now: Senior PM at Deliveroo</div>
+          </div>
+        </div>
+        <span class="t-outcome">3 months → 1 week</span>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"The ATS optimisation was something I'd never even thought about. CV Sensei flagged missing keywords and showed me exactly where to add them without it feeling forced."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#2D4A3E;">PK</div>
+          <div>
+            <div class="t-name">Priya Kapoor</div>
+            <div class="t-role">Data Analyst, HSBC</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-quote">"I uploaded my old Word doc, told it I was applying for senior roles, and within 20 minutes of chatting I had a CV I was actually proud to send."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#393E46;">SR</div>
+          <div>
+            <div class="t-name">Sarah Reeves</div>
+            <div class="t-role">UX Designer, Monzo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★☆</div>
+        <p class="t-quote">"Being able to create different CV versions for different roles is genius. One chat for startups, one for agencies. Completely different CVs from the same experience."</p>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#7B4F2E;">CM</div>
+          <div>
+            <div class="t-name">Chloe Martin</div>
+            <div class="t-role">Marketing Manager, Notion</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section id="cta">
+  <div class="cta-inner">
+    <span class="section-tag">Get started today</span>
+    <h2 class="section-h2">Your next opportunity<br>starts with a <em>stronger CV.</em></h2>
+    <p class="section-sub">Upload your experience, chat with your AI coach, download your polished PDF. Free to start — no card required.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary" style="font-size:1.05rem; padding:16px 32px;">
+        Build my CV free
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <p style="margin-top:16px; font-size:0.8rem; color:#AAA;">No credit card · One CV per chat · Download as PDF</p>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo"></div>
+    <span class="footer-name">CV Sensei</span>
+  </div>
+  <span class="footer-copy">© 2026 CV Sensei. UX Portfolio Project.</span>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Privacy</a>
+    <a href="#" class="footer-link">Accessibility</a>
+    <a href="#" class="footer-link">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
