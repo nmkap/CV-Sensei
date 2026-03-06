@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Persona Template — Refined</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange:      #B85C00;
+    --orange-mid:  #D97216;
+    --orange-light:#FFF0E0;
+    --dark:        #1E2328;
+    --mid:         #6B7280;
+    --light:       #F7F5F2;
+    --white:       #FFFFFF;
+    --border:      #E8E3DC;
+    --text-body:   #3D4148;
+  }
+
+  body {
+    background: #EDEBE7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 16px;
+    align-self: flex-start;
+    margin-left: calc(50% - 480px);
+  }
+
+  /* ── CARD SHELL ───────────────────────────────── */
+  .card {
+    width: 960px;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.10);
+  }
+
+  /* ── LEFT COLUMN ──────────────────────────────── */
+  .col-left {
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Photo area */
+  .photo-area {
+    background: #2C3340;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .photo-placeholder {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: #3D4755;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-placeholder svg { opacity: 0.45; }
+
+  /* Name block */
+  .name-block {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .persona-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .persona-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  .persona-type {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+  }
+
+  /* Quick stats */
+  .stats-block {
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .stat-key {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .stat-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    text-align: right;
+    max-width: 160px;
+  }
+
+  /* Quote card */
+  .quote-block {
+    padding: 24px 28px 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .quote-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #2C3340;
+    border: 2px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .quote-text {
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  .quote-text em {
+    color: #fff;
+    font-style: italic;
+  }
+
+  /* ── RIGHT COLUMN ─────────────────────────────── */
+  .col-right {
+    background: var(--light);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Attribute chips row */
+  .chips-row {
+    background: var(--white);
+    padding: 20px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 14px 5px 6px;
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1;
+  }
+
+  .chip-label {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* Device / platform row */
+  .device-row {
+    background: var(--white);
+    padding: 18px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .device-box {}
+
+  .device-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .device-text {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* Info sections */
+  .info-grid {
+    padding: 20px 28px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .info-card.wide {
+    grid-column: span 2;
+  }
+
+  .info-card.accent {
+    background: var(--orange-light);
+    border-color: #F5C89A;
+  }
+
+  .info-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dark);
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-card.accent .info-card-title {
+    color: var(--orange);
+    border-bottom-color: #F5C89A;
+  }
+
+  .info-card-text {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+</style>
+</head>
+<body>
+
+<p class="label">Refined Template</p>
+
+<div class="card">
+
+  <!-- LEFT -->
+  <div class="col-left">
+    <div class="photo-area">
+      <div class="photo-placeholder">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="16" r="9" stroke="white" stroke-width="2"/>
+          <path d="M4 40c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="name-block">
+      <div class="persona-badge">Persona 1</div>
+      <div class="persona-name">Name Surname</div>
+      <div class="persona-type">Persona Type</div>
+    </div>
+
+    <div class="stats-block">
+      <div class="stat-row">
+        <span class="stat-key">Age</span>
+        <span class="stat-val">— years old</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Occupation</span>
+        <span class="stat-val">Job Title</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Location</span>
+        <span class="stat-val">City, Country</span>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <div class="quote-avatar">
+        <svg width="22" height="22" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="16" r="9" stroke="#D97216" stroke-width="2.5"/>
+          <path d="M4 40c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#D97216" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="quote-text"><em>"Relevant personal quote that captures the persona's attitude and personality."</em></p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="col-right">
+
+    <div class="chips-row">
+      <div class="chip"><span class="chip-label">Age</span> — years old</div>
+      <div class="chip"><span class="chip-label">Location</span> City, Country</div>
+      <div class="chip"><span class="chip-label">Occupation</span> Job Title</div>
+      <div class="chip"><span class="chip-label">Education</span> Degree / Diploma</div>
+    </div>
+
+    <div class="device-row">
+      <div class="device-box">
+        <div class="device-title">Preferred Devices</div>
+        <div class="device-text">Smartband, tablet, laptop, phone</div>
+      </div>
+      <div class="device-box">
+        <div class="device-title">Favorite Platforms</div>
+        <div class="device-text">Platform A, Platform B</div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card accent">
+        <div class="info-card-title">Goals</div>
+        <div class="info-card-text">Describe what this user wants to achieve. What motivates them to use your product or service?</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Frustrations</div>
+        <div class="info-card-text">What blocks this user? What causes friction or makes them abandon a task mid-way?</div>
+      </div>
+      <div class="info-card wide">
+        <div class="info-card-title">Brand Values</div>
+        <div class="info-card-text">What does this persona value most when choosing a product or brand? What builds trust and keeps them loyal over time?</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
