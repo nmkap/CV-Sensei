@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei – Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:    #222831;
+  --mid:     #393E46;
+  --accent:  #B55400;
+  --accent-hover: #8F4200;
+  --light:   #EEEEEE;
+  --surface: #F7F5F1;
+  --white:   #FFFFFF;
+  --text-body: #4A4540;
+  --text-muted: #8A857F;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui: 'Lato', sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-ui); background: #1a1a1a; color: var(--dark); }
+
+/* ── LAYOUT ── */
+.wireframe-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 32px;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.page-subtitle {
+  font-size: 0.875rem;
+  color: #888;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  margin-top: 48px;
+}
+
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.screens-grid.single { grid-template-columns: 1fr; max-width: 900px; }
+.screens-grid.triple { grid-template-columns: repeat(3, 1fr); }
+
+.screen-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.screen-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+.screen-note {
+  font-size: 0.7rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ── BROWSER CHROME ── */
+.browser {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  background: var(--white);
+}
+.browser-bar {
+  background: #2d2d2d;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+}
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+.browser-dot.r { background: #ff5f57; }
+.browser-dot.y { background: #febc2e; }
+.browser-dot.g { background: #28c840; }
+.browser-url {
+  flex: 1;
+  height: 20px;
+  background: #404040;
+  border-radius: 4px;
+  margin: 0 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 0.65rem;
+  color: #aaa;
+  font-family: monospace;
+}
+.browser-body { background: var(--white); }
+.browser-body.dark { background: var(--dark); }
+.browser-body.surface { background: var(--surface); }
+
+/* ── SHARED NAV ── */
+.wf-nav {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid rgba(34,40,49,0.08);
+  background: rgba(255,255,255,0.95);
+}
+.wf-nav.dark {
+  background: var(--dark);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.wf-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.wf-nav.dark .wf-brand { color: #fff; }
+.brand-dot {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; color: #fff; font-weight: 900;
+}
+.wf-navlinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.wf-navlink {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.wf-nav.dark .wf-navlink { color: rgba(255,255,255,0.5); }
+.wf-nav-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* ── HERO (Homepage) ── */
+.wf-hero {
+  padding: 64px 32px 48px;
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.wf-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(34,40,49,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,40,49,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.wf-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+}
+.hero-eyebrow-wf {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(181,84,0,0.1);
+  border: 1px solid rgba(181,84,0,0.2);
+  border-radius: 99px;
+  padding: 4px 12px 4px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.wf-h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+.wf-h1 em { color: var(--accent); font-style: italic; }
+.wf-hero-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 380px;
+}
+.wf-hero-actions { display: flex; gap: 12px; align-items: center; }
+.btn-primary-wf {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-ghost-wf {
+  background: none;
+  color: var(--text-muted);
+  border: 1px solid rgba(34,40,49,0.15);
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.wf-trust {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.trust-dot { width: 4px; height: 4px; border-radius: 50%; background: #ccc; }
+
+/* Hero right - mockup chat preview */
+.hero-mockup {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(34,40,49,0.12);
+  overflow: hidden;
+  border: 1px solid rgba(34,40,49,0.07);
+}
+.mockup-header {
+  background: var(--dark);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mockup-title { font-size: 0.7rem; font-weight: 700; color: #fff; }
+.mockup-badge {
+  font-size: 0.6rem;
+  background: rgba(181,84,0,0.25);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+.mockup-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.ai-bubble {
+  background: var(--surface);
+  border-radius: 0 10px 10px 10px;
+  padding: 10px 12px;
+  font-size: 0.68rem;
+  color: var(--text-body);
+  line-height: 1.5;
+  max-width: 85%;
+}
+.ai-bubble strong { color: var(--accent); }
+.user-bubble {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px 0 10px 10px;
+  padding: 8px 12px;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  align-self: flex-end;
+  max-width: 75%;
+}
+.mockup-input {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid rgba(34,40,49,0.07);
+  align-items: center;
+}
+.mockup-input-field {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid rgba(34,40,49,0.1);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+.mockup-send {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: #fff;
+}
+
+/* Social proof strip */
+.wf-social-strip {
+  padding: 16px 32px;
+  background: var(--white);
+  border-top: 1px solid rgba(34,40,49,0.06);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+.stat-num { font-size: 1rem; font-weight: 900; color: var(--dark); display: block; }
+
+/* ── AUTH SCREENS ── */
+.wf-auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 460px;
+}
+.auth-left {
+  background: var(--dark);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.auth-tagline {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: #fff;
+  line-height: 1.2;
+  margin-top: 32px;
+}
+.auth-tagline em { color: var(--accent); font-style: italic; }
+.auth-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 10px; line-height: 1.6; }
+.auth-preview-bubbles { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.auth-bubble {
+  background: rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
+  border-left: 2px solid var(--accent);
+}
+.auth-right {
+  background: var(--white);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-form-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.auth-form-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.auth-form-sub a { color: var(--accent); }
+.wf-form-group { margin-bottom: 16px; }
+.wf-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-body);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.wf-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(34,40,49,0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: var(--dark);
+  background: var(--surface);
+  font-family: var(--font-ui);
+}
+.wf-input::placeholder { color: var(--text-muted); }
+.wf-btn-full {
+  width: 100%;
+  padding: 11px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 4px;
+  font-family: var(--font-ui);
+}
+.auth-divider {
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin: 14px 0;
+  position: relative;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 42%;
+  height: 1px;
+  background: rgba(34,40,49,0.1);
+}
+.auth-divider::before { left: 0; }
+.auth-divider::after { right: 0; }
+.auth-switch {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+.auth-switch a { color: var(--accent); font-weight: 700; }
+
+/* ── NEW CV FORM ── */
+.wf-newcv-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+.newcv-left {
+  background: var(--dark);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.newcv-section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.newcv-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.newcv-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.upload-zone {
+  border: 1.5px dashed rgba(181,84,0,0.4);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+  background: rgba(181,84,0,0.05);
+  cursor: pointer;
+}
+.upload-icon { font-size: 1.4rem; margin-bottom: 6px; opacity: 0.7; }
+.upload-text { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.upload-text strong { color: var(--accent); }
+.divider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+}
+.divider-row::before, .divider-row::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.wf-textarea-dark {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-ui);
+  resize: none;
+  line-height: 1.5;
+}
+.wf-textarea-dark::placeholder { color: rgba(255,255,255,0.25); }
+.newcv-right {
+  background: var(--surface);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.newcv-right-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.newcv-right-sub { font-size: 0.72rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; }
+.wf-input-light {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(34,40,49,0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: var(--dark);
+  background: var(--white);
+  font-family: var(--font-ui);
+  margin-top: 6px;
+}
+.wf-input-light::placeholder { color: var(--text-muted); }
+.wf-textarea-light {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(34,40,49,0.15);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  color: var(--dark);
+  background: var(--white);
+  font-family: var(--font-ui);
+  resize: none;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+.wf-textarea-light::placeholder { color: var(--text-muted); }
+.newcv-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+  border-top: 1px solid rgba(34,40,49,0.08);
+}
+.btn-submit-wf {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 11px 28px;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── CHAT SCREEN ── */
+.wf-chat-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 560px;
+}
+.chat-sidebar {
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-brand {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-new-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(181,84,0,0.15);
+  border: 1px solid rgba(181,84,0,0.3);
+  border-radius: var(--radius-sm);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-ui);
+}
+.sidebar-section-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 14px 16px 6px;
+}
+.sidebar-cv-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.1s;
+}
+.sidebar-cv-item:hover { background: rgba(255,255,255,0.04); }
+.sidebar-cv-item.active { background: rgba(181,84,0,0.12); border-left: 2px solid var(--accent); }
+.cv-item-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.sidebar-cv-item.active .cv-item-title { color: var(--accent); }
+.cv-item-role { font-size: 0.62rem; color: rgba(255,255,255,0.35); }
+.cv-item-date { font-size: 0.58rem; color: rgba(255,255,255,0.2); margin-top: 3px; }
+
+/* Chat main area */
+.chat-main {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+.chat-topbar {
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(34,40,49,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-cv-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.chat-cv-role {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.chat-topbar-actions { display: flex; gap: 10px; }
+.chat-action-btn {
+  font-size: 0.7rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 700;
+}
+.chat-action-btn.outline {
+  background: none;
+  border: 1px solid rgba(34,40,49,0.15);
+  color: var(--text-muted);
+}
+.chat-action-btn.primary {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+}
+.chat-messages {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+}
+.msg-ai {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ai-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem; font-weight: 900; color: #fff;
+}
+.msg-bubble-ai {
+  background: var(--surface);
+  border-radius: 0 12px 12px 12px;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  max-width: 72%;
+  border: 1px solid rgba(34,40,49,0.06);
+}
+.msg-bubble-ai strong { color: var(--dark); font-weight: 700; }
+.suggestion-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.suggestion-tag {
+  font-size: 0.62rem;
+  background: rgba(181,84,0,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(181,84,0,0.2);
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+.msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.msg-bubble-user {
+  background: var(--dark);
+  color: rgba(255,255,255,0.9);
+  border-radius: 12px 0 12px 12px;
+  padding: 10px 14px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  max-width: 60%;
+}
+.chat-input-area {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(34,40,49,0.08);
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.chat-input-field {
+  flex: 1;
+  border: 1px solid rgba(34,40,49,0.15);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  font-family: var(--font-ui);
+  color: var(--dark);
+  resize: none;
+  background: var(--surface);
+  line-height: 1.5;
+}
+.chat-input-field::placeholder { color: var(--text-muted); }
+.chat-send-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff; font-size: 0.85rem; flex-shrink: 0;
+}
+
+/* ── DASHBOARD ── */
+.wf-dashboard {
+  background: var(--surface);
+  padding: 32px;
+  min-height: 480px;
+}
+.dashboard-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+.dashboard-heading {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.dashboard-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.cv-card-dash {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(34,40,49,0.08);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(34,40,49,0.05);
+}
+.cv-card-dash.new-card {
+  border: 1.5px dashed rgba(34,40,49,0.15);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  cursor: pointer;
+  gap: 8px;
+}
+.new-card-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(181,84,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: var(--accent);
+}
+.new-card-text { font-size: 0.75rem; font-weight: 700; color: var(--accent); }
+.new-card-sub { font-size: 0.65rem; color: var(--text-muted); text-align: center; }
+.cv-card-header-dash {
+  background: var(--dark);
+  padding: 14px 16px;
+}
+.cv-card-title-dash {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+.cv-card-role-dash {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+}
+.cv-card-body-dash { padding: 14px 16px; }
+.cv-card-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.stat-label { font-size: 0.62rem; color: var(--text-muted); }
+.stat-val { font-size: 0.62rem; font-weight: 700; color: var(--dark); }
+.ats-bar-track {
+  height: 4px;
+  background: rgba(34,40,49,0.08);
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.ats-bar-fill {
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.cv-card-actions {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(34,40,49,0.06);
+}
+.card-btn {
+  flex: 1;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-ui);
+}
+.card-btn.open { background: var(--accent); color: #fff; border: none; }
+.card-btn.delete { background: none; border: 1px solid rgba(34,40,49,0.12); color: var(--text-muted); }
+
+/* ── PDF EXPORT ── */
+.wf-export-overlay {
+  background: rgba(34,40,49,0.7);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 540px;
+  backdrop-filter: blur(2px);
+}
+.export-modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 680px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+}
+.export-modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(34,40,49,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.export-modal-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.export-close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+}
+.export-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+}
+.export-options {
+  padding: 24px;
+  border-right: 1px solid rgba(34,40,49,0.08);
+}
+.export-option-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(34,40,49,0.1);
+  background: var(--surface);
+}
+.export-option.selected {
+  border-color: var(--accent);
+  background: rgba(181,84,0,0.05);
+}
+.export-radio {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(34,40,49,0.2);
+  flex-shrink: 0;
+}
+.export-option.selected .export-radio {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: inset 0 0 0 2px #fff;
+}
+.export-option-text { font-size: 0.72rem; color: var(--dark); font-weight: 700; }
+.export-option-sub { font-size: 0.62rem; color: var(--text-muted); margin-top: 1px; }
+.export-preview {
+  padding: 24px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.pdf-thumb {
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(34,40,49,0.1);
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(34,40,49,0.08);
+}
+.pdf-thumb-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark);
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+.pdf-line { height: 5px; border-radius: 2px; background: rgba(34,40,49,0.08); margin-bottom: 5px; }
+.pdf-line.f { width: 100%; }
+.pdf-line.m { width: 75%; }
+.pdf-line.s { width: 55%; }
+.pdf-line.accent { width: 40%; background: rgba(181,84,0,0.2); }
+.pdf-section { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin: 8px 0 6px; }
+.export-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(34,40,49,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.export-note { font-size: 0.65rem; color: var(--text-muted); }
+.export-note strong { color: var(--dark); }
+.btn-download {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-ui);
+}
+
+/* ── EMPTY STATE ── */
+.wf-empty {
+  background: var(--surface);
+  padding: 32px;
+  min-height: 360px;
+}
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 32px;
+  text-align: center;
+}
+.empty-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(181,84,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+.empty-heading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.empty-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 300px;
+  margin-bottom: 24px;
+}
+
+/* ── ANNOTATION PILLS ── */
+.annotation {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(181,84,0,0.12);
+  border: 1px solid rgba(181,84,0,0.25);
+  border-radius: 99px;
+  padding: 4px 10px 4px 6px;
+  font-size: 0.62rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-top: 6px;
+  font-family: var(--font-ui);
+}
+.annotation-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.annotations { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wireframe-page">
+
+  <p class="page-title">CV Sensei — Wireframes</p>
+  <p class="page-subtitle">Improved wireframe set · March 2026 · Based on original student project</p>
+
+  <!-- ════════════ 1. HOMEPAGE ════════════ -->
+  <p class="section-label">01 — Homepage (New User)</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Homepage — New User</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com</div>
+        </div>
+        <div class="browser-body surface">
+          <!-- Nav -->
+          <div class="wf-nav">
+            <div class="wf-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+            <div class="wf-navlinks">
+              <span class="wf-navlink">How it works</span>
+              <span class="wf-navlink">Examples</span>
+              <span class="wf-navlink">Pricing</span>
+              <a href="#" class="wf-navlink" style="color:var(--text-muted)">Log in</a>
+              <button class="wf-nav-btn">Get started free</button>
+            </div>
+          </div>
+          <!-- Hero -->
+          <div class="wf-hero">
+            <div class="hero-grid"></div>
+            <div class="wf-hero-inner">
+              <div class="hero-left">
+                <div class="hero-eyebrow-wf"><div class="eyebrow-dot"></div> AI-powered CV coaching</div>
+                <h1 class="wf-h1">Your experience<br>deserves a CV<br>that <em>gets you hired.</em></h1>
+                <p class="wf-hero-sub">Upload your CV, tell us your target role. Your AI coach handles the keywords, the tone, and the formatting — you just approve and download.</p>
+                <div class="wf-hero-actions">
+                  <button class="btn-primary-wf">Build my CV free →</button>
+                  <button class="btn-ghost-wf">See an example</button>
+                </div>
+                <div class="wf-trust">
+                  <span>Free to start</span><div class="trust-dot"></div>
+                  <span>No credit card</span><div class="trust-dot"></div>
+                  <span>Download as PDF</span>
+                </div>
+              </div>
+              <div>
+                <div class="hero-mockup">
+                  <div class="mockup-header">
+                    <span class="mockup-title">Luca · Sales Executive → Account Director</span>
+                    <span class="mockup-badge">Live session</span>
+                  </div>
+                  <div class="mockup-body">
+                    <div class="ai-bubble">
+                      <strong>CV Sensei</strong> — I've reviewed your CV and the job description. Here's what's missing for this role:<br><br>
+                      ✦ No mention of <strong>enterprise sales</strong> or <strong>quota attainment</strong><br>
+                      ✦ Your achievements use passive language — let's fix that<br>
+                      ✦ 3 high-impact keywords not in your CV yet
+                    </div>
+                    <div class="user-bubble">Can you rewrite my summary section to fix that?</div>
+                    <div class="ai-bubble">Here's a stronger version:<br><br><em>"Results-driven Sales Executive with 6+ years driving enterprise pipeline growth. Consistently exceeded 120% quota…"</em></div>
+                  </div>
+                  <div class="mockup-input">
+                    <div class="mockup-input-field">Ask your coach anything…</div>
+                    <div class="mockup-send">→</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Social proof strip -->
+          <div class="wf-social-strip">
+            <div><span class="stat-num">2,400+</span> CVs created</div>
+            <div style="width:1px;height:28px;background:rgba(34,40,49,0.08)"></div>
+            <div><span class="stat-num">89%</span> avg. ATS score</div>
+            <div style="width:1px;height:28px;background:rgba(34,40,49,0.08)"></div>
+            <div><span class="stat-num">1 in 3</span> users get an interview within 2 weeks</div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Hero shows real AI coaching interaction — not just a tagline</span>
+        <span class="annotation"><span class="annotation-dot"></span>Social proof strip anchors credibility before scroll</span>
+        <span class="annotation"><span class="annotation-dot"></span>Dual CTA: convert now or see example first</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 2. AUTH ════════════ -->
+  <p class="section-label">02 — Authentication</p>
+  <div class="screens-grid">
+    <div class="screen-wrap">
+      <span class="screen-name">Sign up</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/sign-up</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-auth-layout">
+            <div class="auth-left">
+              <div>
+                <div class="wf-brand" style="color:#fff"><div class="brand-dot">CS</div> CV Sensei</div>
+                <h2 class="auth-tagline">Your CV,<br><em>coached to land.</em></h2>
+                <p class="auth-sub">Upload your experience, chat with your AI coach, and download a polished PDF — free.</p>
+              </div>
+              <div class="auth-preview-bubbles">
+                <div class="auth-bubble">✦ Missing keyword: "stakeholder management"</div>
+                <div class="auth-bubble">✦ Rewrote 3 bullet points with quantified results</div>
+                <div class="auth-bubble">✦ ATS score improved from 61 → 88</div>
+              </div>
+            </div>
+            <div class="auth-right">
+              <p class="auth-form-title">Create your account</p>
+              <p class="auth-form-sub">Already have an account? <a href="#">Log in</a></p>
+              <div class="wf-form-group">
+                <label class="wf-label">Full name</label>
+                <input class="wf-input" placeholder="Luca Ferrante" type="text">
+              </div>
+              <div class="wf-form-group">
+                <label class="wf-label">Email address</label>
+                <input class="wf-input" placeholder="luca@example.com" type="email">
+              </div>
+              <div class="wf-form-group">
+                <label class="wf-label">Password</label>
+                <input class="wf-input" placeholder="At least 8 characters" type="password">
+              </div>
+              <button class="wf-btn-full">Create free account →</button>
+              <p style="font-size:0.62rem;color:var(--text-muted);margin-top:12px;text-align:center;line-height:1.5">By signing up you agree to our Terms of Service.<br>No credit card required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Left panel shows product value before any commitment</span>
+        <span class="annotation"><span class="annotation-dot"></span>Real AI output previews build trust at sign-up friction point</span>
+      </div>
+    </div>
+
+    <div class="screen-wrap">
+      <span class="screen-name">Log in</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/log-in</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-auth-layout">
+            <div class="auth-left">
+              <div>
+                <div class="wf-brand" style="color:#fff"><div class="brand-dot">CS</div> CV Sensei</div>
+                <h2 class="auth-tagline">Welcome<br><em>back.</em></h2>
+                <p class="auth-sub">Your CVs and chats are saved and ready to continue from where you left off.</p>
+              </div>
+              <div class="auth-preview-bubbles">
+                <div class="auth-bubble">📄 Luca — Account Director CV · Last edited 2d ago</div>
+                <div class="auth-bubble">📄 Luca — Sales Manager CV · Last edited 1w ago</div>
+              </div>
+            </div>
+            <div class="auth-right">
+              <p class="auth-form-title">Log in to CV Sensei</p>
+              <p class="auth-form-sub">New here? <a href="#">Create a free account</a></p>
+              <div class="wf-form-group">
+                <label class="wf-label">Email address</label>
+                <input class="wf-input" placeholder="luca@example.com" type="email">
+              </div>
+              <div class="wf-form-group">
+                <label class="wf-label">Password</label>
+                <input class="wf-input" placeholder="••••••••" type="password">
+              </div>
+              <div style="text-align:right;margin-bottom:16px"><a href="#" style="font-size:0.68rem;color:var(--accent)">Forgot password?</a></div>
+              <button class="wf-btn-full">Log in →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Left panel shows saved CVs — reminds users why they're returning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 3. NEW CV FORM ════════════ -->
+  <p class="section-label">03 — New CV</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">New CV — Two-panel form</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/cvs/new</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-nav">
+            <div class="wf-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+            <div class="wf-navlinks">
+              <span class="wf-navlink">My CVs</span>
+              <span class="wf-navlink">Log out</span>
+            </div>
+          </div>
+          <div class="wf-newcv-layout">
+            <!-- Left: CV content -->
+            <div class="newcv-left">
+              <div>
+                <div class="newcv-section-label">Step 1 of 2 — Your CV</div>
+                <h2 class="newcv-heading">Tell me about your experience</h2>
+                <p class="newcv-sub">Upload an existing CV or paste your experience below. Include your work history, education, and any skills or achievements you're proud of.</p>
+              </div>
+              <div class="upload-zone">
+                <div class="upload-icon">↑</div>
+                <div class="upload-text"><strong>Drop your CV here</strong> or click to browse<br>PDF, Word, or .txt · Max 5MB</div>
+              </div>
+              <div class="divider-row">or paste your experience</div>
+              <textarea class="wf-textarea-dark" rows="7" placeholder="Work experience, education, skills, achievements… paste anything here. The more context you give, the better the coaching."></textarea>
+            </div>
+            <!-- Right: Target role -->
+            <div class="newcv-right">
+              <div>
+                <div class="newcv-section-label">Step 2 of 2 — Target role</div>
+                <h2 class="newcv-right-heading">What role are you applying for?</h2>
+                <p class="newcv-right-sub">Your AI coach uses this to tailor every suggestion — keywords, tone, structure — specifically to this job.</p>
+              </div>
+              <div>
+                <label class="wf-label" style="font-size:0.68rem">Job title</label>
+                <input class="wf-input-light" placeholder="e.g. Account Director, Senior UX Designer…" type="text">
+              </div>
+              <div>
+                <label class="wf-label" style="font-size:0.68rem">Job description <span style="font-weight:400;color:var(--text-muted)">(optional but recommended)</span></label>
+                <textarea class="wf-textarea-light" rows="6" placeholder="Paste the full job description here. CV Sensei will extract the key requirements and match them to your experience."></textarea>
+              </div>
+              <div class="newcv-submit-row">
+                <button class="btn-submit-wf">Start coaching session →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Two panels make CV content and target role clearly separate tasks</span>
+        <span class="annotation"><span class="annotation-dot"></span>Upload + paste options removes friction for different user types</span>
+        <span class="annotation"><span class="annotation-dot"></span>JD paste is optional but explained — sets expectation of better output</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 4. CHAT ════════════ -->
+  <p class="section-label">04 — Chat interface</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Chat — Active coaching session</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/chats/42</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-chat-layout">
+            <!-- Sidebar -->
+            <div class="chat-sidebar">
+              <div class="sidebar-header">
+                <div class="sidebar-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+                <button class="sidebar-new-btn">+ New CV</button>
+              </div>
+              <div class="sidebar-section-label">Your CVs</div>
+              <div class="sidebar-cv-item active">
+                <div class="cv-item-title">Account Director</div>
+                <div class="cv-item-role">Luca Ferrante</div>
+                <div class="cv-item-date">Active now</div>
+              </div>
+              <div class="sidebar-cv-item">
+                <div class="cv-item-title">Sales Manager</div>
+                <div class="cv-item-role">Luca Ferrante</div>
+                <div class="cv-item-date">3 days ago</div>
+              </div>
+              <div class="sidebar-cv-item">
+                <div class="cv-item-title">Business Dev.</div>
+                <div class="cv-item-role">Luca Ferrante</div>
+                <div class="cv-item-date">1 week ago</div>
+              </div>
+            </div>
+            <!-- Chat main -->
+            <div class="chat-main">
+              <div class="chat-topbar">
+                <div>
+                  <div class="chat-cv-title">Account Director at Salesforce</div>
+                  <div class="chat-cv-role">Luca Ferrante · Session started 20 min ago</div>
+                </div>
+                <div class="chat-topbar-actions">
+                  <button class="chat-action-btn outline">Share template</button>
+                  <button class="chat-action-btn primary">Download PDF →</button>
+                </div>
+              </div>
+              <div class="chat-messages">
+                <div class="msg-ai">
+                  <div class="ai-avatar">CS</div>
+                  <div class="msg-bubble-ai">
+                    <strong>CV Sensei</strong> — I've analysed your CV against the Account Director role at Salesforce. Here's my assessment:<br><br>
+                    ✦ <strong>3 critical keywords missing</strong> — "enterprise pipeline", "C-suite engagement", "revenue growth"<br>
+                    ✦ Your summary undersells you — passive language throughout<br>
+                    ✦ Achievements lack quantification (no numbers = no impact)<br><br>
+                    I'd suggest we start with your summary section. Want me to rewrite it?
+                    <div class="suggestion-tags">
+                      <span class="suggestion-tag">Rewrite summary</span>
+                      <span class="suggestion-tag">Fix keywords</span>
+                      <span class="suggestion-tag">Add metrics</span>
+                      <span class="suggestion-tag">Full review</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="msg-user">
+                  <div class="msg-bubble-user">Yes — rewrite the summary. Keep it under 4 lines.</div>
+                </div>
+                <div class="msg-ai">
+                  <div class="ai-avatar">CS</div>
+                  <div class="msg-bubble-ai">
+                    <strong>Here's your new summary:</strong><br><br>
+                    <em>"Results-driven Sales Executive with 6+ years building and scaling enterprise pipelines across EMEA. Consistently exceeded 120% quota, securing €4.2M in net-new ARR. Skilled at C-suite engagement, cross-functional leadership, and translating customer insight into revenue growth."</em><br><br>
+                    This version includes all 3 missing keywords and leads with your strongest metric. Happy with this, or want me to adjust the tone?
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input-area">
+                <textarea class="chat-input-field" rows="2" placeholder="Reply to your coach, ask for changes, or share a template you like…"></textarea>
+                <button class="chat-send-btn">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Sidebar shows all CVs — no need to go back to dashboard mid-session</span>
+        <span class="annotation"><span class="annotation-dot"></span>Download PDF CTA always visible in topbar — not buried</span>
+        <span class="annotation"><span class="annotation-dot"></span>Quick-reply suggestion tags reduce friction for first interaction</span>
+        <span class="annotation"><span class="annotation-dot"></span>AI's first message shows diagnosis + action — not a generic greeting</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 5. DASHBOARD ════════════ -->
+  <p class="section-label">05 — Dashboard</p>
+  <div class="screens-grid">
+    <div class="screen-wrap">
+      <span class="screen-name">Dashboard — With CVs</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/dashboard</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-nav">
+            <div class="wf-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+            <div class="wf-navlinks">
+              <span class="wf-navlink" style="color:var(--accent);font-weight:700">My CVs</span>
+              <span class="wf-navlink">Log out</span>
+            </div>
+          </div>
+          <div class="wf-dashboard">
+            <div class="dashboard-toprow">
+              <div>
+                <h2 class="dashboard-heading">Your CVs</h2>
+                <p class="dashboard-sub">3 CVs · Each tailored to a different role</p>
+              </div>
+              <button class="btn-primary-wf">+ New CV</button>
+            </div>
+            <div class="dashboard-grid">
+              <!-- New card CTA -->
+              <div class="cv-card-dash new-card">
+                <div class="new-card-icon">+</div>
+                <div class="new-card-text">New CV</div>
+                <div class="new-card-sub">Start a new coaching session for a different role</div>
+              </div>
+              <!-- CV card 1 -->
+              <div class="cv-card-dash">
+                <div class="cv-card-header-dash">
+                  <div class="cv-card-title-dash">Account Director</div>
+                  <div class="cv-card-role-dash">Luca Ferrante · Salesforce</div>
+                </div>
+                <div class="cv-card-body-dash">
+                  <div class="cv-card-stat"><span class="stat-label">ATS score</span><span class="stat-val" style="color:var(--accent)">88 / 100</span></div>
+                  <div class="ats-bar-track"><div class="ats-bar-fill" style="width:88%"></div></div>
+                  <div class="cv-card-stat"><span class="stat-label">Last edited</span><span class="stat-val">Today</span></div>
+                  <div class="cv-card-stat"><span class="stat-label">Messages</span><span class="stat-val">14</span></div>
+                </div>
+                <div class="cv-card-actions">
+                  <button class="card-btn open">Continue →</button>
+                  <button class="card-btn delete">Delete</button>
+                </div>
+              </div>
+              <!-- CV card 2 -->
+              <div class="cv-card-dash">
+                <div class="cv-card-header-dash">
+                  <div class="cv-card-title-dash">Sales Manager</div>
+                  <div class="cv-card-role-dash">Luca Ferrante · Stripe</div>
+                </div>
+                <div class="cv-card-body-dash">
+                  <div class="cv-card-stat"><span class="stat-label">ATS score</span><span class="stat-val" style="color:var(--accent)">74 / 100</span></div>
+                  <div class="ats-bar-track"><div class="ats-bar-fill" style="width:74%"></div></div>
+                  <div class="cv-card-stat"><span class="stat-label">Last edited</span><span class="stat-val">3 days ago</span></div>
+                  <div class="cv-card-stat"><span class="stat-label">Messages</span><span class="stat-val">8</span></div>
+                </div>
+                <div class="cv-card-actions">
+                  <button class="card-btn open">Continue →</button>
+                  <button class="card-btn delete">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>New CV card always first — primary action is visible without scrolling</span>
+        <span class="annotation"><span class="annotation-dot"></span>ATS score per card lets user prioritise which CV needs more work</span>
+        <span class="annotation"><span class="annotation-dot"></span>Title, role, company, date — enough to distinguish CVs at a glance</span>
+      </div>
+    </div>
+
+    <div class="screen-wrap">
+      <span class="screen-name">Dashboard — Empty state (first-time user)</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/dashboard</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-nav">
+            <div class="wf-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+            <div class="wf-navlinks">
+              <span class="wf-navlink" style="color:var(--accent);font-weight:700">My CVs</span>
+              <span class="wf-navlink">Log out</span>
+            </div>
+          </div>
+          <div class="wf-empty">
+            <div class="empty-state">
+              <div class="empty-icon">📄</div>
+              <h3 class="empty-heading">You haven't built a CV yet</h3>
+              <p class="empty-sub">Create your first CV and your AI coach will help you tailor it to any role — with keyword suggestions, rewritten bullet points, and an ATS-ready PDF to download.</p>
+              <button class="btn-primary-wf">Build my first CV →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Empty state explains the value again — not just "nothing here yet"</span>
+        <span class="annotation"><span class="annotation-dot"></span>Single clear CTA — no decision paralysis</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 6. PDF EXPORT ════════════ -->
+  <p class="section-label">06 — PDF Export (modal)</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Download CV — Preview modal</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/chats/42</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-export-overlay">
+            <div class="export-modal">
+              <div class="export-modal-header">
+                <div class="export-modal-title">Download your CV — Account Director</div>
+                <button class="export-close">✕</button>
+              </div>
+              <div class="export-body">
+                <div class="export-options">
+                  <div class="export-option-label">Format</div>
+                  <div class="export-option selected">
+                    <div class="export-radio"></div>
+                    <div>
+                      <div class="export-option-text">Clean single-column</div>
+                      <div class="export-option-sub">ATS-safe · Recommended</div>
+                    </div>
+                  </div>
+                  <div class="export-option">
+                    <div class="export-radio"></div>
+                    <div>
+                      <div class="export-option-text">Two-column modern</div>
+                      <div class="export-option-sub">Better for creative roles</div>
+                    </div>
+                  </div>
+                  <div class="export-option">
+                    <div class="export-radio"></div>
+                    <div>
+                      <div class="export-option-text">Academic / research</div>
+                      <div class="export-option-sub">For publications & grants</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:20px">
+                    <div class="export-option-label">Options</div>
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <label style="display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--text-body);cursor:pointer">
+                        <input type="checkbox" checked style="accent-color:var(--accent)"> Include cover letter page
+                      </label>
+                      <label style="display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--text-body);cursor:pointer">
+                        <input type="checkbox" style="accent-color:var(--accent)"> Include keyword summary page
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="export-preview">
+                  <div class="export-option-label" style="align-self:flex-start">Preview</div>
+                  <div class="pdf-thumb">
+                    <div class="pdf-thumb-name">Luca Ferrante</div>
+                    <div class="pdf-line accent"></div>
+                    <div style="font-size:0.55rem;color:var(--text-muted);margin-bottom:8px">luca@example.com · linkedin.com/in/luca</div>
+                    <div class="pdf-section">Summary</div>
+                    <div class="pdf-line f"></div>
+                    <div class="pdf-line m"></div>
+                    <div class="pdf-section">Experience</div>
+                    <div class="pdf-line f"></div>
+                    <div class="pdf-line m"></div>
+                    <div class="pdf-line s"></div>
+                    <div class="pdf-line f"></div>
+                    <div class="pdf-line m"></div>
+                    <div class="pdf-section">Education</div>
+                    <div class="pdf-line m"></div>
+                    <div class="pdf-line s"></div>
+                    <div class="pdf-section">Skills</div>
+                    <div class="pdf-line f"></div>
+                  </div>
+                  <div style="font-size:0.62rem;color:var(--text-muted);text-align:center">This is a layout preview. Your full content will appear in the download.</div>
+                </div>
+              </div>
+              <div class="export-footer">
+                <p class="export-note"><strong>Free download</strong> · No watermarks · No sign-up required</p>
+                <button class="btn-download">↓ Download PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Layout preview sets expectations before download — reduces disappointment</span>
+        <span class="annotation"><span class="annotation-dot"></span>Format options solve the ATS vs. creative role tension upfront</span>
+        <span class="annotation"><span class="annotation-dot"></span>"Free · no watermarks" reassurance at the final CTA</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:48px;padding:24px;background:rgba(181,84,0,0.08);border:1px solid rgba(181,84,0,0.2);border-radius:var(--radius-lg)">
+    <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">How to use in Figma</p>
+    <p style="font-size:0.78rem;color:#ccc;line-height:1.7">1. Open this file in a browser · 2. Screenshot each screen at 2× scale · 3. Import PNGs into Figma as reference frames · 4. Trace over with your own components using your existing design tokens (navy <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px">#222831</code>, accent <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px">#B55400</code>, surface <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px">#F7F5F1</code>)</p>
+  </div>
+
+</div>
+</body>
+</html>

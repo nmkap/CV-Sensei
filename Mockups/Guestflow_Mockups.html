@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Sensei – Guest Flow Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:    #222831;
+  --mid:     #393E46;
+  --accent:  #B55400;
+  --accent-hover: #8F4200;
+  --light:   #EEEEEE;
+  --surface: #F7F5F1;
+  --white:   #FFFFFF;
+  --text-body: #4A4540;
+  --text-muted: #8A857F;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-ui: 'Lato', sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-ui); background: #1a1a1a; color: var(--dark); }
+
+.wireframe-page { max-width: 1400px; margin: 0 auto; padding: 48px 32px; }
+.page-title { font-family: var(--font-display); font-size: 2rem; color: #fff; margin-bottom: 8px; }
+.page-subtitle { font-size: 0.875rem; color: #888; margin-bottom: 16px; }
+.page-intro { font-size: 0.82rem; color: #aaa; line-height: 1.7; max-width: 760px; margin-bottom: 48px; border-left: 2px solid var(--accent); padding-left: 16px; }
+
+.section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 56px; }
+.screens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(560px, 1fr)); gap: 40px; margin-bottom: 40px; }
+.screens-grid.single { grid-template-columns: 1fr; max-width: 900px; }
+.screen-wrap { display: flex; flex-direction: column; gap: 12px; }
+.screen-name { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #aaa; }
+.screen-note { font-size: 0.7rem; color: #666; font-style: italic; margin-top: 2px; }
+
+/* Flow connector */
+.flow-connector {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 32px 0 0;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 110px;
+}
+.flow-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--dark);
+  border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 900; color: var(--accent);
+}
+.flow-circle.active { background: var(--accent); color: #fff; }
+.flow-circle.muted { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.3); }
+.flow-label { font-size: 0.6rem; color: #aaa; text-align: center; line-height: 1.3; max-width: 90px; }
+.flow-label.active { color: #fff; font-weight: 700; }
+.flow-label.muted { color: rgba(255,255,255,0.25); }
+.flow-arrow { font-size: 0.8rem; color: rgba(255,255,255,0.2); margin: 0 4px; flex-shrink: 0; padding-bottom: 20px; }
+.flow-arrow.accent { color: var(--accent); }
+
+/* Browser chrome */
+.browser { border-radius: 10px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.5); background: var(--white); }
+.browser-bar { background: #2d2d2d; height: 36px; display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+.browser-dot.r { background: #ff5f57; }
+.browser-dot.y { background: #febc2e; }
+.browser-dot.g { background: #28c840; }
+.browser-url { flex: 1; height: 20px; background: #404040; border-radius: 4px; margin: 0 12px; display: flex; align-items: center; padding: 0 10px; font-size: 0.65rem; color: #aaa; font-family: monospace; }
+.browser-body { background: var(--white); }
+.browser-body.surface { background: var(--surface); }
+.browser-body.dark { background: var(--dark); }
+
+/* Shared nav */
+.wf-nav { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; border-bottom: 1px solid rgba(34,40,49,0.08); background: rgba(255,255,255,0.97); }
+.wf-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+.brand-dot { width: 26px; height: 26px; border-radius: 6px; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: #fff; font-weight: 900; }
+.wf-navlinks { display: flex; align-items: center; gap: 24px; }
+.wf-navlink { font-size: 0.78rem; color: var(--text-muted); }
+.wf-nav-btn { font-size: 0.75rem; font-weight: 700; background: var(--accent); color: #fff; border: none; padding: 7px 16px; border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font-ui); }
+.wf-nav-btn.outline { background: none; border: 1px solid rgba(34,40,49,0.15); color: var(--text-muted); }
+
+/* Guest banner */
+.guest-banner {
+  background: rgba(181,84,0,0.08);
+  border-bottom: 1px solid rgba(181,84,0,0.15);
+  padding: 8px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.guest-banner-text { font-size: 0.72rem; color: var(--accent); font-weight: 700; }
+.guest-banner-sub { font-size: 0.68rem; color: var(--text-muted); margin-left: 8px; font-weight: 400; }
+.guest-banner-cta { font-size: 0.7rem; font-weight: 700; color: var(--accent); background: none; border: 1px solid rgba(181,84,0,0.3); padding: 5px 14px; border-radius: 99px; cursor: pointer; font-family: var(--font-ui); white-space: nowrap; }
+
+/* New CV form - two panel */
+.wf-newcv-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; }
+.newcv-left { background: var(--dark); padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+.newcv-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.newcv-heading { font-family: var(--font-display); font-size: 1.3rem; color: #fff; line-height: 1.2; margin-bottom: 4px; }
+.newcv-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.upload-zone { border: 1.5px dashed rgba(181,84,0,0.4); border-radius: var(--radius-md); padding: 24px; text-align: center; background: rgba(181,84,0,0.05); cursor: pointer; }
+.upload-icon { font-size: 1.4rem; margin-bottom: 6px; opacity: 0.7; }
+.upload-text { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.upload-text strong { color: var(--accent); }
+.divider-row { display: flex; align-items: center; gap: 12px; font-size: 0.65rem; color: rgba(255,255,255,0.3); }
+.divider-row::before, .divider-row::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+.wf-textarea-dark { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 0.72rem; color: rgba(255,255,255,0.8); font-family: var(--font-ui); resize: none; line-height: 1.5; }
+.wf-textarea-dark::placeholder { color: rgba(255,255,255,0.25); }
+.newcv-right { background: var(--surface); padding: 40px; display: flex; flex-direction: column; gap: 20px; }
+.newcv-right-heading { font-family: var(--font-display); font-size: 1.3rem; color: var(--dark); margin-bottom: 4px; }
+.newcv-right-sub { font-size: 0.72rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 4px; }
+.wf-label { display: block; font-size: 0.68rem; font-weight: 700; color: var(--text-body); margin-bottom: 6px; letter-spacing: 0.02em; }
+.wf-input-light { width: 100%; padding: 10px 12px; border: 1px solid rgba(34,40,49,0.15); border-radius: var(--radius-sm); font-size: 0.78rem; color: var(--dark); background: var(--white); font-family: var(--font-ui); margin-top: 6px; }
+.wf-input-light::placeholder { color: var(--text-muted); }
+.wf-textarea-light { width: 100%; padding: 10px 12px; border: 1px solid rgba(34,40,49,0.15); border-radius: var(--radius-sm); font-size: 0.72rem; color: var(--dark); background: var(--white); font-family: var(--font-ui); resize: none; line-height: 1.5; margin-top: 6px; }
+.wf-textarea-light::placeholder { color: var(--text-muted); }
+.newcv-submit-row { display: flex; justify-content: flex-end; padding-top: 8px; border-top: 1px solid rgba(34,40,49,0.08); }
+.btn-submit-wf { background: var(--accent); color: #fff; border: none; padding: 11px 28px; border-radius: var(--radius-md); font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); }
+
+/* Chat */
+.wf-chat-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 560px; }
+.chat-sidebar { background: var(--dark); display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.06); }
+.sidebar-header { padding: 16px 16px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.sidebar-brand { font-family: var(--font-display); font-size: 0.9rem; color: #fff; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.sidebar-new-btn { width: 100%; margin-top: 10px; padding: 8px; background: rgba(181,84,0,0.15); border: 1px solid rgba(181,84,0,0.3); border-radius: var(--radius-sm); font-size: 0.68rem; font-weight: 700; color: var(--accent); cursor: pointer; text-align: center; font-family: var(--font-ui); }
+.sidebar-section-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 14px 16px 6px; }
+.sidebar-cv-item { padding: 10px 16px; cursor: pointer; }
+.sidebar-cv-item.active { background: rgba(181,84,0,0.12); border-left: 2px solid var(--accent); }
+.cv-item-title { font-size: 0.72rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.sidebar-cv-item.active .cv-item-title { color: var(--accent); }
+.cv-item-role { font-size: 0.62rem; color: rgba(255,255,255,0.35); }
+.cv-item-date { font-size: 0.58rem; color: rgba(255,255,255,0.2); margin-top: 3px; }
+.sidebar-guest-note { margin: 12px 16px; padding: 10px 12px; background: rgba(181,84,0,0.1); border: 1px solid rgba(181,84,0,0.2); border-radius: var(--radius-sm); }
+.sidebar-guest-note p { font-size: 0.62rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.sidebar-guest-note strong { color: var(--accent); }
+
+.chat-main { display: flex; flex-direction: column; background: var(--white); }
+.chat-topbar { padding: 14px 24px; border-bottom: 1px solid rgba(34,40,49,0.08); display: flex; align-items: center; justify-content: space-between; }
+.chat-cv-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--dark); }
+.chat-cv-role { font-size: 0.7rem; color: var(--text-muted); margin-top: 1px; }
+.chat-topbar-actions { display: flex; gap: 10px; }
+.chat-action-btn { font-size: 0.7rem; padding: 6px 14px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-family: var(--font-ui); }
+.chat-action-btn.outline { background: none; border: 1px solid rgba(34,40,49,0.15); color: var(--text-muted); }
+.chat-action-btn.primary { background: var(--accent); border: none; color: #fff; }
+.chat-action-btn.locked { background: var(--surface); border: 1px solid rgba(34,40,49,0.15); color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.chat-messages { flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.msg-ai { display: flex; gap: 10px; align-items: flex-start; }
+.ai-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; font-weight: 900; color: #fff; }
+.msg-bubble-ai { background: var(--surface); border-radius: 0 12px 12px 12px; padding: 12px 16px; font-size: 0.75rem; color: var(--text-body); line-height: 1.6; max-width: 72%; border: 1px solid rgba(34,40,49,0.06); }
+.msg-bubble-ai strong { color: var(--dark); font-weight: 700; }
+.suggestion-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.suggestion-tag { font-size: 0.62rem; background: rgba(181,84,0,0.1); color: var(--accent); border: 1px solid rgba(181,84,0,0.2); padding: 3px 10px; border-radius: 99px; font-weight: 700; }
+.msg-user { display: flex; justify-content: flex-end; }
+.msg-bubble-user { background: var(--dark); color: rgba(255,255,255,0.9); border-radius: 12px 0 12px 12px; padding: 10px 14px; font-size: 0.75rem; line-height: 1.5; max-width: 60%; }
+.chat-input-area { padding: 16px 24px; border-top: 1px solid rgba(34,40,49,0.08); display: flex; gap: 10px; align-items: flex-end; }
+.chat-input-field { flex: 1; border: 1px solid rgba(34,40,49,0.15); border-radius: var(--radius-md); padding: 10px 14px; font-size: 0.78rem; font-family: var(--font-ui); color: var(--dark); resize: none; background: var(--surface); line-height: 1.5; }
+.chat-input-field::placeholder { color: var(--text-muted); }
+.chat-send-btn { background: var(--accent); border: none; border-radius: var(--radius-md); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 0.85rem; flex-shrink: 0; }
+
+/* Download gate modal */
+.gate-overlay { background: rgba(34,40,49,0.75); padding: 40px; display: flex; align-items: center; justify-content: center; min-height: 580px; }
+.gate-modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 560px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.35); }
+.gate-modal-top { background: var(--dark); padding: 28px 32px; text-align: center; }
+.gate-icon { font-size: 2rem; margin-bottom: 12px; }
+.gate-heading { font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 8px; line-height: 1.2; }
+.gate-heading em { color: var(--accent); font-style: italic; }
+.gate-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 380px; margin: 0 auto; }
+.gate-value-props { display: flex; justify-content: center; gap: 24px; margin-top: 20px; }
+.gate-prop { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.gate-prop-icon { font-size: 1rem; }
+.gate-prop-text { font-size: 0.62rem; color: rgba(255,255,255,0.4); text-align: center; max-width: 72px; line-height: 1.3; }
+.gate-modal-body { padding: 28px 32px; }
+.gate-form-title { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+.wf-input { width: 100%; padding: 10px 12px; border: 1px solid rgba(34,40,49,0.15); border-radius: var(--radius-sm); font-size: 0.78rem; color: var(--dark); background: var(--surface); font-family: var(--font-ui); margin-bottom: 12px; }
+.wf-input::placeholder { color: var(--text-muted); }
+.gate-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 8px; }
+.gate-fine-print { font-size: 0.62rem; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+.gate-reassurance { background: var(--surface); border-top: 1px solid rgba(34,40,49,0.07); padding: 14px 32px; display: flex; align-items: center; gap: 24px; justify-content: center; }
+.reassurance-item { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: var(--text-muted); }
+.reassurance-check { color: var(--accent); font-weight: 900; font-size: 0.7rem; }
+
+/* Post-signup confirmation */
+.confirm-overlay { background: rgba(34,40,49,0.75); padding: 40px; display: flex; align-items: center; justify-content: center; min-height: 480px; }
+.confirm-modal { background: var(--white); border-radius: var(--radius-lg); width: 100%; max-width: 480px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.35); text-align: center; }
+.confirm-top { background: var(--accent); padding: 36px 32px 28px; }
+.confirm-checkmark { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 16px; }
+.confirm-heading { font-family: var(--font-display); font-size: 1.4rem; color: #fff; margin-bottom: 6px; }
+.confirm-sub { font-size: 0.75rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.confirm-body { padding: 28px 32px; }
+.confirm-what-next { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+.confirm-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.confirm-item { display: flex; align-items: center; gap: 12px; text-align: left; }
+.confirm-item-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(181,84,0,0.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--accent); }
+.confirm-item-text { font-size: 0.75rem; color: var(--text-body); line-height: 1.4; }
+.confirm-item-text strong { color: var(--dark); }
+.confirm-btn { width: 100%; padding: 12px; background: var(--dark); color: #fff; border: none; border-radius: var(--radius-md); font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: var(--font-ui); display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+/* Annotations */
+.annotation { display: inline-flex; align-items: center; gap: 6px; background: rgba(181,84,0,0.12); border: 1px solid rgba(181,84,0,0.25); border-radius: 99px; padding: 4px 10px 4px 6px; font-size: 0.62rem; color: var(--accent); font-weight: 700; margin-top: 6px; font-family: var(--font-ui); }
+.annotation-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.annotations { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ux-note { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 16px 20px; margin-top: 12px; font-size: 0.72rem; color: #aaa; line-height: 1.7; }
+.ux-note strong { color: #fff; }
+</style>
+</head>
+<body>
+<div class="wireframe-page">
+
+  <p class="page-title">CV Sensei — Guest Flow</p>
+  <p class="page-subtitle">Option A: Try before you sign up · Supplement to main wireframe set</p>
+  <p class="page-intro">
+    When a first-time visitor clicks <strong style="color:#fff">"Get started free"</strong>, they go directly into the product — no account required. They complete a full coaching session as a guest. The sign-up gate appears only when they click <strong style="color:#fff">"Download PDF"</strong>, at the moment of maximum motivation. By then, they've already experienced the product's value and have a CV they want to keep.
+  </p>
+
+  <!-- Flow diagram -->
+  <div class="flow-connector">
+    <div class="flow-step">
+      <div class="flow-circle">H</div>
+      <div class="flow-label">Homepage<br>"Get started free"</div>
+    </div>
+    <div class="flow-arrow accent">→</div>
+    <div class="flow-step">
+      <div class="flow-circle active">1</div>
+      <div class="flow-label active">New CV form<br>(guest)</div>
+    </div>
+    <div class="flow-arrow accent">→</div>
+    <div class="flow-step">
+      <div class="flow-circle active">2</div>
+      <div class="flow-label active">Chat session<br>(guest)</div>
+    </div>
+    <div class="flow-arrow accent">→</div>
+    <div class="flow-step">
+      <div class="flow-circle active">3</div>
+      <div class="flow-label active">Download click<br>→ sign-up gate</div>
+    </div>
+    <div class="flow-arrow accent">→</div>
+    <div class="flow-step">
+      <div class="flow-circle active">4</div>
+      <div class="flow-label active">Create account<br>+ download</div>
+    </div>
+    <div class="flow-arrow accent">→</div>
+    <div class="flow-step">
+      <div class="flow-circle">D</div>
+      <div class="flow-label">Dashboard<br>(returning user)</div>
+    </div>
+  </div>
+
+  <!-- ════════ SCREEN 1: Guest New CV ════════ -->
+  <p class="section-label">Screen 1 — New CV form (guest, no account)</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">New CV — Guest session</span>
+      <span class="screen-note">Identical to the logged-in version — except the nav and guest banner</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/cvs/new</div>
+        </div>
+        <div class="browser-body">
+          <!-- Nav: guest state -->
+          <div class="wf-nav">
+            <div class="wf-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+            <div class="wf-navlinks">
+              <span class="wf-navlink">How it works</span>
+              <button class="wf-nav-btn outline" style="margin-right:4px">Log in</button>
+              <button class="wf-nav-btn">Sign up free</button>
+            </div>
+          </div>
+          <!-- Guest banner -->
+          <div class="guest-banner">
+            <div>
+              <span class="guest-banner-text">✦ You're in a guest session</span>
+              <span class="guest-banner-sub">Your CV will be saved when you create a free account at download</span>
+            </div>
+            <button class="guest-banner-cta">Create account now</button>
+          </div>
+          <!-- Form (same layout as logged-in version) -->
+          <div class="wf-newcv-layout">
+            <div class="newcv-left">
+              <div>
+                <div class="newcv-section-label">Step 1 of 2 — Your CV</div>
+                <div class="newcv-heading">Tell me about your experience</div>
+                <div class="newcv-sub">Upload an existing CV or paste your experience below. Include your work history, education, skills and achievements.</div>
+              </div>
+              <div class="upload-zone">
+                <div class="upload-icon">↑</div>
+                <div class="upload-text"><strong>Drop your CV here</strong> or click to browse<br>PDF, Word, or .txt · Max 5MB</div>
+              </div>
+              <div class="divider-row">or paste your experience</div>
+              <textarea class="wf-textarea-dark" rows="6" placeholder="Work experience, education, skills, achievements…"></textarea>
+            </div>
+            <div class="newcv-right">
+              <div>
+                <div class="newcv-section-label">Step 2 of 2 — Target role</div>
+                <div class="newcv-right-heading">What role are you applying for?</div>
+                <div class="newcv-right-sub">Your AI coach uses this to tailor every suggestion to your specific job target.</div>
+              </div>
+              <div>
+                <label class="wf-label">Job title</label>
+                <input class="wf-input-light" placeholder="e.g. Account Director, Senior UX Designer…" type="text">
+              </div>
+              <div>
+                <label class="wf-label">Job description <span style="font-weight:400;color:var(--text-muted)">(optional but recommended)</span></label>
+                <textarea class="wf-textarea-light" rows="5" placeholder="Paste the full job description here for more targeted coaching…"></textarea>
+              </div>
+              <div class="newcv-submit-row">
+                <button class="btn-submit-wf">Start coaching session →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Guest banner sets honest expectations — no surprise gate later</span>
+        <span class="annotation"><span class="annotation-dot"></span>Nav offers sign-up but doesn't force it — user stays in control</span>
+        <span class="annotation"><span class="annotation-dot"></span>Form is identical to logged-in version — no degraded guest experience</span>
+      </div>
+      <div class="ux-note"><strong>Design decision:</strong> The guest banner is a key trust moment. Telling users upfront that their CV will be saved when they create an account removes the fear of losing their work — which is the main reason people abandon guest flows mid-session.</div>
+    </div>
+  </div>
+
+  <!-- ════════ SCREEN 2: Guest Chat ════════ -->
+  <p class="section-label">Screen 2 — Chat (guest, active session)</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Chat — Guest session</span>
+      <span class="screen-note">Full coaching experience — download button triggers the gate</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/chats/guest</div>
+        </div>
+        <div class="browser-body">
+          <div class="wf-chat-layout">
+            <!-- Sidebar: guest state -->
+            <div class="chat-sidebar">
+              <div class="sidebar-header">
+                <div class="sidebar-brand"><div class="brand-dot">CS</div> CV Sensei</div>
+                <button class="sidebar-new-btn">+ New CV</button>
+              </div>
+              <div class="sidebar-section-label">This session</div>
+              <div class="sidebar-cv-item active">
+                <div class="cv-item-title">Account Director</div>
+                <div class="cv-item-role">Guest session</div>
+                <div class="cv-item-date">Active now</div>
+              </div>
+              <div class="sidebar-guest-note">
+                <p><strong>Guest session</strong><br>Sign up to save this CV and create more versions for other roles.</p>
+              </div>
+            </div>
+            <!-- Chat: full coaching, locked download -->
+            <div class="chat-main">
+              <div class="chat-topbar">
+                <div>
+                  <div class="chat-cv-title">Account Director at Salesforce</div>
+                  <div class="chat-cv-role">Guest session · No account needed to chat</div>
+                </div>
+                <div class="chat-topbar-actions">
+                  <button class="chat-action-btn outline">Share template</button>
+                  <button class="chat-action-btn primary">Download PDF →</button>
+                </div>
+              </div>
+              <div class="chat-messages">
+                <div class="msg-ai">
+                  <div class="ai-avatar">CS</div>
+                  <div class="msg-bubble-ai">
+                    <strong>CV Sensei</strong> — I've analysed your CV against the Account Director role. Here's what I found:<br><br>
+                    ✦ <strong>3 critical keywords missing</strong> — "enterprise pipeline", "C-suite engagement", "revenue growth"<br>
+                    ✦ Your summary uses passive language throughout<br>
+                    ✦ Achievements have no metrics — numbers make the difference<br><br>
+                    Want to start with your summary?
+                    <div class="suggestion-tags">
+                      <span class="suggestion-tag">Rewrite summary</span>
+                      <span class="suggestion-tag">Fix keywords</span>
+                      <span class="suggestion-tag">Add metrics</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="msg-user">
+                  <div class="msg-bubble-user">Yes — rewrite the summary. Keep it under 4 lines.</div>
+                </div>
+                <div class="msg-ai">
+                  <div class="ai-avatar">CS</div>
+                  <div class="msg-bubble-ai">
+                    <strong>Here's your new summary:</strong><br><br>
+                    <em>"Results-driven Sales Executive with 6+ years building enterprise pipelines across EMEA. Consistently exceeded 120% quota, securing €4.2M in net-new ARR. Skilled at C-suite engagement and translating customer insight into revenue growth."</em><br><br>
+                    Happy with this? I can also work through your experience bullets next.
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input-area">
+                <textarea class="chat-input-field" rows="2" placeholder="Reply to your coach, ask for changes, or share a template you like…"></textarea>
+                <button class="chat-send-btn">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>Full AI coaching available — no degraded guest experience</span>
+        <span class="annotation"><span class="annotation-dot"></span>"Download PDF" CTA visible throughout — user knows the goal is achievable</span>
+        <span class="annotation"><span class="annotation-dot"></span>Sidebar note is informative, not a nag — sign-up is invited, not forced</span>
+      </div>
+      <div class="ux-note"><strong>Design decision:</strong> The chat experience is completely unrestricted for guests. Limiting the coaching (e.g. only 3 messages) would undermine trust and fail to show the product's real value. The payoff — the PDF — is the natural, honest gate.</div>
+    </div>
+  </div>
+
+  <!-- ════════ SCREEN 3: Download Gate ════════ -->
+  <p class="section-label">Screen 3 — Download gate (sign-up prompt)</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Download gate — Triggered by "Download PDF" click</span>
+      <span class="screen-note">Appears as a modal over the chat screen</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/chats/guest</div>
+        </div>
+        <div class="browser-body dark">
+          <div class="gate-overlay">
+            <div class="gate-modal">
+              <!-- Top: value reinforcement -->
+              <div class="gate-modal-top">
+                <div class="gate-icon">📄</div>
+                <h2 class="gate-heading">Your CV is ready<br>to <em>download.</em></h2>
+                <p class="gate-sub">Create a free account to download your polished PDF — and save this session so you can keep refining it.</p>
+                <div class="gate-value-props">
+                  <div class="gate-prop">
+                    <div class="gate-prop-icon">↓</div>
+                    <div class="gate-prop-text">Download as PDF</div>
+                  </div>
+                  <div class="gate-prop">
+                    <div class="gate-prop-icon">💾</div>
+                    <div class="gate-prop-text">Session saved automatically</div>
+                  </div>
+                  <div class="gate-prop">
+                    <div class="gate-prop-icon">+</div>
+                    <div class="gate-prop-text">Create more CV versions</div>
+                  </div>
+                  <div class="gate-prop">
+                    <div class="gate-prop-icon">✦</div>
+                    <div class="gate-prop-text">Always free, no card</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Body: sign-up form -->
+              <div class="gate-modal-body">
+                <div class="gate-form-title">Create your free account</div>
+                <input class="wf-input" placeholder="Full name" type="text">
+                <input class="wf-input" placeholder="Email address" type="email">
+                <input class="wf-input" placeholder="Password (at least 8 characters)" type="password">
+                <button class="gate-btn">Create account and download PDF →</button>
+                <p class="gate-fine-print">
+                  Already have an account? <a href="#" style="color:var(--accent)">Log in instead</a><br>
+                  Your guest session will be saved to your new account automatically.
+                </p>
+              </div>
+              <!-- Reassurance strip -->
+              <div class="gate-reassurance">
+                <div class="reassurance-item"><span class="reassurance-check">✓</span> Free forever</div>
+                <div class="reassurance-item"><span class="reassurance-check">✓</span> No credit card</div>
+                <div class="reassurance-item"><span class="reassurance-check">✓</span> No watermarks</div>
+                <div class="reassurance-item"><span class="reassurance-check">✓</span> Session saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>"Your CV is ready" — leads with what user gets, not what they must do</span>
+        <span class="annotation"><span class="annotation-dot"></span>Session saved automatically — removes the biggest fear at this moment</span>
+        <span class="annotation"><span class="annotation-dot"></span>Reassurance strip addresses every common objection in one line</span>
+        <span class="annotation"><span class="annotation-dot"></span>CTA button combines both actions — create account AND download</span>
+      </div>
+      <div class="ux-note"><strong>Design decision:</strong> The gate headline is <em>"Your CV is ready to download"</em> — not <em>"Sign up to continue"</em>. The framing matters enormously here. The user is being rewarded for their work, not blocked. The form is short (3 fields) because they've already invested effort — conversion rate at this point should be high.</div>
+    </div>
+  </div>
+
+  <!-- ════════ SCREEN 4: Post-signup confirmation ════════ -->
+  <p class="section-label">Screen 4 — Account created + download triggered</p>
+  <div class="screens-grid single">
+    <div class="screen-wrap">
+      <span class="screen-name">Confirmation — Account created, PDF downloading</span>
+      <span class="screen-note">Shown immediately after sign-up form submission</span>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div>
+          <div class="browser-url">cvsensei.com/dashboard</div>
+        </div>
+        <div class="browser-body dark">
+          <div class="confirm-overlay">
+            <div class="confirm-modal">
+              <div class="confirm-top">
+                <div class="confirm-checkmark">✓</div>
+                <h2 class="confirm-heading">Account created!</h2>
+                <p class="confirm-sub">Your PDF is downloading now. Your coaching session has been saved to your account.</p>
+              </div>
+              <div class="confirm-body">
+                <div class="confirm-what-next">What's been set up for you</div>
+                <div class="confirm-items">
+                  <div class="confirm-item">
+                    <div class="confirm-item-icon">↓</div>
+                    <div class="confirm-item-text"><strong>PDF downloading</strong> — your Account Director CV is saving to your device now</div>
+                  </div>
+                  <div class="confirm-item">
+                    <div class="confirm-item-icon">💾</div>
+                    <div class="confirm-item-text"><strong>Session saved</strong> — you can reopen this chat at any time to keep refining</div>
+                  </div>
+                  <div class="confirm-item">
+                    <div class="confirm-item-icon">+</div>
+                    <div class="confirm-item-text"><strong>Dashboard ready</strong> — start a new CV for a different role whenever you're ready</div>
+                  </div>
+                </div>
+                <button class="confirm-btn">Go to my dashboard →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotations">
+        <span class="annotation"><span class="annotation-dot"></span>PDF download starts immediately — no extra steps after sign-up</span>
+        <span class="annotation"><span class="annotation-dot"></span>Confirms what was saved — reassures user nothing was lost</span>
+        <span class="annotation"><span class="annotation-dot"></span>Single CTA leads to dashboard — now a returning user</span>
+      </div>
+      <div class="ux-note"><strong>Design decision:</strong> The download triggers automatically on account creation — the user should never have to click download twice. This is the moment they become a registered user and the experience should feel seamless, not like they jumped through a hoop.</div>
+    </div>
+  </div>
+
+  <!-- Summary note -->
+  <div style="margin-top:48px;padding:24px 28px;background:rgba(181,84,0,0.08);border:1px solid rgba(181,84,0,0.2);border-radius:var(--radius-lg)">
+    <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Portfolio case study note</p>
+    <p style="font-size:0.78rem;color:#ccc;line-height:1.8">
+      This guest flow is worth documenting as a deliberate design decision in your case study. The key UX principle at play is <strong style="color:#fff">progressive commitment</strong> — asking for personal information only when the user has already experienced value, and has something concrete to lose (their CV session) by not signing up. Compare this to "sign up first" flows where conversion happens before value is demonstrated. The gate framing — <em style="color:var(--accent)">"Your CV is ready"</em> vs <em style="color:var(--accent)">"Sign up to continue"</em> — is a specific copywriting decision with measurable UX impact, and worth calling out explicitly.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
